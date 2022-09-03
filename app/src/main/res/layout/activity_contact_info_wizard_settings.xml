@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.RunWizard.ContactInfoWizardSettingsActivity">
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:background="@color/settingEditBackgroundColor"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.04"
+        android:src="@drawable/logo_white"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintVertical_bias="0.035"
+
+        android:fontFamily="@font/raleway_medium"
+        android:text="@string/wizard_setting"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/userProfileLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.123"
+        app:layout_constraintHorizontal_bias="0.95"
+
+        app:layout_constraintHeight_percent="0.16"
+        app:layout_constraintWidth_percent="0.31"
+        >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/plain_white_image"
+                app:layout_constraintHeight_percent="0.2"
+                app:layout_constraintWidth_percent="0.4"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/border_line_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userprofile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintHeight_percent="0.95"
+                app:layout_constraintWidth_percent="0.95"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:background="@drawable/personal_info_background2"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.15"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+
+            app:layout_constraintVertical_bias="0.72"
+            app:layout_constraintWidth_percent="0.5"
+
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+
+                android:fontFamily="@font/raleway_bold"
+                android:background="@null"
+                android:gravity="center"
+                android:text="@string/edit"
+
+
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:inputType="text"
+                android:textSize="@dimen/_12sdp"></androidx.appcompat.widget.AppCompatTextView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent="0.55"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.12"
+
+        android:fontFamily="@font/raleway_medium"
+        android:text="@string/contact_information1"
+        android:textColor="@color/white"
+        android:gravity="bottom"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintVertical_bias="0.31"
+        android:gravity="center_horizontal"
+        android:textColor="@color/settingEditBackgroundColor"
+        android:textSize="@dimen/_18sdp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/lena"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/userProfileLayout"
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/wizard_info3"
+        android:textSize="@dimen/_14sdp"
+        android:gravity="center_vertical"
+        app:layout_constraintHeight_percent="0.17"
+        app:layout_constraintWidth_percent="0.57"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.24"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.58"
+        app:layout_constraintVertical_bias="0.93"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/e_mail"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintWidth_percent="0.9"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/not_approved"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintWidth_percent="0.9"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/contact_wizard_email_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:background="@drawable/personal_info_background"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+
+
+            app:layout_constraintVertical_bias="0.14"
+            app:layout_constraintWidth_percent="0.9"
+
+
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+
+                android:fontFamily="@font/raleway_medium"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="abc@gmail.com"
+                android:inputType="textEmailAddress"
+                ></androidx.appcompat.widget.AppCompatEditText>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/send_confirmation_code"
+            android:textColor="@color/settingEditBackgroundColor"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/contact_wizard_email_edittext"
+            app:layout_constraintVertical_bias="0.05"
+            app:layout_constraintWidth_percent="0.9"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/web_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/raleway_extrabold"
+            android:text="@string/web_url"
+            app:fontFamily="@font/raleway_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.26"
+            app:layout_constraintWidth_percent="0.9"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:background="@drawable/personal_info_background"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/web_url"
+            app:layout_constraintVertical_bias="0.37"
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/contact_web_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+
+                android:fontFamily="@font/raleway_medium"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="www.lenawilson.com"
+
+
+                android:inputType="text"
+             ></androidx.appcompat.widget.AppCompatEditText>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mobile_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/raleway_extrabold"
+            android:text="@string/mobile_number"
+            app:fontFamily="@font/raleway_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.48"
+            app:layout_constraintWidth_percent="0.9"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            android:orientation="horizontal"
+            android:weightSum="10"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mobile_number"
+
+            app:layout_constraintHeight_percent="0.1"
+            android:background="@drawable/custom_border2"
+            >
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/country_code_picker"
+                android:layout_width="0dp"
+                app:ccp_textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                app:ccp_autoDetectCountry="true"
+                >
+
+            </com.hbb20.CountryCodePicker>
+
+            <View
+                android:layout_width="0dp"
+
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight=".05"
+                android:layout_height="match_parent"
+                android:background="@color/border_line_color"
+                >
+
+            </View>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:background="@null"
+                android:inputType="number"
+                android:fontFamily="@font/raleway_medium"
+                android:textSize="@dimen/_12sdp"
+                android:textColorHint="@color/hint_color"
+                android:layout_marginLeft="5dp"
+                android:hint="@string/forgot_password_hint"
+                >
+
+            </androidx.appcompat.widget.AppCompatEditText>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/raleway_extrabold"
+            android:text="@string/notification"
+            app:fontFamily="@font/raleway_bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.04"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.715"
+            app:layout_constraintWidth_percent="0.9"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sms_notification_switchMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notification"
+            app:layout_constraintHeight_percent="0.1"
+
+            app:layout_constraintVertical_bias="0.1"
+
+            android:text="@string/sms_notification"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sms_notification_switchMaterial"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/friend_request_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line"
+
+
+
+            app:layout_constraintHeight_percent="0.1"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/email_notificaiton"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/contact_info_wizard_next_button"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_continue_credentials"
+        android:gravity="center"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@drawable/text_color"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_heading"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96"
+        >
+
+    </androidx.appcompat.widget.AppCompatButton>
+</androidx.constraintlayout.widget.ConstraintLayout>

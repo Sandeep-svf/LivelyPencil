@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/create_story"
+        android:title="@string/create_story"
+
+        />
+
+    <item
+        android:id="@+id/terms_conditions"
+        android:title="@string/terms_conditions"
+        />
+
+    <item
+        android:id="@+id/privacy_policies"
+        android:title="@string/privacy_policy"
+
+        />
+    <item
+        android:id="@+id/Settings"
+        android:title="@string/settings"
+        />
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        />
+
+</menu>

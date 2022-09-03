@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/slider_constraint_layout2">
+
+    <include layout="@layout/activity_personal_information_wizard" android:visibility="visible" android:id="@+id/RW1"/>
+    <include layout="@layout/activity_contact_info_wizard_settings" android:visibility="gone" android:id="@+id/RW2"/>
+    <include layout="@layout/activity_about_yourself_wizard" android:visibility="gone" android:id="@+id/RW3"/>
+    <include layout="@layout/activity_streaming_area_wizard_settings" android:visibility="gone" android:id="@+id/RW4"/>
+    <include layout="@layout/activity_tv_channel_settings_wizard" android:visibility="gone" android:id="@+id/RW5"/>
+    <include layout="@layout/activity_radio_channel_settings_wizard" android:visibility="gone" android:id="@+id/RW6"/>
+    <include layout="@layout/activity_privacy_setting_wizard" android:visibility="gone" android:id="@+id/RW7"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

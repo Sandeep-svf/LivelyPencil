@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <in.aabhasjindal.otptextview.OtpTextView
+        android:id="@+id/submit_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/settingEditBackgroundColor"
+        app:bar_active_color="@color/settingEditBackgroundColor"
+        app:bar_enabled="true"
+        app:bar_error_color="@color/red"
+        app:bar_height="1.5dp"
+        app:bar_inactive_color="@color/settingEditBackgroundColor"
+        app:bar_margin_bottom="0dp"
+        app:bar_margin_left="0dp"
+        app:bar_margin_right="5dp"
+        app:bar_success_color="@color/settingEditBackgroundColor"
+        app:box_margin="0dp"
+        app:height="40dp"
+        app:hide_otp="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintVertical_bias="0.08"
+        app:length="6"
+        app:otp=""
+        app:otp_text_size="20dp"
+        app:width="40dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/verify_otp_button"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:background="@drawable/ic_continue_credentials"
+        android:gravity="center"
+        android:text="@string/verify_otp"
+        android:textAllCaps="false"
+        android:textColor="@drawable/text_color"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_heading"
+
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="20dp"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

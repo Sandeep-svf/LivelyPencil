@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Utility.HelpActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/stream_user_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:srcCompat="@drawable/support_background_2">
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintVertical_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+
+
+            android:foregroundGravity="left"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintHorizontal_bias="0"
+
+            android:src="@drawable/solo_logo_svg_white"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+
+
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintVertical_bias="0.035"
+            app:layout_constraintHorizontal_bias="1"
+
+            android:src="@drawable/back_button_header"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+
+            >
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintVertical_bias="0.18"
+
+        android:text="@string/help"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/_22sdp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/raleway_medium"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintVertical_bias="0.23"
+
+
+        android:text="@string/page"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/_22sdp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/raleway_medium"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+
+
+        app:layout_constraintVertical_bias="1"
+
+        app:layout_constraintHeight_percent="0.68"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.1"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/help_topics"
+            android:textSize="@dimen/_22sdp"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.107"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+        </View>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/one"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.12"
+            app:layout_constraintWidth_percent="0.9"
+
+
+            android:text="@string/what_is_lp"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/text_color"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.192"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/one"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/two"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.205"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/using_feature"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/two"
+
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/three"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+            android:fontFamily="@font/raleway_medium"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.275"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/accessbility_feature"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.332"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/three"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/four"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fontFamily="@font/raleway_medium"
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.345"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/community_guidline"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.402"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/four"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/five"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fontFamily="@font/raleway_medium"
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.415"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/privacy_security"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.472"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/five"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/six"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/raleway_medium"
+
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.485"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/live_market_help"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.542"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/six"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/seven"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:fontFamily="@font/raleway_medium"
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.555"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/terms_of_service"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.612"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/seven"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/eight"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.625"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/submit_a_question"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+            android:fontFamily="@font/raleway_medium"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.687"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/eight"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/nine"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/game_help"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+            android:fontFamily="@font/raleway_medium"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+
+            android:background="@color/black"
+
+            app:layout_constraintWidth_percent="0.9"
+
+            app:layout_constraintVertical_bias="0.762"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/nine"
+            >
+
+        </View>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+
+
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintVertical_bias="0.775"
+            app:layout_constraintWidth_percent="0.9"
+            android:textColor="@color/text_color"
+
+            android:text="@string/api_information"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center_vertical"
+
+            android:fontFamily="@font/raleway_medium"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

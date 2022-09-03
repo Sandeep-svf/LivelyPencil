@@ -1,0 +1,29 @@
+package com.webnmobapps.livelyPencil.ModelPython;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class LoginModelPython {
+
+@SerializedName("status")
+@Expose
+public String status;
+@SerializedName("message")
+@Expose
+public String message;
+@SerializedName("token")
+@Expose
+public TokenPython tokenPython;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public TokenPython getToken() {
+        return tokenPython;
+    }
+}

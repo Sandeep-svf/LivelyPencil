@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0"
+
+            android:background="@color/text_color"
+            ></View>
+
+<de.hdodenhof.circleimageview.CircleImageView
+    android:id="@+id/radio_profile"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+
+    app:layout_constraintWidth_percent="0.2"
+    app:layout_constraintHeight_percent="0.8"
+    app:layout_constraintHorizontal_bias="0.05"
+
+    android:src="@drawable/ic_launcher_background"
+
+    >
+
+</de.hdodenhof.circleimageview.CircleImageView>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+
+
+            app:layout_constraintWidth_percent="0.73"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintHorizontal_bias="1"
+            >
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/radio_profile_name"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+
+                android:text="Lena Wilson"
+                android:textSize="@dimen/text_heading_20dp"
+                android:textStyle="bold"
+                android:textColor="@color/settingEditBackgroundColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintWidth_percent="0.4"
+
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintVertical_bias="0.1"
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintHorizontal_bias="0.48"
+                app:layout_constraintVertical_bias="0.13"
+
+                app:tint="@color/settingEditBackgroundColor"
+
+                app:layout_constraintHeight_percent="0.2"
+                app:layout_constraintWidth_percent="0.1"
+                android:src="@drawable/speaker"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/radio_listen_num"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+
+                android:text="13k Listened"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/text_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintHeight_percent="0.2"
+                app:layout_constraintWidth_percent="0.3"
+
+                app:layout_constraintHorizontal_bias="0.77"
+                app:layout_constraintVertical_bias="0.14"
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                android:background="@color/dark_white"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintWidth_percent="0.85"
+
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintVertical_bias="0.52"
+
+
+                >
+
+                <LinearLayout
+                    android:weightSum="10"
+                    android:id="@+id/showProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+
+                    <ImageView
+                        android:layout_weight="1.5"
+                        android:id="@+id/btnPlay"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_play_circle_filled_black_24dp"
+                        android:tint="@color/settingEditBackgroundColor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+
+                        tools:ignore="UseAppTint">
+
+
+
+                    </ImageView>
+
+                    <SeekBar
+                        android:id="@+id/seekBarAudio"
+                        style="@style/Base.Widget.AppCompat.SeekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="7.3"
+                        android:theme="@style/SeekBar"/>
+
+                    <TextView
+
+                        android:layout_weight="1.5"
+                        android:id="@+id/current"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:textSize="10dp"
+                        android:text="00:00"
+                        android:textColor="@color/settingEditBackgroundColor"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+
+
+                        >
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:text="@string/stream2"
+
+                android:textSize="@dimen/text_size_10dp"
+
+                app:layout_constraintWidth_percent="0.14"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/radio_stream_name"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:text="@string/stream_name2"
+
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_10dp"
+               android:textColor="@color/settingEditBackgroundColor"
+
+
+                app:layout_constraintWidth_percent="0.25"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.19"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:text="@string/page2"
+
+                android:textSize="@dimen/text_size_10dp"
+                android:textColor="@color/text_color"
+
+
+                app:layout_constraintWidth_percent="0.11"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.48"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/radio_page_number"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:text="#146"
+
+                android:textSize="@dimen/text_size_10dp"
+                android:textColor="@color/settingEditBackgroundColor"
+
+
+                app:layout_constraintWidth_percent="0.12"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.6"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatImageView
+
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+               android:src="@drawable/comment_icon"
+                android:tint="@color/settingEditBackgroundColor"
+
+                app:layout_constraintWidth_percent="0.12"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.735"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/radio_comment_number"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:text="146"
+
+                android:textSize="@dimen/text_size_10dp"
+                android:textColor="@color/settingEditBackgroundColor"
+
+
+                app:layout_constraintWidth_percent="0.12"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.86"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/radio_audio_menu"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:src="@drawable/audio_icon"
+
+
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintWidth_percent="0.15"
+                app:layout_constraintHorizontal_bias="1"
+                >
+
+            </androidx.appcompat.widget.AppCompatImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

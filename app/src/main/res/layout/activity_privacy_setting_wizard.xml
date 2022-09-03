@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.RunWizard.PrivacySettingWizardActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/abc"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:background="@color/settingEditBackgroundColor"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.005"
+
+        android:background="@color/border_line_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+       app:layout_constraintTop_toBottomOf="@+id/abc"
+        >
+
+    </View>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.04"
+        android:src="@drawable/logo_white"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintVertical_bias="0.035"
+
+        android:fontFamily="@font/raleway_medium"
+        android:text="@string/wizard_setting"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintWidth_percent="0.55"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.12"
+
+        android:fontFamily="@font/raleway_medium"
+        android:text="@string/privact_settings"
+        android:textColor="@color/white"
+        android:gravity="bottom"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintHeight_percent="0.75"
+        app:layout_constraintVertical_bias="0.8"
+
+        >
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sms_notification_switchMaterial"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0.1"
+
+            android:text="@string/friend_request"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sms_notification_switchMaterial"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/messaging_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/messaging"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+
+        <View
+            android:id="@+id/view_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/messaging_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/mailbox_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line2"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/mail_box"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+        <View
+            android:id="@+id/view_line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mailbox_w_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/relationship_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line3"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/relationship"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relationship_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/tv_channel_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line4"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/tv_channel"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_channel_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/redio_channel_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line5"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/radio_channel"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/redio_channel_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/photos_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line6"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/photo"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photos_w_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/activities_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line7"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/photo"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activities_w_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/email_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line8"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/e_mail"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_w_switchMaterials"
+
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/web_url_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line9"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/web_url"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line10"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/web_url_w_switchMaterials"
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/about_me_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line10"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/about_me"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line11"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/about_me_w_switchMaterials"
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/my_static_w_switchMaterials"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:theme="@style/SCBSwitch"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line11"
+
+
+
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintVertical_bias="0.15"
+
+            android:text="@string/my_static"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/text_color"
+            android:fontFamily="@font/raleway_bold"
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <View
+            android:id="@+id/view_line12"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintVertical_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_static_w_switchMaterials"
+            android:background="@color/underLine"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintHeight_percent="0.0009">
+        </View>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/privacy_wizard_next_button"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_continue_credentials"
+        android:gravity="center"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@drawable/text_color"
+        android:textSize="@dimen/text_heading"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.967"
+        app:layout_constraintWidth_percent="0.4">
+
+    </androidx.appcompat.widget.AppCompatButton>
+</androidx.constraintlayout.widget.ConstraintLayout>

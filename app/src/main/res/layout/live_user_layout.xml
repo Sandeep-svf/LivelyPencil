@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id = "@+id/live_user_prifile"
+        android:layout_width = "57dp"
+        android:layout_height = "60dp"
+
+        android:src="@drawable/test_profile"
+
+
+        android:layout_marginRight="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintVertical_bias = "0.0"
+       app:layout_editor_absoluteX="0dp" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/live_user_color"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintWidth_percent="0.22"
+        app:layout_constraintHeight_percent="0.2"
+
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.2"
+
+        android:src="@color/green"
+        >
+    </de.hdodenhof.circleimageview.CircleImageView>
+</androidx.constraintlayout.widget.ConstraintLayout>

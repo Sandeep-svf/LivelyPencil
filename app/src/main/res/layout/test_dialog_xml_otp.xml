@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/alert_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/error_message"
+        android:layout_marginLeft="20dp"
+        android:textSize="@dimen/_18sdp"
+
+        android:gravity="center|top"
+
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_width="fill_parent"
+       android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/close_dialog"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:foregroundGravity="center"
+            android:layout_marginTop="10dp"
+
+            android:src="@drawable/close_icon"
+
+            >
+
+        </ImageView>
+
+        <TextView
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/raleway_bold"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+
+            android:text="@string/close"
+            ></TextView>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+

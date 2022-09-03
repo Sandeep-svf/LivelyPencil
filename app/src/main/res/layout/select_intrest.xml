@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/select_intrest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_heading"
+
+        android:theme="@style/SCBSwitch"
+        android:fontFamily="@font/raleway_bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Demo">
+    </com.google.android.material.switchmaterial.SwitchMaterial>
+
+
+</LinearLayout>

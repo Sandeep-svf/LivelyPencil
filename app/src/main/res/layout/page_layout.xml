@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+
+        android:src="@drawable/sport_image"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintWidth_percent="0.5"
+
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+
+        >
+
+    </ImageView>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/test_profile"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintVertical_bias="0.7"
+        >
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+
+
+    app:layout_constraintWidth_percent="0.8"
+    app:layout_constraintHeight_percent="0.1"
+    app:layout_constraintVertical_bias="0.78"
+
+    android:background="@drawable/personal_info_background2"
+
+    >
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/stream_title4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_14"
+        android:hint="Cake and dessert"
+        android:textStyle="bold"
+        ></androidx.appcompat.widget.AppCompatTextView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:weightSum="15"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.88"
+        android:background="@drawable/personal_info_background3"
+        >
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:tint="@color/settingEditBackgroundColor"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/image"
+            tools:ignore="UseAppTint">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/page"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textSize="8dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="15"
+            >
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:tint="@color/settingEditBackgroundColor"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_videocam_24"
+            tools:ignore="UseAppTint">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/video"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textSize="8dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="12"
+            >
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:tint="@color/settingEditBackgroundColor"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/volume"
+            tools:ignore="UseAppTint">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/sound"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textSize="8dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="42"
+            >
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:tint="@color/settingEditBackgroundColor"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/comment_icon"
+            tools:ignore="UseAppTint">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/comment"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textSize="8dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="92"
+            >
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/heart"
+            tools:ignore="UseAppTint">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/like"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textSize="8dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="92"
+            >
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:tint="@color/settingEditBackgroundColor"
+            android:src="@drawable/ic_baseline_person1_24"
+            tools:ignore="UseAppTint">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/followers"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:textSize="8dp"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="57"
+            >
+
+        </TextView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
