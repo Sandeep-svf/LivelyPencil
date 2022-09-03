@@ -308,7 +308,6 @@ public class PersonalInformationActivity extends AppCompatActivity implements Da
                 single_circle.setImageResource(R.color.white);
             }
         });
-
     }
 
     private void city_list_api() {
