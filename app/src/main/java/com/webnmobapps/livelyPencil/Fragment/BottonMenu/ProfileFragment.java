@@ -38,38 +38,17 @@ public class ProfileFragment extends Fragment {
         tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);
         title= view.findViewById(R.id.title);
 
-        setupTabtitle();
-
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         setupViewPager(viewPager,adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        setupTabtitle();
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                String anme= String.valueOf(tabLayout.getTabAt(position).getText());
-                //getActivity().title.setText(anme);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
         return  view;
     }
     private void setupTabtitle() {
         tabLayout.getTabAt(0).setText(getResources().getString(R.string.pages));
-        tabLayout.getTabAt(1).setText(getResources().getString(R.string.retell));
-        tabLayout.getTabAt(2).setText(getResources().getString(R.string.followers));
-
-
-
+        tabLayout.getTabAt(1).setText(getResources().getString(R.string.followers));
     }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter
@@ -106,7 +85,6 @@ public class ProfileFragment extends Fragment {
     {
         {
             adapter.addFragment(new PageFragment());
-            adapter.addFragment(new RetellFragment());
             adapter.addFragment(new FriendFollowersFragment());
 
         }
