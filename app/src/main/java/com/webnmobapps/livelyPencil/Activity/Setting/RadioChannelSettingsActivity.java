@@ -115,7 +115,6 @@ public class RadioChannelSettingsActivity extends AppCompatActivity {
                     edit_radio_setting_api();
                 }
 
-
             }
         });
 

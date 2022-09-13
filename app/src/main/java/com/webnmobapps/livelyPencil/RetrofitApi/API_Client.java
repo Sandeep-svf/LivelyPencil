@@ -14,8 +14,8 @@ public class API_Client {
         public  static final String BASE_LOGO_IMAGE = "https://mobileandwebsitedevelopment.com/LivelyPencil/public/upload/avatars/";
         public static final String BASE_VIDEO_URL = "https://mobileandwebsitedevelopment.com/LivelyPencil/public/video/"; */
 
-       // public static final String BASE_URL = "https://livelypencil.com/api/";
-        public static final String BASE_URL = "http://ec2-35-90-177-237.us-west-2.compute.amazonaws.com:8001/api/";
+       // public static final String BASE_URL = "http://192.168.1.130:8001/api/";
+        public static final String BASE_URL = "http://ec2-3-91-178-48.compute-1.amazonaws.com:8001/api/";
         public static final String BASE_IMAGE = "https://livelypencil.com/public/upload/User/";
         public static final String BASE_COVER_IMAGE = "https://livelypencil.com/public/upload/User/Cover/";
         public  static final String BASE_LOGO_IMAGE = "https://livelypencil.com/public/upload/avatars/";

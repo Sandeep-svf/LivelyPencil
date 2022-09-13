@@ -199,7 +199,11 @@
         <activity
             android:name=".Activity.Setting.RadioChannelSettingsActivity"
             android:exported="true"
-            android:screenOrientation="locked" />
+            android:screenOrientation="locked"
+            >
+
+
+        </activity>
         <activity
             android:name=".Activity.Setting.TVChannelSettingsActivity"
             android:exported="true"
@@ -257,8 +261,6 @@
             android:name=".Activity.JoinUs.SelectIntrestActivity"
             android:exported="true"
             android:screenOrientation="locked" >
-
-
 
         </activity>
         <activity

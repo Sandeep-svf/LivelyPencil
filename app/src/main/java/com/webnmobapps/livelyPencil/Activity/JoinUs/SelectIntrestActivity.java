@@ -40,6 +40,8 @@ import com.webnmobapps.livelyPencil.Model.Record.IntrestListModelRecord;
 import com.webnmobapps.livelyPencil.Model.RegisterModel;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingListPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.TokenPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 
@@ -71,6 +73,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
     ArrayList<String> addIntrestIdArrayList = new ArrayList();
     private String selectedIntrestId = "";
+    private String finalSelectedInrestedId = "";
     private String selectedIntrestId2 = "";
     private String finalSelectedIntrestId = "";
     private String temp_s = "";
@@ -164,19 +167,221 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                 startActivity(intent);*/
 
                 // register();
+                // converting Stirng in to List <Integer>
 
-                new_registration_api();
+
+                try {
+                    
+                    List<RequestBody> list = null;
+                    
+                    String[] s = selectedIntrestId.split("\\s+");
+                    List<Integer> selectedIntrestIdList = new ArrayList<>();
+                    // List<Integer> selectedIntrestIdList = new List<Integer>();
+                    for(int index = 1 ; index < s.length ; index++) {
+                        selectedIntrestIdList.add(Integer.parseInt(s[index]));
+                    }
+                   /* Log.e("printFinalId", String.valueOf(s.length));
+                    Log.e("printFinalId", String.valueOf(selectedIntrestIdList.size()));*/
+                    /*for(int i=0; i<selectedIntrestIdList.size() ;i++){
+
+                        Log.e("printFinalId", String.valueOf(selectedIntrestIdList));
+                    }*/
+
+                    finalSelectedInrestedId = "["+selectedIntrestId+"]";
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(SelectIntrestActivity.this, e, Toast.LENGTH_SHORT).show();
+                }finally {
+                    //Toast.makeText(SelectIntrestActivity.this, "Something went wrong while converting Stirng in to List<Integer>.", Toast.LENGTH_SHORT).show();
+                }
+
+
+                if(validation()){
+                    new_registration_api();
+                }
+
+
+
+                Log.e("finalSelectedInrestedId",finalSelectedInrestedId);
             }
         });
 
-
-
-
     }
+
+    private boolean validation() {
+        return true;
+    }
+
 
     private void new_registration_api() {
 
-    }
+
+            final ProgressDialog pd = new ProgressDialog(SelectIntrestActivity.this);
+            pd.setCancelable(false);
+            pd.setMessage("loading...");
+            pd.show();
+
+
+            String userEmailPhone = "";
+            MultipartBody.Part usrProfieImageFileBody , userStreamCoverImageFileBody;
+
+    //   RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), usrProfieImageFile);
+       // usrProfieImageFileBody = MultipartBody.Part.createFormData("streamcoverimage", usrProfieImageFile.getName(), requestFile);
+        Log.e("Photo", usrProfieImageFile.getName());
+
+
+            userStreamCoverImageFileBody = MultipartBody.Part.createFormData("stream_cover_image", userStreamCoverImageFile.getName(), RequestBody.create(MediaType.parse("image/*"), userStreamCoverImageFile));
+
+            usrProfieImageFileBody = MultipartBody.Part.createFormData("image", usrProfieImageFile.getName(), RequestBody.create(MediaType.parse("image/*"), usrProfieImageFile));
+
+      //RequestBody requestFile2 = RequestBody.create(MediaType.parse("image/*"), userStreamCoverImageFile);
+       // userStreamCoverImageFileBody = MultipartBody.Part.createFormData("image", userStreamCoverImageFile.getName(), requestFile2);
+        Log.e("Photo", userStreamCoverImageFile.getName());
+
+          /*  if(key.equals("1"))
+            {
+                userEmailPhone = userEmail;
+            }else if(key.equals("2"))
+            {
+                userEmailPhone = userPhone;
+            }*/
+
+
+        try {
+            Log.e("DATA","userName: "+userName);
+            Log.e("DATA","usersurName: "+usersurName);
+            Log.e("DATA","userEmail: "+userEmail);
+            Log.e("DATA","userPasswordData: "+userPasswordData);
+            Log.e("DATA","cameraGalleryimageURI: "+cameraGalleryimageURI);
+            Log.e("DATA","usreStreamPageCoverImage: "+usreStreamPageCoverImage);
+            Log.e("DATA","streamPagePrivacy: "+streamPagePrivacy);
+            Log.e("DATA","userStreamNameData: "+userStreamNameData);
+            Log.e("DATA","selectedIntrestId: "+finalSelectedInrestedId);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        //   RequestBody tokenRB = RequestBody.create(MediaType.parse("text/plain"), device_token);
+            RequestBody userNameRB = RequestBody.create(MediaType.parse("text/plain"), userName);
+            RequestBody usersurNameRB = RequestBody.create(MediaType.parse("text/plain"), usersurName);
+            RequestBody userPasswordDataRB = RequestBody.create(MediaType.parse("text/plain"), userPasswordData);
+            RequestBody streamPagePrivacyRB = RequestBody.create(MediaType.parse("text/plain"), streamPagePrivacy);
+            RequestBody userStreamNameDataRB = RequestBody.create(MediaType.parse("text/plain"), userStreamNameData);
+            RequestBody selectedIntrestIdRB = RequestBody.create(MediaType.parse("text/plain"), finalSelectedInrestedId);
+          //  RequestBody userMobileNumberRB = RequestBody.create(MediaType.parse("text/plain"), userEmailPhone);
+           // RequestBody countryCodeRB = RequestBody.create(MediaType.parse("text/plain"), countryCode);
+
+
+            Call<LoginModelPython> call = API_Client.getClient().register2(selectedIntrestIdRB,
+                    userNameRB,
+                    usersurNameRB,
+                    userStreamNameDataRB,
+                    streamPagePrivacyRB,
+                    userPasswordDataRB,
+                    userStreamCoverImageFileBody,
+                    usrProfieImageFileBody);
+
+            call.enqueue(new Callback<LoginModelPython>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(Call<LoginModelPython> call, Response<LoginModelPython> response) {
+                    pd.dismiss();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = response.body().getStatus();
+
+
+                            if (success.equals("true") || success.equals("True")) {
+
+                                LoginModelPython registerModel = response.body();
+                                TokenPython tokenPython = registerModel.getToken();
+                                String accessToken = String.valueOf(tokenPython.getAccess());
+
+                                SharedPreferences getUserIdData = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = getUserIdData.edit();
+                                editor.putString("accessToken", String.valueOf(accessToken));
+                                editor.apply();
+
+                                Intent intent = new Intent(SelectIntrestActivity.this, PopularListActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra("finish", true);
+                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                            }
+
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                                switch (response.code()) {
+                                    case 400:
+                                        alert_dialog_message("400");
+                                        //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        alert_dialog_message("401");
+                                        // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        alert_dialog_message("404");
+                                        //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        alert_dialog_message("500");
+                                        //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        alert_dialog_message("503");
+                                        // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        alert_dialog_message("504");
+                                        //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        alert_dialog_message("511");
+                                        // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        alert_dialog_message("default");
+                                        //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginModelPython> call, Throwable t) {
+                    Log.e("bhgyrrrthbh", String.valueOf(t));
+                    if (t instanceof IOException) {
+                        Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            });
+
+        }
 
     private void getProfileImage() {
 
@@ -450,7 +655,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             addIntrestIdArrayList.add(addIntrestId);
         }*/
         addIntrestIdArrayList.add(id);
-        selectedIntrestId = selectedIntrestId + "," + id;
+        selectedIntrestId = selectedIntrestId +","+id;
         Log.e("fdfdfde"," Add : " + selectedIntrestId);
 
 
@@ -489,9 +694,6 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
             }
         }*/
-
-
-
 
     }
 

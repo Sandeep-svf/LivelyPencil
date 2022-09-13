@@ -40,6 +40,8 @@ import com.webnmobapps.livelyPencil.Model.UserWallModel;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -90,6 +92,18 @@ public interface Api {
             @Part("country_code") RequestBody country_code,
             @Part MultipartBody.Part streamcoverimage,
             @Part MultipartBody.Part image);
+
+
+    @Multipart
+    @POST("register/")
+    Call<LoginModelPython> register2(@Part("interesting") RequestBody interesting,
+                                     @Part ("first_name") RequestBody first_name,
+                                     @Part ("last_name") RequestBody last_name,
+                                     @Part ("stream_title") RequestBody stream_title,
+                                     @Part ("role") RequestBody role,
+                                     @Part ("password") RequestBody password,
+                                     @Part MultipartBody.Part stream_cover_image,
+                                     @Part MultipartBody.Part image);
 
 
     @FormUrlEncoded
