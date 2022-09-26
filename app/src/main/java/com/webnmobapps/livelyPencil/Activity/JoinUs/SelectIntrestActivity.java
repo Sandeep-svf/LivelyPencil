@@ -50,7 +50,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -71,6 +74,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
     private String device_token;
     AlertDialog dialogs;
 
+    List<Integer> list = new ArrayList<Integer>();
     ArrayList<String> addIntrestIdArrayList = new ArrayList();
     private String selectedIntrestId = "";
     private String finalSelectedInrestedId = "";
@@ -114,17 +118,22 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
 
         //geting userID data
-        SharedPreferences getUserIdData = getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE);
-        userName = getUserIdData.getString("userName", "");
-        usersurName = getUserIdData.getString("usersurName", "");
-        userEmail = getUserIdData.getString("userEmail", "");
-      //  userPhone = getUserIdData.getString("userPhone", "");
-        userPasswordData = getUserIdData.getString("userPasswordData", "");
-        cameraGalleryimageURI = getUserIdData.getString("cameraGalleryimageURI", "");
-        usreStreamPageCoverImage = getUserIdData.getString("usreStreamPageCoverImage", "");
-        streamPagePrivacy = getUserIdData.getString("streamPagePrivacy", "");
-        userStreamNameData = getUserIdData.getString("userStreamNameData", "");
-     //   countryCode=getUserIdData.getString("countryCode","");
+        SharedPreferences getUserIdData = null;
+        try {
+            getUserIdData = getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE);
+            userName = getUserIdData.getString("userName", "");
+            usersurName = getUserIdData.getString("usersurName", "");
+            userEmail = getUserIdData.getString("userEmail", "");
+            //  userPhone = getUserIdData.getString("userPhone", "");
+            userPasswordData = getUserIdData.getString("userPasswordData", "");
+            cameraGalleryimageURI = getUserIdData.getString("cameraGalleryimageURI", "");
+            usreStreamPageCoverImage = getUserIdData.getString("usreStreamPageCoverImage", "");
+            streamPagePrivacy = getUserIdData.getString("streamPagePrivacy", "");
+            userStreamNameData = getUserIdData.getString("userStreamNameData", "");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        //   countryCode=getUserIdData.getString("countryCode","");
      //   key=getUserIdData.getString("key","");
 
      //   Log.e("DATA",""+countryCode);
@@ -140,10 +149,12 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
 
         confirm_button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                userEmail = getUserIdData.getString("userEmail", "");
+              //  userEmail = getUserIdData.getString("userEmail", "");
 
+                Log.e("sdfsdf","button clicked");
                 String comma = selectedIntrestId.substring(0,1);
                 if(comma.equals(","))
                 {
@@ -171,25 +182,55 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
 
                 try {
-                    
+
+                    Log.e("sdfsdf","String is: "+selectedIntrestId.length());
+
+                    List<Integer> list = Arrays.stream(selectedIntrestId.split("\\s"))
+                            .map(Integer::parseInt)
+                            .collect(Collectors.toList());
+
+                   /* Scanner scanner = new Scanner(selectedIntrestId);
+                    while (scanner.hasNextInt()) {
+                        list.add(scanner.nextInt());
+                    }
+
+                    for(int i=0; i < list.size();i++){
+                        Log.e("sdfsdf","list is: "+String.valueOf(list.get(i)));
+                    }*/
+
+
+           /*         Log.e("fdsjlkfjdslk","Inside try block");
+
+
                     List<RequestBody> list = null;
                     
                     String[] s = selectedIntrestId.split("\\s+");
                     List<Integer> selectedIntrestIdList = new ArrayList<>();
                     // List<Integer> selectedIntrestIdList = new List<Integer>();
-                    for(int index = 1 ; index < s.length ; index++) {
+                    for(int index = 0 ; index < s.length ; index++) {
                         selectedIntrestIdList.add(Integer.parseInt(s[index]));
                     }
-                   /* Log.e("printFinalId", String.valueOf(s.length));
-                    Log.e("printFinalId", String.valueOf(selectedIntrestIdList.size()));*/
-                    /*for(int i=0; i<selectedIntrestIdList.size() ;i++){
-
+                    *//*Log.e("printFinalId", String.valueOf(s.length));
+                    Log.e("printFinalId", String.valueOf(selectedIntrestIdList.size()));
+                    for(int i=0; i<selectedIntrestIdList.size() ;i++){
                         Log.e("printFinalId", String.valueOf(selectedIntrestIdList));
-                    }*/
+                    }*//*
 
-                    finalSelectedInrestedId = "["+selectedIntrestId+"]";
+                    Log.e("fdsjlkfjdslk","string value is: "+selectedIntrestId);
+                    Log.e("fdsjlkfjdslk","string length is: "+selectedIntrestId.length());
+                    Log.e("fdsjlkfjdslk","String List size is: "+s.length);
+                    Log.e("fdsjlkfjdslk","Int List size is: "+selectedIntrestIdList.size());
+
+                    Log.e("fdsjlkfjdslk","pos:  is :"+String.valueOf(s.toString()));
+
+                    for(int i =0; i<selectedIntrestIdList.size();i++){
+                        Log.e("fdsjlkfjdslk","pos: "+i+" is :"+String.valueOf(selectedIntrestIdList.get(i)));
+                    }
+
+                    finalSelectedInrestedId = "["+selectedIntrestId+"]";*/
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
+                    Log.e("sdfsdf","Inside catch block");
                     //Toast.makeText(SelectIntrestActivity.this, e, Toast.LENGTH_SHORT).show();
                 }finally {
                     //Toast.makeText(SelectIntrestActivity.this, "Something went wrong while converting Stirng in to List<Integer>.", Toast.LENGTH_SHORT).show();
@@ -197,7 +238,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
 
                 if(validation()){
-                    new_registration_api();
+                   new_registration_api();
                 }
 
 
@@ -261,9 +302,21 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             exception.printStackTrace();
         }
 
+        List<Integer> intrestingList = new ArrayList<>();
+
+
+        for(int i=0; i<list.size();i++){
+            intrestingList.add(list.get(i));
+            Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.get(i)));
+        }
+
+
+
         //   RequestBody tokenRB = RequestBody.create(MediaType.parse("text/plain"), device_token);
             RequestBody userNameRB = RequestBody.create(MediaType.parse("text/plain"), userName);
             RequestBody usersurNameRB = RequestBody.create(MediaType.parse("text/plain"), usersurName);
+            RequestBody userEmailRB = RequestBody.create(MediaType.parse("text/plain"), userEmail);
+           // RequestBody intrestingListRB = RequestBody.create(MediaType.parse("text/plain"), intrestingList);
             RequestBody userPasswordDataRB = RequestBody.create(MediaType.parse("text/plain"), userPasswordData);
             RequestBody streamPagePrivacyRB = RequestBody.create(MediaType.parse("text/plain"), streamPagePrivacy);
             RequestBody userStreamNameDataRB = RequestBody.create(MediaType.parse("text/plain"), userStreamNameData);
@@ -272,9 +325,10 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
            // RequestBody countryCodeRB = RequestBody.create(MediaType.parse("text/plain"), countryCode);
 
 
-            Call<LoginModelPython> call = API_Client.getClient().register2(selectedIntrestIdRB,
+            Call<LoginModelPython> call = API_Client.getClient().register2(intrestingList,
                     userNameRB,
                     usersurNameRB,
+                    userEmailRB,
                     userStreamNameDataRB,
                     streamPagePrivacyRB,
                     userPasswordDataRB,
@@ -655,7 +709,8 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             addIntrestIdArrayList.add(addIntrestId);
         }*/
         addIntrestIdArrayList.add(id);
-        selectedIntrestId = selectedIntrestId +","+id;
+        // selectedIntrestId = selectedIntrestId +","+id;
+        selectedIntrestId = selectedIntrestId +" "+id;
         Log.e("fdfdfde"," Add : " + selectedIntrestId);
 
 
