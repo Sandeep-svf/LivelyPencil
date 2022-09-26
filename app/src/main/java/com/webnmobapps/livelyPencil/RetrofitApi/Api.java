@@ -71,7 +71,8 @@ public interface Api {
     @POST("login/")
     Call<LoginModelPython> login (
                              @Field("username") String username,
-                             @Field("password") String password);
+                             @Field("password") String password,
+                             @Field("device_token") String device_toke);
 
     @FormUrlEncoded
     @POST("check-user")

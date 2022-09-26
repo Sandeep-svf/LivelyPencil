@@ -76,6 +76,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
     List<Integer> list = new ArrayList<Integer>();
     ArrayList<String> addIntrestIdArrayList = new ArrayList();
+    List<Integer> list12345 = new ArrayList<>();
     private String selectedIntrestId = "";
     private String finalSelectedInrestedId = "";
     private String selectedIntrestId2 = "";
@@ -155,7 +156,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
               //  userEmail = getUserIdData.getString("userEmail", "");
 
                 Log.e("sdfsdf","button clicked");
-                String comma = selectedIntrestId.substring(0,1);
+              /*  String comma = selectedIntrestId.substring(0,1);
                 if(comma.equals(","))
                 {
                     selectedIntrestId = selectedIntrestId.substring(1, selectedIntrestId.length());
@@ -164,7 +165,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                 {
 
                     Log.e("fdsfdsfsdfsdf",  selectedIntrestId);
-                }
+                }*/
                 getProfileImage();
                 getStreamCoverImage();
 
@@ -183,20 +184,23 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
                 try {
 
-                    Log.e("sdfsdf","String is: "+selectedIntrestId.length());
+                    Log.e("sdfsdf","String length is: "+selectedIntrestId.length());
+                    Log.e("sdfsdf","String is: "+selectedIntrestId);
 
-                    List<Integer> list = Arrays.stream(selectedIntrestId.split("\\s"))
+                     list12345 = Arrays.stream(selectedIntrestId.split("\\s"))
                             .map(Integer::parseInt)
                             .collect(Collectors.toList());
 
-                   /* Scanner scanner = new Scanner(selectedIntrestId);
+                    Scanner scanner = new Scanner(selectedIntrestId);
                     while (scanner.hasNextInt()) {
                         list.add(scanner.nextInt());
                     }
+                    Log.e("ScannerTest","list size is: "+String.valueOf(list.size()));
+
 
                     for(int i=0; i < list.size();i++){
-                        Log.e("sdfsdf","list is: "+String.valueOf(list.get(i)));
-                    }*/
+                        Log.e("ScannerTest","list is: "+String.valueOf(list.get(i)));
+                    }
 
 
            /*         Log.e("fdsjlkfjdslk","Inside try block");
@@ -238,10 +242,8 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
 
                 if(validation()){
-                   new_registration_api();
+                //   new_registration_api();
                 }
-
-
 
                 Log.e("finalSelectedInrestedId",finalSelectedInrestedId);
             }
@@ -305,12 +307,11 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         List<Integer> intrestingList = new ArrayList<>();
 
 
-        for(int i=0; i<list.size();i++){
-            intrestingList.add(list.get(i));
+        for(int i=0; i<list12345.size();i++){
+            intrestingList.add(list12345.get(i));
             Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.get(i)));
+            Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.size()));
         }
-
-
 
         //   RequestBody tokenRB = RequestBody.create(MediaType.parse("text/plain"), device_token);
             RequestBody userNameRB = RequestBody.create(MediaType.parse("text/plain"), userName);
@@ -710,7 +711,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         }*/
         addIntrestIdArrayList.add(id);
         // selectedIntrestId = selectedIntrestId +","+id;
-        selectedIntrestId = selectedIntrestId +" "+id;
+        selectedIntrestId = selectedIntrestId +id;
         Log.e("fdfdfde"," Add : " + selectedIntrestId);
 
 
@@ -728,7 +729,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         for(int i = 0; i < addIntrestIdArrayList.size(); i++)
         {
 
-            selectedIntrestId = selectedIntrestId + "," + addIntrestIdArrayList.get(i);
+            selectedIntrestId = selectedIntrestId + addIntrestIdArrayList.get(i);
         }
 
 

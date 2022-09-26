@@ -350,6 +350,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
 
+                    android:visibility="gone"
 
                     app:layout_constraintWidth_percent="0.465"
 
@@ -387,6 +388,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/with_email2"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="match_parent"
 
                     app:layout_constraintWidth_percent="0.4565"
