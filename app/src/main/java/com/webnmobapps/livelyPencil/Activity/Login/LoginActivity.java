@@ -350,14 +350,15 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("userEmailPhoneData2",userEmail+"ok");
         Log.e("userEmailPhoneData2",userPasswordData+"ok");
 
+
         final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
         pd.setCancelable(false);
         pd.setMessage("loading...");
         pd.show();
 
 
-        Call<LoginModelPython> call = API_Client.getClient().login(userEmailPhoneData2,userPasswordData
-            ,"fhkjdsf" );
+        Call<LoginModelPython> call = API_Client.getClient().login("aarav@gmail.com","123456er"
+            ,"fdhsg" );
 
         call.enqueue(new Callback<LoginModelPython>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -411,6 +412,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jObjError = new JSONObject(response.errorBody().string());
                             Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+
                             switch (response.code()) {
                                 case 400:
                                     alert_dialog_message("400");

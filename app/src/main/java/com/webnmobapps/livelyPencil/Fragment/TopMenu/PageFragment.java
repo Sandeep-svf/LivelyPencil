@@ -27,8 +27,11 @@ import com.webnmobapps.livelyPencil.Adapter.PageAdapter;
 import com.webnmobapps.livelyPencil.Model.NotificationListModel;
 import com.webnmobapps.livelyPencil.Model.Record.StreamPageResult;
 import com.webnmobapps.livelyPencil.Model.StreamPageModel;
+import com.webnmobapps.livelyPencil.ModelPython.PostListDataPython;
+import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -44,42 +47,17 @@ import retrofit2.Response;
 public class PageFragment extends Fragment {
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
     private RecyclerView rcv_page;
     PageAdapter pageAdapter;
     int numberOfColumns = 2;
     private String user_id;
-    List<StreamPageResult> streamPageResultList = new ArrayList<>();
+    List<PostListDataPython> postListDataPythonArrayList = new ArrayList<>();
     AppCompatEditText searchText;
+    private String accessToken, finalAccessToken;
 
-    public PageFragment() {
-        // Required empty public constructor
-    }
-
-  
-    // TODO: Rename and change types and number of parameters
-    public static PageFragment newInstance(String param1, String param2) {
-        PageFragment fragment = new PageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +67,7 @@ public class PageFragment extends Fragment {
         inits(view);
 
 
-        searchText.addTextChangedListener(new TextWatcher() {
+       /* searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -104,10 +82,12 @@ public class PageFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        });*/
 
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
-        user_id=sharedPreferences.getString("UserID","");
+       // user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
 
         stream_page_list_api();
 
@@ -134,25 +114,25 @@ public class PageFragment extends Fragment {
 
 
 
-        Call<StreamPageModel> call = API_Client.getClient().stramPageList(user_id);
+        Call<PostListModelPython> call = API_Client.getClient().POST_LIST_MODEL_PYTHON_CALL(finalAccessToken);
 
-        call.enqueue(new Callback<StreamPageModel>() {
+        call.enqueue(new Callback<PostListModelPython>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onResponse(Call<StreamPageModel> call, Response<StreamPageModel> response) {
+            public void onResponse(Call<PostListModelPython> call, Response<PostListModelPython> response) {
                 pd.dismiss();
 
 
                 try {
                     if (response.isSuccessful()) {
                         String message = response.body().getMessage();
-                        String success = response.body().getSuccess();
+                        String success = response.body().getStatus();
 
                         if (success.equals("true") || success.equals("True")) {
 
-                            streamPageResultList = response.body().getRecord();
+                            postListDataPythonArrayList = response.body().getData();
                             rcv_page.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
-                            pageAdapter = new PageAdapter(getActivity(),streamPageResultList);
+                            pageAdapter = new PageAdapter(getActivity(),postListDataPythonArrayList);
                             rcv_page.setAdapter(pageAdapter);
 
 
@@ -204,7 +184,7 @@ public class PageFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<StreamPageModel> call, Throwable t) {
+            public void onFailure(Call<PostListModelPython> call, Throwable t) {
                 Log.e("bhgyrrrthbh", String.valueOf(t));
                 if (t instanceof IOException) {
                     Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();

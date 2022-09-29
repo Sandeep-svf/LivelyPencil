@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
     AppCompatImageView home_icon, search_icon, friends_followers_icon, messages_mailbox_icon, notification_icon;
     ConstraintLayout fragment_contaner, n_count_layout;
     CircleImageView profile_icon;
-    private String user_id;
+    private String user_id,accessToken;
     private int notificationCount;
     AppCompatTextView notification_count;
     AppCompatImageView contant_icon;
@@ -89,6 +89,7 @@ public class HomeActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
 
         // API
         notificaiton_count_api();
@@ -98,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         // Default fragment
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contaner, new UserWallFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contaner, new PageFragment()).commit();
         home_icon.setImageResource(R.drawable.home_color);
 
 

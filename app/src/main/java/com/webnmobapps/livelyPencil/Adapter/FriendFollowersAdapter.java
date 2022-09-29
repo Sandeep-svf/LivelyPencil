@@ -4,23 +4,32 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.webnmobapps.livelyPencil.Model.friend_followers_model;
+import com.webnmobapps.livelyPencil.ModelPython.LiveUserListDataPython;
 import com.webnmobapps.livelyPencil.R;
+import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FriendFollowersAdapter extends RecyclerView.Adapter<FriendFollowersViewHolder> {
 
     private Context context;
-     List<friend_followers_model>  friend_followers_modelList = new ArrayList<>();
+     List<LiveUserListDataPython>  liveUserListDataPythonArrayList = new ArrayList<>();
 
-    public FriendFollowersAdapter(Context context) {
+    public FriendFollowersAdapter(Context context, List<LiveUserListDataPython> liveUserListDataPythonArrayList) {
         this.context = context;
+        this.liveUserListDataPythonArrayList = liveUserListDataPythonArrayList;
     }
 
     @NonNull
@@ -34,16 +43,43 @@ public class FriendFollowersAdapter extends RecyclerView.Adapter<FriendFollowers
     @Override
     public void onBindViewHolder(@NonNull FriendFollowersViewHolder holder, int position) {
 
+        try {
+            if(liveUserListDataPythonArrayList.get(position).getFirstName() != null){
+                holder.liveUserName.setText(liveUserListDataPythonArrayList.get(position).getFirstName()+" "+liveUserListDataPythonArrayList.get(position).getLastName());
+            }else{
+               // Toast.makeText(context, "API response null value at position: "+position, Toast.LENGTH_SHORT).show();
+            }
+
+            if(liveUserListDataPythonArrayList.get(position).getStreamTitle() != null){
+                holder.liveUserStreamName.setText(String.valueOf(liveUserListDataPythonArrayList.get(position).getStreamTitle()));
+            }else{
+               // Toast.makeText(context, "API response null value at position: "+position, Toast.LENGTH_SHORT).show();
+            }
+            Glide.with(context).load(API_Client.BASE_IMAGE+liveUserListDataPythonArrayList.get(position).getImage()).
+                    placeholder(R.drawable.ic_launcher_background).
+                    into(holder.live_user_profile);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return 20;
+        return liveUserListDataPythonArrayList.size();
     }
 }
 class FriendFollowersViewHolder extends RecyclerView.ViewHolder {
 
+    CircleImageView live_user_profile;
+    AppCompatTextView liveUserName, liveUserStreamName;
+    AppCompatButton live_add_follow_button;
+
     public FriendFollowersViewHolder(@NonNull View itemView) {
         super(itemView);
+        live_user_profile = itemView.findViewById(R.id.live_user_profile);
+        liveUserName = itemView.findViewById(R.id.liveUserName);
+        liveUserStreamName = itemView.findViewById(R.id.liveUserStreamName);
+        live_add_follow_button = itemView.findViewById(R.id.live_add_follow_button);
     }
 }

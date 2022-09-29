@@ -32,8 +32,12 @@ import com.webnmobapps.livelyPencil.Model.NotificationListModel;
 import com.webnmobapps.livelyPencil.Model.Personal_Information_Settings_Model;
 import com.webnmobapps.livelyPencil.Model.Record.NotificationListResult;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationListPython;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -48,42 +52,16 @@ import retrofit2.Response;
 public class NotificationFragment extends Fragment {
 
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    private String user_id;
-    List<NotificationListResult> notificationListResultList = new ArrayList<>();
+    private String user_id,accessToken,finalAccessToken;
+    List<NotificationListPython> notificationListPythonArrayList = new ArrayList<>();
     RecyclerView rcv_notification_list;
     AppCompatButton n_clear_all_button;
 
 
-    public NotificationFragment() {
-        // Required empty public constructor
-    }
+    //#########################################################################
 
-    // TODO: Rename and change types and number of parameters
-    public static NotificationFragment newInstance(String param1, String param2) {
-        NotificationFragment fragment = new NotificationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,6 +73,8 @@ public class NotificationFragment extends Fragment {
 
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
 
         notification_list_api();
 
@@ -109,19 +89,19 @@ public class NotificationFragment extends Fragment {
                 pd.show();
 
 
-                Call<SmFlaxibleModel> call = API_Client.getClient().notificationClearAll(user_id);
+                Call<CommonStatusMessageModelPython> call = API_Client.getClient().CLEAR_ALL_NOTIFICATION_PYTHON_CALL(finalAccessToken);
 
-                call.enqueue(new Callback<SmFlaxibleModel>() {
+                call.enqueue(new Callback<CommonStatusMessageModelPython>() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
-                    public void onResponse(Call<SmFlaxibleModel> call, Response<SmFlaxibleModel> response) {
+                    public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
                         pd.dismiss();
 
 
                         try {
                             if (response.isSuccessful()) {
                                 String message = response.body().getMessage();
-                                String success = response.body().getSuccess();
+                                String success = response.body().getStatus();
 
                                 if (success.equals("true") || success.equals("True")) {
 
@@ -176,7 +156,7 @@ public class NotificationFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<SmFlaxibleModel> call, Throwable t) {
+                    public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
                         Log.e("bhgyrrrthbh", String.valueOf(t));
                         if (t instanceof IOException) {
                             Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -211,25 +191,25 @@ public class NotificationFragment extends Fragment {
 
 
 
-        Call<NotificationListModel> call = API_Client.getClient().notificationList(user_id);
+        Call<NotificationModelPython> call = API_Client.getClient().NOTIFICATION_MODEL_PYTHON_CALL(finalAccessToken);
 
-        call.enqueue(new Callback<NotificationListModel>() {
+        call.enqueue(new Callback<NotificationModelPython>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onResponse(Call<NotificationListModel> call, Response<NotificationListModel> response) {
+            public void onResponse(Call<NotificationModelPython> call, Response<NotificationModelPython> response) {
                 pd.dismiss();
 
 
                 try {
                     if (response.isSuccessful()) {
                         String message = response.body().getMessage();
-                        String success = response.body().getSuccess();
+                        String success = response.body().getStatus();
 
                         if (success.equals("true") || success.equals("True")) {
 
-                            notificationListResultList = response.body().getRecord();
+                            notificationListPythonArrayList = response.body().getData();
 
-                            if(notificationListResultList.size() == 0)
+                            if(notificationListPythonArrayList.size() == 0)
                             {
                                 n_clear_all_button.setVisibility(View.GONE);
                             }else
@@ -240,12 +220,12 @@ public class NotificationFragment extends Fragment {
                             LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity());
                             linearLayoutManager2.setOrientation(RecyclerView.VERTICAL);
                             rcv_notification_list.setLayoutManager(linearLayoutManager2);
-                            NotificationListAdapter notificationListAdapter = new NotificationListAdapter(notificationListResultList, getActivity(),user_id);
+                            NotificationListAdapter notificationListAdapter = new NotificationListAdapter(finalAccessToken,notificationListPythonArrayList, getActivity());
                             rcv_notification_list.setAdapter(notificationListAdapter);
                             //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-
-                        } else {
                             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                        } else {
+                          //  Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
                             pd.dismiss();
                         }
 
@@ -300,7 +280,7 @@ public class NotificationFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<NotificationListModel> call, Throwable t) {
+            public void onFailure(Call<NotificationModelPython> call, Throwable t) {
                 Log.e("bhgyrrrthbh", String.valueOf(t));
                 if (t instanceof IOException) {
                     Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();

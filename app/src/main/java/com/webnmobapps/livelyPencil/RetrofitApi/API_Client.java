@@ -16,7 +16,7 @@ public class API_Client {
 
        // public static final String BASE_URL = "http://192.168.1.130:8001/api/";
         public static final String BASE_URL = "http://69.49.235.253:8001/api/";
-        public static final String BASE_IMAGE = "https://livelypencil.com/public/upload/User/";
+        public static final String BASE_IMAGE = "http://69.49.235.253:8001";
         public static final String BASE_COVER_IMAGE = "https://livelypencil.com/public/upload/User/Cover/";
         public  static final String BASE_LOGO_IMAGE = "https://livelypencil.com/public/upload/avatars/";
         public static final String BASE_VIDEO_URL = "https://livelypencil.com/public/video/";

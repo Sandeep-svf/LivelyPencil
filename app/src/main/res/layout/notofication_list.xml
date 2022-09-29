@@ -49,7 +49,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="gone"
+
         android:layout_width="0dp"
         android:layout_height="120dp"
         app:layout_constraintStart_toStartOf="parent"

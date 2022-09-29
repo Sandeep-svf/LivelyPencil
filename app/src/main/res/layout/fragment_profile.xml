@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHeight_percent="0.5">
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/streamCoverImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
 
@@ -32,6 +33,7 @@
         </androidx.appcompat.widget.AppCompatImageView>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userProfile"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,6 +139,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabSelectedTextColor="@color/settingEditBackgroundColor"
+            app:tabIndicatorColor="@color/settingEditBackgroundColor"
             app:layout_constraintBottom_toTopOf="@+id/view_pager"
             >
 

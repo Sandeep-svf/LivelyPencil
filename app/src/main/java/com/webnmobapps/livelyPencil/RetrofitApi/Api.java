@@ -37,8 +37,14 @@ import com.webnmobapps.livelyPencil.Model.TvListModel;
 import com.webnmobapps.livelyPencil.Model.TvSettingsModel;
 import com.webnmobapps.livelyPencil.Model.UserWallListModel;
 import com.webnmobapps.livelyPencil.Model.UserWallModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
 
 import java.util.List;
 
@@ -48,9 +54,11 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Url;
 
 public interface Api {
 
@@ -70,7 +78,7 @@ public interface Api {
     @FormUrlEncoded
     @POST("login/")
     Call<LoginModelPython> login (
-                             @Field("username") String username,
+                             @Field("email") String email,
                              @Field("password") String password,
                              @Field("device_token") String device_toke);
 
@@ -221,11 +229,19 @@ public interface Api {
     @POST("notificationList")
     Call<NotificationListModel> notificationList (@Field("user_id") String user_id);
 
-    @FormUrlEncoded
-    @POST("notificationRemoveSingle")
-    Call<SmFlaxibleModel> notificaitonSingleDelete (@Field("user_id") String user_id,
-                                                    @Field("id") String id
-                                                    );
+
+
+    @GET("notifications/")
+    Call<NotificationModelPython> NOTIFICATION_MODEL_PYTHON_CALL (@Header("Authorization") String Authorization);
+
+
+    @POST("notifications/")
+    Call<CommonStatusMessageModelPython> CLEAR_ALL_NOTIFICATION_PYTHON_CALL (@Header("Authorization") String Authorization);
+
+
+    @POST
+    Call<CommonStatusMessageModelPython> notificaitonSingleDelete (@Url String url,
+                                                                   @Header("Authorization")String Authorization);
 
     @FormUrlEncoded
     @POST("notificationRemoveAll")
@@ -235,6 +251,26 @@ public interface Api {
     @FormUrlEncoded
     @POST("showpoststeam")
     Call<StreamPageModel> stramPageList (@Field("user_id") String user_id);
+
+
+
+    @GET("posts/")
+    Call<PostListModelPython> POST_LIST_MODEL_PYTHON_CALL (@Header("Authorization") String Authorization);
+
+
+    @GET
+    Call<UserProfileModelPython> USER_PROFILE_MODEL_PYTHON_CALL (@Url String url,
+            @Header("Authorization") String Authorization);
+
+
+    @GET
+    Call<FollowersListModelPython> FOLLOWERS_LIST_MODEL_PYTHON_CALL (@Url String url,
+                                                                   @Header("Authorization") String Authorization);
+
+
+    @GET
+    Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url,
+                                                                    @Header("Authorization") String Authorization);
 
     @FormUrlEncoded
     @POST("popular-tv")

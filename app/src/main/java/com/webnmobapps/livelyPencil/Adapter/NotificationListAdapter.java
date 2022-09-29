@@ -16,10 +16,9 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.webnmobapps.livelyPencil.Activity.Setting.PersonalInformationActivity;
-import com.webnmobapps.livelyPencil.Model.Personal_Information_Settings_Model;
-import com.webnmobapps.livelyPencil.Model.Record.NotificationListResult;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationListPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 
@@ -34,14 +33,15 @@ import retrofit2.Response;
 
 public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListViewHolder> {
 
-    List<NotificationListResult> notificationListResultList;
+    List<NotificationListPython> notificationListPythonList;
     Context context;
-    private String notificationId, user_id;
+    private String notificationId, user_id,finalAccessToken;
 
-    public NotificationListAdapter(List<NotificationListResult> notificationListResultList, Context context, String user_id) {
-        this.notificationListResultList = notificationListResultList;
+    public NotificationListAdapter(String finalAccessToken,List<NotificationListPython> notificationListPythonList, Context context) {
+        this.notificationListPythonList = notificationListPythonList;
         this.context = context;
-        this.user_id = user_id;
+        this.finalAccessToken = finalAccessToken;
+
     }
 
     @NonNull
@@ -55,39 +55,39 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
     @Override
     public void onBindViewHolder(@NonNull NotificationListViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        notificationId = String.valueOf(notificationListResultList.get(position).getId());
+        notificationId = String.valueOf(notificationListPythonList.get(position).getId());
 
-        holder.n_title.setText( notificationListResultList.get(position).getTitle());
-        holder.n_message.setText( notificationListResultList.get(position).getMessage());
+        holder.n_title.setText( notificationListPythonList.get(position).getTitle());
+        holder.n_message.setText( notificationListPythonList.get(position).getMessage());
 
-        String Dtime = notificationListResultList.get(position).getNotificationTime();
+        String Dtime = notificationListPythonList.get(position).getCreatedAt();
 
 
-        String[] parts = Dtime.split("T");
+       /* String[] parts = Dtime.split("T");
         String dateData = parts[0];
         String rawData = parts[1];
 
         String timeData = rawData.substring(0,8);
 
         Log.e("dt_data","dateData  "+dateData);
-        Log.e("dt_data","timeData  "+timeData);
+        Log.e("dt_data","timeData  "+timeData);*/
 
 
 
-        holder.n_time_date.setText(dateData+" "+timeData);
+        holder.n_time_date.setText(Dtime);
 
         holder.n_single_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                notification_single_delete_api(notificationId , user_id,position);
+                notification_single_delete_api(notificationId ,position);
 
             }
         });
 
     }
 
-    private void notification_single_delete_api(String notificationId, String user_id, int position) {
+    private void notification_single_delete_api(String notificationId, int position) {
 
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setCancelable(false);
@@ -95,19 +95,19 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         pd.show();
 
 
-        Call<SmFlaxibleModel> call = API_Client.getClient().notificaitonSingleDelete(user_id,notificationId);
+        Call<CommonStatusMessageModelPython> call = API_Client.getClient().notificaitonSingleDelete("removenotification/"+notificationId+"/",finalAccessToken);
 
-        call.enqueue(new Callback<SmFlaxibleModel>() {
+        call.enqueue(new Callback<CommonStatusMessageModelPython>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onResponse(Call<SmFlaxibleModel> call, Response<SmFlaxibleModel> response) {
+            public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
                 pd.dismiss();
 
 
                 try {
                     if (response.isSuccessful()) {
                         String message = response.body().getMessage();
-                        String success = response.body().getSuccess();
+                        String success = response.body().getStatus();
 
 
                         if (success.equals("true") || success.equals("True")) {
@@ -163,7 +163,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             }
 
             @Override
-            public void onFailure(Call<SmFlaxibleModel> call, Throwable t) {
+            public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
                 Log.e("bhgyrrrthbh", String.valueOf(t));
                 if (t instanceof IOException) {
                     Toast.makeText(context, "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -179,7 +179,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     public void removeItem(int position) {
         try {
-            notificationListResultList.remove(position);
+            notificationListPythonList.remove(position);
             notifyDataSetChanged();     // Update data in adapter.... Notify adapter for change data
         } catch (IndexOutOfBoundsException index) {
             index.printStackTrace();
@@ -191,7 +191,7 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
 
     @Override
     public int getItemCount() {
-        return notificationListResultList.size();
+        return notificationListPythonList.size();
     }
 }
 class NotificationListViewHolder extends RecyclerView.ViewHolder {
