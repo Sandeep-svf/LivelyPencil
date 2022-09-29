@@ -50,7 +50,7 @@ public class PageAdapter extends RecyclerView.Adapter<PageViewHolder>  {
 
 
 
-        Log.e("image_Link",API_Client.BASE_IMAGE+postListDataPythonList.get(position).getFile());
+      /*  Log.e("image_Link",API_Client.BASE_IMAGE+postListDataPythonList.get(position).getFile());*/
     /*    holder.stream_title4.setText(streamPageResultList.get(position).getStreamtitle());
         holder.page.setText(String.valueOf(streamPageResultList.get(position).getTotalimage()));
         holder.video.setText(String.valueOf(streamPageResultList.get(position).getTotalvideo()));

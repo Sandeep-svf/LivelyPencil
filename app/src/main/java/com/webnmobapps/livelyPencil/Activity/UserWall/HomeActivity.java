@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
 import com.webnmobapps.livelyPencil.Activity.Login.LoginJoinusActivity;
+import com.webnmobapps.livelyPencil.Activity.NewChangePhase.SettingsFragment;
 import com.webnmobapps.livelyPencil.Activity.PostType.CreateOfflinePostActivity;
 import com.webnmobapps.livelyPencil.Activity.PostType.Fragment.HomePostFragment;
 import com.webnmobapps.livelyPencil.Activity.Setting.PersonalInformationActivity;
@@ -301,8 +302,18 @@ public class HomeActivity extends AppCompatActivity {
                             case R.id.Settings:
                                 // Set the text color to red
                                 relaseMediaPlayer();
-                                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-                                startActivity(intent);
+                               /* Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                                startActivity(intent);*/
+
+                                SettingsFragment settingsFragment = new SettingsFragment();
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                //  ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                                fragmentTransaction.replace(R.id.fragment_contaner, settingsFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+
                                 return true;
 
                             default:
