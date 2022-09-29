@@ -1,9 +1,12 @@
 package com.webnmobapps.livelyPencil.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,14 +25,16 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FriendFollowersAdapter extends RecyclerView.Adapter<FriendFollowersViewHolder> {
+public class FriendFollowersAdapter extends RecyclerView.Adapter<FriendFollowersViewHolder> implements Filterable {
 
     private Context context;
-     List<LiveUserListDataPython>  liveUserListDataPythonArrayList = new ArrayList<>();
+     private static List<LiveUserListDataPython>  liveUserListDataPythonArrayList = new ArrayList<>();
+    private static  List<LiveUserListDataPython>  backup;
 
     public FriendFollowersAdapter(Context context, List<LiveUserListDataPython> liveUserListDataPythonArrayList) {
         this.context = context;
         this.liveUserListDataPythonArrayList = liveUserListDataPythonArrayList;
+        backup = new ArrayList<>((liveUserListDataPythonArrayList));
     }
 
     @NonNull
@@ -67,6 +72,43 @@ public class FriendFollowersAdapter extends RecyclerView.Adapter<FriendFollowers
     @Override
     public int getItemCount() {
         return liveUserListDataPythonArrayList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence keyword) {
+                ArrayList<LiveUserListDataPython> filtereddata=new ArrayList<>();
+
+
+                if(keyword.toString().isEmpty())
+                    filtereddata.addAll(backup);
+                else
+                {
+                    for(LiveUserListDataPython obj : backup)
+                    {
+                        if(obj.getStreamTitle().toString().toLowerCase().contains(keyword.toString().toLowerCase()) || obj.getFirstName().toString().toLowerCase().contains(keyword.toString().toLowerCase()))
+                            filtereddata.add(obj);
+                    }
+                }
+
+                FilterResults results=new FilterResults();
+                results.values=filtereddata;
+                return results;
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                liveUserListDataPythonArrayList.clear();
+                liveUserListDataPythonArrayList.addAll((ArrayList<LiveUserListDataPython>)results.values);
+                notifyDataSetChanged();
+            }
+        };
+
+        return filter;
     }
 }
 class FriendFollowersViewHolder extends RecyclerView.ViewHolder {
