@@ -8,15 +8,10 @@
 
 
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/post_bg2"
-
-        >
+        android:background="@color/post_bg2">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/nh1"
@@ -26,17 +21,16 @@
             android:text="Support Center"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/nh2"
+            app:layout_constraintEnd_toStartOf="@+id/support_center_image"
             app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             app:layout_constraintVertical_bias="0.05"></androidx.appcompat.widget.AppCompatTextView>
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/nh2"
+            android:id="@+id/support_center_image"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:paddingStart="5dp"
@@ -186,6 +180,7 @@
                         android:id="@+id/surname_editText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+
 
 
                         android:textStyle="bold"
@@ -484,7 +479,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/change_text"
+                    android:id="@+id/change_username_text_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -640,11 +635,14 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chang_user_profile_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:elevation="2dp"
+                app:layout_constraintVertical_bias="0.85"
                 app:layout_constraintBottom_toBottomOf="parent"
 
 
@@ -654,8 +652,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Change"
-                    android:fontFamily=""
-                    android:padding="5dp"
+                    android:fontFamily="@font/raleway_medium"
+
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+
+
+                    android:background="@color/settingEditBackgroundColor"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -691,6 +697,7 @@
             ></androidx.appcompat.widget.AppCompatTextView>
 
         <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/stream_privacy_setting_switchmaterial"
             android:layout_width="0dp"
             android:layout_height="0dp"
 
@@ -736,6 +743,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
 
+            android:id="@+id/notification_privacy_setting_switchmaterial"
             app:layout_constraintTop_toBottomOf="@+id/notification_text"
 
             android:background="@color/white"

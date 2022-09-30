@@ -23,6 +23,7 @@
         <activity
             android:name=".Activity.JoinUs.NameEmailActivity2"
             android:exported="true" />
+
         <activity
             android:name=".Tempcode.TempActivity.TempActivity"
             android:exported="true"

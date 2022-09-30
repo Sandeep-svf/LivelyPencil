@@ -42,6 +42,7 @@ import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
@@ -261,6 +262,10 @@ public interface Api {
     @GET
     Call<UserProfileModelPython> USER_PROFILE_MODEL_PYTHON_CALL (@Url String url,
             @Header("Authorization") String Authorization);
+
+    @GET("myfollowers/")
+    Call<MyFollowersModel> MY_FOLLOWERS_MODEL_CALL (@Header("Authorization") String Authorization);
+
 
 
     @GET

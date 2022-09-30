@@ -219,8 +219,6 @@
             android:id="@+id/date_spin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-
             android:gravity="center"
             android:textSize="@dimen/text_size_14"
             android:textStyle="bold"

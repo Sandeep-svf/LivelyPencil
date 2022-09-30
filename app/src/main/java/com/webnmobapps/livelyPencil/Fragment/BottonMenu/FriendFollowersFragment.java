@@ -14,14 +14,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -52,7 +49,6 @@ public class FriendFollowersFragment extends Fragment {
     RecyclerView rcv_friend_followers;
     List<LiveUserListDataPython>  liveUserListDataPythonArrayList = new ArrayList<>();
     private String finalAccessToken,accessToken;
-    EditText searchText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +57,6 @@ public class FriendFollowersFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_friend_followers, container, false);
 
         rcv_friend_followers = view.findViewById(R.id.rcv_friend_followers);
-        searchText = view.findViewById(R.id.searchText);
 
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         // user_id=sharedPreferences.getString("UserID","");
@@ -71,24 +66,6 @@ public class FriendFollowersFragment extends Fragment {
         live_user_api();
 
 
-
-      /*  searchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                FriendFollowersAdapter.getFilter().filter(searchText.getText().toString());
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });*/
 
 
 
