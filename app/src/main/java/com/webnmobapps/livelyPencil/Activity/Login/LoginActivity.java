@@ -399,7 +399,7 @@ public class LoginActivity extends AppCompatActivity {
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-                            // Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
 
                         } else {
