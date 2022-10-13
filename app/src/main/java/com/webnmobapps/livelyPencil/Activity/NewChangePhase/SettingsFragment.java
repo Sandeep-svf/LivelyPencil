@@ -23,7 +23,7 @@ import com.webnmobapps.livelyPencil.R;
 
 import java.util.Calendar;
 
-public class SettingsFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerdatepicker.DatePickerDialog.OnDateSetListener {
 
     AppCompatImageView support_center_image;
     ConstraintLayout chang_user_profile_layout;
@@ -74,6 +74,7 @@ public class SettingsFragment extends Fragment implements DatePickerDialog.OnDat
 
         new SpinnerDatePickerDialogBuilder()
                 .context(getActivity())
+                .callback(this)
                 .spinnerTheme(R.style.NumberPickerStyle)
                 .showTitle(true)
                 .showDaySpinner(true)
@@ -101,7 +102,10 @@ public class SettingsFragment extends Fragment implements DatePickerDialog.OnDat
 
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+    public void onDateSet(com.tsongkha.spinnerdatepicker.DatePicker  view, int year, int month, int dayOfMonth) {
 
+        Log.e("check","working.*&###########"+year+month+dayOfMonth);
     }
+
+
 }
