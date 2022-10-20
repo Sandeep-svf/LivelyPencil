@@ -347,4 +347,11 @@ public interface Api {
     @POST("Education")
     Call<EducationModel> education_list();
 
+    @Multipart
+    @POST("addbook/")
+    Call<CommonStatusMessageModelPython> ADD_BOOK_MODEL_CALL (@Header("Authorization") String Authorization,
+                                                              @Part("book_name") RequestBody book_name,
+                                                              @Part("book_descriptions") RequestBody book_descriptions,
+                                                              @Part MultipartBody.Part book_image);
+
 }

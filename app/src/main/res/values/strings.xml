@@ -271,4 +271,5 @@
     <string name="re_enter">Re-Enter</string>
     <string name="enter_stream_name">Please enter stream name</string>
     <string name="select_stream_image">Please select stream image</string>
+    <string name="create_book">Create Book</string>
 </resources>

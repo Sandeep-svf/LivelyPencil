@@ -21,13 +21,22 @@
         android:theme="@style/Theme.LivelyPencil"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.Book.WebviewEditorActivity"
+            android:exported="true" >
+
+
+
+        </activity>
+        <activity
+            android:name=".Activity.Book.CreateBookActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.JoinUs.NameEmailActivity2"
             android:exported="true" />
-
         <activity
             android:name=".Tempcode.TempActivity.TempActivity"
             android:exported="true"
-            android:screenOrientation="locked"></activity>
+            android:screenOrientation="locked" />
         <activity
             android:name=".Activity.PostType.CreateOfflinePostActivity"
             android:exported="true"
@@ -200,11 +209,7 @@
         <activity
             android:name=".Activity.Setting.RadioChannelSettingsActivity"
             android:exported="true"
-            android:screenOrientation="locked"
-            >
-
-
-        </activity>
+            android:screenOrientation="locked" />
         <activity
             android:name=".Activity.Setting.TVChannelSettingsActivity"
             android:exported="true"
@@ -261,9 +266,7 @@
         <activity
             android:name=".Activity.JoinUs.SelectIntrestActivity"
             android:exported="true"
-            android:screenOrientation="locked" >
-
-        </activity>
+            android:screenOrientation="locked" />
         <activity
             android:name=".Activity.Utility.ImagePickerActivity"
             android:exported="true"
@@ -290,6 +293,7 @@
             android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

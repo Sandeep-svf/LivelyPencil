@@ -31,7 +31,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
+import com.webnmobapps.livelyPencil.Activity.Login.LoginActivity;
 import com.webnmobapps.livelyPencil.Activity.Login.LoginJoinusActivity;
 import com.webnmobapps.livelyPencil.Activity.NewChangePhase.SettingsFragment;
 import com.webnmobapps.livelyPencil.Activity.PostType.CreateOfflinePostActivity;
@@ -157,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-        tv_top_icon.setOnClickListener(new View.OnClickListener() {
+       /* tv_top_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -200,7 +202,7 @@ public class HomeActivity extends AppCompatActivity {
                 Glide.with(HomeActivity.this).load(R.drawable.menu_button).into(three_dot_top_icon);
 
             }
-        });
+        });*/
 
 
         three_dot_top_icon.setOnClickListener(new View.OnClickListener() {
@@ -220,6 +222,15 @@ public class HomeActivity extends AppCompatActivity {
                             case R.id.create_story:
                                 // Set the text color to red
                               //  relaseMediaPlayer();
+
+                                // create book....
+
+                              //  alert_dialog_create_book();
+                                Intent intent = new Intent(HomeActivity.this, CreateBookActivity.class);
+                                startActivity(intent);
+
+
+
                                 return true;
                             case R.id.terms_conditions:
                                 // Set the text color to red
@@ -514,6 +525,40 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+
+    private void alert_dialog_create_book(String value) {
+
+        Dialog dialogs;
+        final LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.test_dialog_xml_otp, null);
+
+        final ImageView close_dialog = alertLayout.findViewById(R.id.close_dialog);
+
+
+
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(HomeActivity.this);
+
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+
+        dialogs = alert.create();
+        dialogs.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogs.show();
+        dialogs.setCanceledOnTouchOutside(true);
+        // dialogs.getWindow().setBackgroundDrawableResource(R.color.black_transparent_50);
+        // dialogs.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+
+        close_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialogs.dismiss();
+            }
+        });
+    }
     private void relaseMediaPlayer() {
         MediaPlayerUtils.releaseMediaPlayer();
     }
@@ -785,8 +830,8 @@ public class HomeActivity extends AppCompatActivity {
         n_count_layout = findViewById(R.id.n_count_layout);
         notification_count = findViewById(R.id.notification_count);
         page_top_icon = findViewById(R.id.page_top_icon);
-        tv_top_icon = findViewById(R.id.tv_top_icon);
-        radio_top_icon = findViewById(R.id.radio_top_icon);
+        //tv_top_icon = findViewById(R.id.tv_top_icon);
+       // radio_top_icon = findViewById(R.id.radio_top_icon);
         three_dot_top_icon = findViewById(R.id.three_dot_top_icon);
         home_icon = findViewById(R.id.home_icon);
         fragment_contaner = findViewById(R.id.fragment_contaner);

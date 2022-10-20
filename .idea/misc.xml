@@ -74,6 +74,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_comment.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_contact_info_wizard_settings.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_contact_information.xml" value="0.25" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_create_book.xml" value="0.209375" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_create_offline_post.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_custom_photo_gallery.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_firebase_dbactivity.xml" value="0.209375" />
@@ -135,6 +136,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_user_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_user_wall.xml" value="0.22" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_video_player.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_webview_editor.xml" value="0.209375" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_welcome.xml" value="0.18" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_wizard_base.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/add_profile_image_dialog.xml" value="0.20416666666666666" />

@@ -12,9 +12,7 @@
         android:id="@+id/error_message"
         android:layout_marginLeft="20dp"
         android:textSize="@dimen/_18sdp"
-
         android:gravity="center|top"
-
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
