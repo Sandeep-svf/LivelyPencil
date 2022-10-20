@@ -512,11 +512,11 @@ public class HomeActivity extends AppCompatActivity {
                 notification_read_api();
 
                 page_top_icon.setImageResource(R.drawable.n_shelf);
-                tv_top_icon.setImageResource(R.drawable.n_tv);
-                radio_top_icon.setImageResource(R.drawable.n_radio);
+ //               tv_top_icon.setImageResource(R.drawable.n_tv);
+   //             radio_top_icon.setImageResource(R.drawable.n_radio);
                 Glide.with(HomeActivity.this).load(R.drawable.menu_button).into(three_dot_top_icon);
-                home_icon.setImageResource(R.drawable.home);
-                search_icon.setImageResource(R.drawable.search);
+   //             home_icon.setImageResource(R.drawable.home);
+   //             search_icon.setImageResource(R.drawable.search);
                 friends_followers_icon.setImageResource(R.drawable.friends_followers);
                 messages_mailbox_icon.setImageResource(R.drawable.messages_mailbox);
                 notification_icon.setImageResource(R.drawable.noti_color);

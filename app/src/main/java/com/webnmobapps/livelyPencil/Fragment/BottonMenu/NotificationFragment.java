@@ -209,12 +209,16 @@ public class NotificationFragment extends Fragment {
 
                             notificationListPythonArrayList = response.body().getData();
 
-                            if(notificationListPythonArrayList.size() == 0)
-                            {
-                                n_clear_all_button.setVisibility(View.GONE);
-                            }else
-                            {
-                                n_clear_all_button.setVisibility(View.VISIBLE);
+                            try {
+                                if(notificationListPythonArrayList.size() == 0)
+                                {
+                                    n_clear_all_button.setVisibility(View.GONE);
+                                }else
+                                {
+                                    n_clear_all_button.setVisibility(View.VISIBLE);
+                                }
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
                             }
 
                             LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getActivity());
