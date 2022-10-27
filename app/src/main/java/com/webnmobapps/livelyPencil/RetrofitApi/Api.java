@@ -37,6 +37,7 @@ import com.webnmobapps.livelyPencil.Model.TvListModel;
 import com.webnmobapps.livelyPencil.Model.TvSettingsModel;
 import com.webnmobapps.livelyPencil.Model.UserWallListModel;
 import com.webnmobapps.livelyPencil.Model.UserWallModel;
+import com.webnmobapps.livelyPencil.ModelPython.BookListModel;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
@@ -353,5 +354,8 @@ public interface Api {
                                                               @Part("book_name") RequestBody book_name,
                                                               @Part("book_descriptions") RequestBody book_descriptions,
                                                               @Part MultipartBody.Part book_image);
+
+    @GET("bookslist/")
+    Call<BookListModel> BOOK_LIST_MODEL_CALL (@Header("Authorization") String Authorization);
 
 }

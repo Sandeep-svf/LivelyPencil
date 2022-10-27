@@ -70,6 +70,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_about_yourself_wizard.xml" value="0.18" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_ads_settings.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_apisettings.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_book_list.xml" value="0.209375" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_choose_language.xml" value="0.2" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_comment.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_contact_info_wizard_settings.xml" value="0.20416666666666666" />
@@ -140,6 +141,7 @@
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_welcome.xml" value="0.18" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/activity_wizard_base.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/add_profile_image_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/book_list.xml" value="0.22" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/comment_user_post_wall_holder.xml" value="0.16" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/custom_gallery.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/LivelyPencil/app/src/main/res/layout/custom_gallery_item.xml" value="0.20416666666666666" />

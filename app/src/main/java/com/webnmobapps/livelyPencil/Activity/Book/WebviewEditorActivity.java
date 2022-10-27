@@ -12,7 +12,8 @@ public class WebviewEditorActivity extends AppCompatActivity {
 
 
     WebView web;
-    private final String  url = "http://69.49.235.253:8001/3";
+    private final String  url = "http://69.49.235.253:8001/";
+    private String bookId,finalUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,10 @@ public class WebviewEditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webview_editor);
 
         web = findViewById(R.id.editor_webview);
+
+        //get id
+        bookId = getIntent().getStringExtra("bookid");
+        finalUrl = url+bookId;
 
         // linl ->  http://69.49.235.253:8001/
         //http://69.49.235.253:8001/
@@ -39,7 +44,7 @@ public class WebviewEditorActivity extends AppCompatActivity {
 
         web.getSettings().setAllowContentAccess(true);
 
-        web.loadUrl(url);
+        web.loadUrl(finalUrl);
         web.setWebViewClient(new WebViewClient());
 
     }

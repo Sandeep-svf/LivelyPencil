@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.Book.BookListActivity;
 import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
 import com.webnmobapps.livelyPencil.Activity.Login.LoginActivity;
@@ -112,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
                /* Intent intent = new Intent(HomeActivity.this, CreateOfflinePostActivity.class);
                 startActivity(intent);*/
 
-                HomePostFragment homePostFragment = new HomePostFragment();
+        /*        HomePostFragment homePostFragment = new HomePostFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 //  ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -121,7 +122,10 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
-                relaseMediaPlayer();
+                relaseMediaPlayer();*/
+
+                Intent intent = new Intent(HomeActivity.this, BookListActivity.class);
+                startActivity(intent);
 
                 page_top_icon.setImageResource(R.drawable.n_shelf);
          //       tv_top_icon.setImageResource(R.drawable.n_tv);
