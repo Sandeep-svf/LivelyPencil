@@ -1,11 +1,475 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Book.CreateBookActivity">
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/stream_user_image_cb"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_bias="0"
+            app:srcCompat="@color/ImageBackgroundColor"
+            app:layout_constraintHeight_percent="0.4"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/need_to_hide_cb"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintHeight_percent="0.3"
+            android:src="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintVertical_bias="0.2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/join_us"
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/join_us"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/ultra_heading"
+                    android:textColor="@color/white"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.8"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/logo_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.4">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/logo_image"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/logo_with_text"
+                    android:tint="@color/white"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.8"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/join_us"
+
+                    app:layout_constraintWidth_percent="0.6">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/stream_page_Image_cb"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/camera_icon"
+                android:tint="@color/white"
+
+                app:layout_constraintWidth_percent="0.2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.65"
+                app:layout_constraintHeight_percent="0.4"
+                app:layout_constraintVertical_chainStyle="packed">
+
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/stream_page_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                app:layout_constraintWidth_percent="0.4"
+                android:text="@string/book_cover_image"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sub_heading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:fontFamily="@font/raleway_medium"
+                android:background="@null"
+
+                app:layout_constraintVertical_bias="0.95"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/stream_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/book_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sub_heading"
+
+android:fontFamily="@font/raleway_bold"
+            app:layout_constraintVertical_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/passcode_cardview"
+
+            app:layout_constraintWidth_percent="0.9">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/private_public"
+            android:text="@string/Private"
+
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:textSize="@dimen/text_heading"
+            android:textColor="@color/white"
+            app:thumbTint="@color/dark_white"
+            app:trackTint="@color/rippleBlue"
+            android:fontFamily="@font/raleway_bold"
+            app:layout_constraintWidth_percent="0.3"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.85"
+            app:layout_constraintBottom_toTopOf="@+id/passcode_cardview"
+
+            >
+
+        </com.google.android.material.switchmaterial.SwitchMaterial>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/passcode_cardview"
+            android:layout_width="0dp"
+            app:cardElevation="4dp"
+            android:layout_height="40dp"
+            android:background="@drawable/border_line_around_edittext"
+            app:cardCornerRadius="4dp"
+
+            app:layout_constraintVertical_bias="0.39"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.9">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/Stream_name_title_cb"
+                android:layout_width="match_parent"
+                android:background="@null"
+                android:inputType="text"
+                android:fontFamily="@font/raleway_bold"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:layout_height="match_parent">
+
+            </androidx.appcompat.widget.AppCompatEditText>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/private_public_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:visibility="gone"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintHorizontal_bias="0.15"
+
+            android:text="Private"
+            android:textColor="@color/rippleBlue"
+            android:gravity="center"
+            android:textSize="@dimen/text_heading"
+            android:fontFamily="@font/raleway_bold"
+
+            app:layout_constraintVertical_bias="0.48"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            ></androidx.appcompat.widget.AppCompatTextView>
+
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/private_message_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+
+            android:text="@string/private_message"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/sub_heading"
+            android:gravity="center"
+
+
+            app:layout_constraintVertical_bias="0.53"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/book_desc_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65"
+            app:layout_constraintHeight_percent="0.3"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/boook_description"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+
+                app:layout_constraintHorizontal_bias="0.08"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/passwordEditText_cb"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/custom_border2"
+                android:inputType="text"
+               android:maxLines="6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+
+                android:fontFamily="@font/raleway_medium"
+
+                android:gravity="top"
+                app:layout_constraintHeight_percent="0.8"
+                app:layout_constraintWidth_percent="0.9">
+
+            </androidx.appcompat.widget.AppCompatEditText>
+
+
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/e_mail"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+
+
+                app:layout_constraintVertical_bias="0.4"
+                app:layout_constraintHorizontal_bias="0.1"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:visibility="gone"
+                android:background="@drawable/custom_border2"
+                app:cardCornerRadius="4dp"
+
+
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.05"
+
+
+                app:layout_constraintTop_toBottomOf="@+id/email"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintWidth_percent="0.9"
+
+                >
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/email_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:inputType="textEmailAddress"
+
+                    >
+
+                </androidx.appcompat.widget.AppCompatEditText>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/next_button"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/ic_continue_credentials"
+                android:gravity="center"
+                android:text="@string/next"
+                android:visibility="gone"
+                android:textAllCaps="false"
+                android:textColor="@drawable/text_color"
+                android:textSize="@dimen/text_heading"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintVertical_bias="0.72"
+                app:layout_constraintWidth_percent="0.4">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirm_button2_cb"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_continue_credentials_profile"
+            android:gravity="center"
+            android:text="@string/create_book"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:fontFamily="@font/raleway_bold"
+
+            android:textSize="@dimen/text_heading"
+
+
+            app:layout_constraintVertical_bias="0.62"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_desc_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.4"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatButton>
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/confirm_button_cb"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_continue_credentials"
+            android:gravity="center"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textColor="@drawable/text_color"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_heading"
+
+
+            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_desc_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.4">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
