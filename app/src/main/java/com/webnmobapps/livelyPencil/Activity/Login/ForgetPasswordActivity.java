@@ -111,7 +111,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 {
                     //forget_password_api();
 
-                    check_user_api();
+                   // check_user_api();
+                    Intent intent = new Intent(ForgetPasswordActivity.this, ForgetPaawordPasscodeActivity.class);
+                    intent.putExtra("userEmail",userEmail);
+                    startActivity(intent);
 
                 }
             }
@@ -206,13 +209,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     private void check_user_api() {
         String emailPhone;
-        if(key.equals("1"))
-        {
-            emailPhone = userEmail;
-        }else
-        {
-            emailPhone = userPhone;
-        }
+
 
 
         // show till load api data
@@ -222,7 +219,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         pd.setMessage("loading...");
         pd.show();
 
-        Call<CheckUserModel> call = API_Client.getClient().checkUser(emailPhone);
+        Call<CheckUserModel> call = API_Client.getClient().checkUser(userEmail);
 
 
 
@@ -239,9 +236,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         if (success.equals("true") || success.equals("True")) {
                            // Toast.makeText(getApplicationContext(), "Email or phone already register", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(ForgetPasswordActivity.this, ForgetPaawordPasscodeActivity.class);
-                            intent.putExtra("key",key);
-                            intent.putExtra("countryCode",countryCode);
-                            intent.putExtra("userPhone",userPhone);
                             intent.putExtra("userEmail",userEmail);
                             startActivity(intent);
                         } else {

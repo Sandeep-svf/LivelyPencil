@@ -24,6 +24,7 @@
     <color name="backgroundWhite">#FEFEFE</color>
     <color name="text_color">#6D6D70</color>
     <color name="border_line_color">#E6E6E6</color>
+    <color name="circle_bg">#808080</color>
     <color name="forgot_password_color">#E5E5E4</color>
     <color name="underLine">#BEBEC3</color>
     <color name="top_header">#80B6FE</color>

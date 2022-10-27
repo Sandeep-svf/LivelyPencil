@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment {
     AppCompatTextView userName,streamName,createdOnTime;
     CircleImageView userProfile;
     AppCompatImageView streamCoverImage;
+    CircleImageView add_stream_image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +70,7 @@ public class ProfileFragment extends Fragment {
         createdOnTime= view.findViewById(R.id.appCompatTextView6);
         userProfile= view.findViewById(R.id.userProfile);
         streamCoverImage= view.findViewById(R.id.streamCoverImage);
+        add_stream_image= view.findViewById(R.id.add_stream_image);
 
 
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
@@ -94,7 +96,6 @@ public class ProfileFragment extends Fragment {
             pd.setCancelable(false);
             pd.setMessage("loading...");
             pd.show();
-
 
             Call<UserProfileModelPython> call = API_Client.getClient().USER_PROFILE_MODEL_PYTHON_CALL("user/18/",finalAccessToken);
 

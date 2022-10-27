@@ -356,7 +356,7 @@ public class LoginActivity extends AppCompatActivity {
         pd.show();
 
 
-        Call<LoginModelPython> call = API_Client.getClient().login("aarav@gmail.com","123456er"
+        Call<LoginModelPython> call = API_Client.getClient().login(email_edittext.getText().toString(),password_edit_text.getText().toString()
             ,"fdhsg" );
 
         call.enqueue(new Callback<LoginModelPython>() {

@@ -58,8 +58,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 if(validation())
                 {
                     // reset password api
+                   // reset_password_api();
 
-                    reset_password_api();
+                    // add API here.....
+                    Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }
             }
         });

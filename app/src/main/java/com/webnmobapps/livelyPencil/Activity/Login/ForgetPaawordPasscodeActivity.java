@@ -65,18 +65,21 @@ public class ForgetPaawordPasscodeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         intis();
 
-        key = getIntent().getStringExtra("key");
-        userEmail = getIntent().getStringExtra("userEmail");
-        userPhone = getIntent().getStringExtra("userPhone");
-        countryCode = getIntent().getStringExtra("countryCode");
 
-        Log.e("check_data",countryCode+ userPhone);
+        try {
+            userEmail = getIntent().getStringExtra("userEmail");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
+ /*       Log.e("check_data",countryCode+ userPhone);
         Log.e("check_data","key"+ key);
-        Log.e("check_data","userEmail"+ userEmail);
+        Log.e("check_data","userEmail"+ userEmail);*/
 
 
 
-        if(key.equals("1"))
+/*        if(key.equals("1"))
         {
 
 
@@ -94,13 +97,13 @@ public class ForgetPaawordPasscodeActivity extends AppCompatActivity {
             sendVerificationCode("+"+countryCode + userPhone);
             Log.e("check_data","otp sent for phone auth");
 
-        }
+        }*/
 
 
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                otpData = otpTextView.getOTP();
+              /*  otpData = otpTextView.getOTP();
 
                 Log.e("check_data",otpData);
 
@@ -117,7 +120,11 @@ public class ForgetPaawordPasscodeActivity extends AppCompatActivity {
                 {
                     Log.e("check_data","verify code method runnign......");
                    verifyCode();
-                }
+                }*/
+
+                Intent intent = new Intent(ForgetPaawordPasscodeActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+
             }
         });
     }
