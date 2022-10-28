@@ -44,6 +44,7 @@ import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
@@ -357,5 +358,8 @@ public interface Api {
 
     @GET("bookslist/")
     Call<BookListModel> BOOK_LIST_MODEL_CALL (@Header("Authorization") String Authorization);
+
+    @GET("notificationsetting/")
+    Call<NotificationModel> NOTIFICATION_MODEL_SETTINGS_CALL (@Header("Authorization") String Authorization);
 
 }

@@ -13,7 +13,7 @@ private String status;
 private String message;
 @SerializedName("data")
 @Expose
-private Data data;
+private NotificationModelSettingData notificationModelSettingData;
 
 public String getStatus() {
 return status;
@@ -31,12 +31,12 @@ public void setMessage(String message) {
 this.message = message;
 }
 
-public Data getData() {
-return data;
+public NotificationModelSettingData getData() {
+return notificationModelSettingData;
 }
 
-public void setData(Data data) {
-this.data = data;
+public void setData(NotificationModelSettingData notificationModelSettingData) {
+this.notificationModelSettingData = notificationModelSettingData;
 }
 
 }

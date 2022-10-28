@@ -2,5 +2,5 @@
 <paths>
     <external-path
         name="PikMe"
-        path="Android/data/com.pik.me.datingapp12/files/Pictures"/>
+        path="Android/notificationModelSettingData/com.pik.me.datingapp12/files/Pictures"/>
 </paths>

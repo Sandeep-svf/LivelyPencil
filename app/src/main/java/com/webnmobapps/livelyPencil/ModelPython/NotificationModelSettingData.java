@@ -3,7 +3,7 @@ package com.webnmobapps.livelyPencil.ModelPython;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class NotificationModelSettingData {
 
 @SerializedName("notification")
 @Expose
