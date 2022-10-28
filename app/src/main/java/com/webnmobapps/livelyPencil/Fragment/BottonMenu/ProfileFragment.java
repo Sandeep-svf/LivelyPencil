@@ -1,12 +1,22 @@
 package com.webnmobapps.livelyPencil.Fragment.BottonMenu;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
@@ -15,15 +25,21 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.tabs.TabLayout;
+import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
+import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
+import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.Adapter.PageAdapter;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
@@ -35,6 +51,7 @@ import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +72,23 @@ public class ProfileFragment extends Fragment {
     CircleImageView userProfile;
     AppCompatImageView streamCoverImage;
     CircleImageView add_stream_image;
+    AlertDialog dialogs;
+    private Uri imageUri7;
+    private Bitmap thumbnail6;
+
+
+
+    public static final int REQUEST_IMAGE = 100;
+    private Uri uri;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private static final int PICK_IMAGE_G = 12547;
+    public static final int RESULT_OK = -1;
+    private File profileImage, streamImage;
+    private static final int CAMERA_PIC_REQUEST_R = 25418;
+    private Uri selectedImageUri;
+  
+   
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,11 +118,247 @@ public class ProfileFragment extends Fragment {
         setupTabtitle();
 
 
+        add_stream_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final LayoutInflater inflater = getActivity().getLayoutInflater();
+                View alertLayout = inflater.inflate(R.layout.test_dialog_xml, null);
+
+                final ImageView close_dialog = alertLayout.findViewById(R.id.close_dialog);
+                final ImageView camera_icon = alertLayout.findViewById(R.id.camera_icon);
+                final ImageView browse_icon = alertLayout.findViewById(R.id.browse_icon);
+
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+                alert.setView(alertLayout);
+                alert.setCancelable(false);
+
+                dialogs = alert.create();
+                dialogs.show();
+                dialogs.setCanceledOnTouchOutside(true);
+
+
+
+                close_dialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogs.dismiss();
+                    }
+                });
+
+                camera_icon.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(View view) {
+                        profile_camera_open();
+                        dialogs.dismiss();
+                    }
+                });
+
+
+
+
+                browse_icon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        gallery();
+                        dialogs.dismiss();
+                    }
+                });
+
+            }
+        });
+
+
+
         user_profile_details_api();
 
 
         return  view;
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void profile_camera_open() {
+
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        boolean readExternal = Permission.checkPermissionReadExternal(getActivity());
+        boolean writeExternal = Permission.checkPermissionReadExternal2(getActivity());
+        boolean camera = Permission.checkPermissionCamera(getActivity());
+
+        if (camera && writeExternal && readExternal ) {
+            if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+
+
+
+                Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
+                intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
+
+                // setting aspect ratio
+                intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+                intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+                intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+
+                // setting maximum bitmap width and height
+                intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
+                intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
+                intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_HEIGHT, 1000);
+
+                startActivityForResult(intent, REQUEST_IMAGE);
+
+
+            }
+        } else {
+            Toast.makeText(getActivity(), "camera permission required", Toast.LENGTH_LONG).show();
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        }
+
+    }
+
+    private void gallery() {
+
+        boolean readExternal = Permission.checkPermissionReadExternal(getActivity());
+        boolean writeExternal = Permission.checkPermissionReadExternal2(getActivity());
+        boolean camera = Permission.checkPermissionCamera(getActivity());
+        if (readExternal && camera ) {
+      /*      Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, PICK_IMAGE_G);*/
+
+
+            Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
+            intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
+
+            // setting aspect ratio
+            intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+            intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+            intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+            startActivityForResult(intent, REQUEST_IMAGE);
+
+        }else
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+
+
+
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_G) {
+
+      
+            Bitmap bitmap = null;
+
+            selectedImageUri = data.getData();
+            //Toast.makeText(getApplicationContext(), String.valueOf(selectedImageUri), Toast.LENGTH_SHORT).show();
+
+
+
+            String[] projection = {MediaStore.MediaColumns.DATA};
+            Cursor cursor = getActivity().managedQuery(selectedImageUri, projection, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            cursor.moveToFirst();
+            profileImage = new File(cursor.getString(column_index));
+            Log.e("userImage1", String.valueOf(profileImage));
+            String selectedImagePath1 = getPath(selectedImageUri);
+            Log.v("Deatils_path","***"+selectedImagePath1);
+            Glide.with(getActivity()).load(selectedImagePath1).into(streamCoverImage);
+            Log.e("userImage1", "BB");
+
+
+
+        }else if ( requestCode == CAMERA_PIC_REQUEST_R && resultCode == RESULT_OK )
+        {
+        
+            //  Toast.makeText(this, "R Code Working", Toast.LENGTH_SHORT).show();
+
+
+            try {
+                thumbnail6 = MediaStore.Images.Media.getBitmap(
+                        getActivity().getContentResolver(), imageUri7);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //setUserProfile.setImageBitmap(thumbnail);
+
+
+            File file = new File(getRealPathFromURIs(imageUri7));
+
+            Glide.with(getActivity())
+                    .load(file)
+                    .placeholder(R.color.text_color)
+                    .into(streamCoverImage);
+
+            profileImage  = new File(getRealPathFromURIs(imageUri7));
+        } else if(requestCode == REQUEST_IMAGE)
+        {
+
+
+            if (resultCode == Activity.RESULT_OK) {
+                uri = data.getParcelableExtra("path");
+
+              
+
+                // String sel_path = getpath(uri);
+                // You can update this bitmap to your server
+
+
+                // loading profile image from local cache
+                //loadProfile(uri.toString());
+                streamImage = new File(uri.getPath());
+                Log.e("file ", "path " + streamImage.getAbsolutePath());
+                profileImage = streamImage;
+
+                Uri uu = Uri.fromFile(streamImage);
+                Glide.with(this).load(uu)
+                        .into(streamCoverImage);
+
+
+            }
+
+        }
+
+
+    }
+    public String getRealPathFromURIs(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+    public String getPath(Uri uri)
+    {
+        Cursor cursor=null;
+        try {
+            String[] projection = {MediaStore.Images.Media.DATA};
+            cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+            if (cursor == null) return null;
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+
+            return cursor.getString(column_index);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return "";
+    }
+
 
     private void user_profile_details_api() {
 

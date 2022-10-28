@@ -42,6 +42,11 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
         intis(view);
         context = getActivity();
 
+
+        // notification settings get API
+        notification_settring_api();
+
+
         date_spin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +72,10 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
 
 
         return view;
+    }
+
+    private void notification_settring_api() {
+
     }
 
     private void intisialization_method(View v) {
