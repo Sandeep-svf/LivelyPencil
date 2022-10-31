@@ -72,9 +72,9 @@ dependencies {
     implementation "com.karumi:dexter:5.0.0"
 
     //Crop Image
-    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'com.theartofdev.edmodo:android-image-cropper:1.1.+'
+  //  implementation 'com.theartofdev.edmodo:android-image-cropper:1.1.+'
 
 
     implementation 'com.github.yalantis:ucrop:2.2.6'

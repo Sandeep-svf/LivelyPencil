@@ -45,7 +45,7 @@ public class WebviewEditorActivity extends AppCompatActivity {
         web.getSettings().setAllowContentAccess(true);
 
         web.loadUrl(finalUrl);
-        web.setWebViewClient(new WebViewClient());
+
 
     }
 }
