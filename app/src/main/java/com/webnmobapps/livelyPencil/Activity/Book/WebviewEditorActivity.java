@@ -34,6 +34,7 @@ public class WebviewEditorActivity extends AppCompatActivity {
         web.getSettings().setLoadsImagesAutomatically(true);
 
         web.getSettings().setJavaScriptEnabled(true);
+        web.getSettings().setDomStorageEnabled(true);
 
         web.getSettings().setBuiltInZoomControls(true);
 
