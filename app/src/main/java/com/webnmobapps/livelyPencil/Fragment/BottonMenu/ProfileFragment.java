@@ -43,6 +43,9 @@ import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.Adapter.PageAdapter;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.UserProfileData;
+import com.webnmobapps.livelyPencil.ModelPython.UserProfileModel;
+import com.webnmobapps.livelyPencil.ModelPython.SettingModelData;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileDataPython;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
 import com.webnmobapps.livelyPencil.R;
@@ -112,6 +115,9 @@ public class ProfileFragment extends Fragment {
         accessToken=sharedPreferences.getString("accessToken","");
         finalAccessToken = StaticKey.prefixTokem+accessToken;
 
+
+        user_profle_api();
+        
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         setupViewPager(viewPager,adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -178,7 +184,123 @@ public class ProfileFragment extends Fragment {
         return  view;
     }
 
+    private void user_profle_api() {
 
+
+
+
+        final ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setCancelable(false);
+        pd.setMessage("loading...");
+        pd.show();
+
+
+
+
+
+        Call<UserProfileModel> call = API_Client.getClient().USER_PROFILE_MODEL_CALL(finalAccessToken);
+
+        call.enqueue(new Callback<UserProfileModel>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(Call<UserProfileModel> call, Response<UserProfileModel> response) {
+                pd.dismiss();
+
+
+                try {
+                    if (response.isSuccessful()) {
+                        String message = response.body().getMessage();
+                        String success = response.body().getStatus();
+
+                        if (success.equals("true") || success.equals("True")) {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+
+
+                                UserProfileModel userProfileModel = response.body();
+                                UserProfileData userProfileData = userProfileModel.getUserProfileData();
+
+
+                                try {
+                                    userName.setText(userProfileData.getFirstName()+userProfileData.getLastName());
+                                    streamName.setText(userProfileData.getStreamTitle());
+                                    createdOnTime.setText(userProfileData.getCreatedAt());
+                                    Glide.with(getActivity()).load(API_Client.BASE_IMAGE+userProfileData.getImage())
+                                            .placeholder(R.drawable.ic_launcher_background)
+                                            .into(userProfile);
+
+                                    Glide.with(getActivity()).load(API_Client.BASE_IMAGE+userProfileData.getStreamCoverImage())
+                                            .placeholder(R.drawable.ic_launcher_background)
+                                            .into(streamCoverImage);
+
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                    Toast.makeText(getActivity(), "Something went wrong, while loading user profile data form APIs.", Toast.LENGTH_SHORT).show();
+                                }
+
+                            pd.dismiss();
+                        } else {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                            pd.dismiss();
+                        }
+
+
+                    } else {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Toast.makeText(getActivity(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                            switch (response.code()) {
+                                case 400:
+                                    Toast.makeText(getActivity(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 401:
+                                    Toast.makeText(getActivity(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 404:
+                                    Toast.makeText(getActivity(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 500:
+                                    Toast.makeText(getActivity(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 503:
+                                    Toast.makeText(getActivity(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 504:
+                                    Toast.makeText(getActivity(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 511:
+                                    Toast.makeText(getActivity(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    Toast.makeText(getActivity(), "unknown error", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                } catch (
+                        Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserProfileModel> call, Throwable t) {
+                Log.e("bhgyrrrthbh", String.valueOf(t));
+                if (t instanceof IOException) {
+                    Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                } else {
+                    Log.e("conversion issue", t.getMessage());
+                    Toast.makeText(getActivity(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            }
+        });
+
+    }
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void profile_camera_open() {
 

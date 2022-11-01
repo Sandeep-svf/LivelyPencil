@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
+import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity2;
 import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.HelpActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.SupportActivity;
@@ -148,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         joinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, NameEmailActivity.class);
+                Intent intent = new Intent(LoginActivity.this, NameEmailActivity2.class);
                 startActivity(intent);
             }
         });

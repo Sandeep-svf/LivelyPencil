@@ -242,7 +242,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
 
                 if(validation()){
-                //   new_registration_api();
+                   new_registration_api();
                 }
 
                 Log.e("finalSelectedInrestedId",finalSelectedInrestedId);
@@ -305,13 +305,15 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         }
 
         List<Integer> intrestingList = new ArrayList<>();
+        intrestingList.add(1);
+        intrestingList.add(3);
+        intrestingList.add(2);
 
-
-        for(int i=0; i<list12345.size();i++){
+    /*    for(int i=0; i<list12345.size();i++){
             intrestingList.add(list12345.get(i));
             Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.get(i)));
             Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.size()));
-        }
+        }*/
 
         //   RequestBody tokenRB = RequestBody.create(MediaType.parse("text/plain"), device_token);
             RequestBody userNameRB = RequestBody.create(MediaType.parse("text/plain"), userName);

@@ -57,6 +57,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     private String finalAccessToken,accessToken;
     private String notificatinStatus, roleStatus;
     CircleImageView usere_profile_circle_image_view;
+    AppCompatTextView user_name_data_text;
 
 
     @Override
@@ -158,9 +159,13 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                                 name_editText.setText(settingModelData.getFirstName());
                                 surname_editText.setText(settingModelData.getLastName());
                                 streamname_editText.setText(settingModelData.getStreamTitle());
-                                /*Glide.with(getActivity()).load(API_Client.BASE_IMAGE+settingModelData.get())
+                                user_name_data_text.setText(settingModelData.getUsername());
+                                date_spin.setText("null");
+                                month_spin.setText("null");
+                                year_spin.setText("null");
+                                Glide.with(getActivity()).load(API_Client.BASE_IMAGE+settingModelData.getImage())
                                         .placeholder(R.drawable.ic_launcher_background)
-                                        .into(usere_profile_circle_image_view);*/
+                                        .into(usere_profile_circle_image_view);
                                 try {
                                     country_name_editText.setText(settingModelData.getCountry());
                                 } catch (Exception exception) {
@@ -687,6 +692,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     }
 
     private void intis(View view) {
+        user_name_data_text = view.findViewById(R.id.user_name_data_text);
         change_username_text_layout = view.findViewById(R.id.change_username_text_layout);
         support_center_image = view.findViewById(R.id.support_center_image);
         chang_user_profile_layout = view.findViewById(R.id.chang_user_profile_layout);

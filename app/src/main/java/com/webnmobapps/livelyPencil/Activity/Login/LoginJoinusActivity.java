@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
+import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity2;
 import com.webnmobapps.livelyPencil.R;
 
 public class LoginJoinusActivity extends AppCompatActivity {
@@ -48,7 +49,7 @@ public class LoginJoinusActivity extends AppCompatActivity {
         joinUsMovement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginJoinusActivity.this, NameEmailActivity.class);
+                Intent intent = new Intent(LoginJoinusActivity.this, NameEmailActivity2.class);
                 startActivity(intent);
             }
         });

@@ -38,6 +38,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.hbb20.CountryCodePicker;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
+import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity2;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.PasscodeValidationActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.ProfilePhotoActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
@@ -176,7 +177,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         joinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ForgetPasswordActivity.this, NameEmailActivity.class);
+                Intent intent = new Intent(ForgetPasswordActivity.this, NameEmailActivity2.class);
                 startActivity(intent);
             }
         });

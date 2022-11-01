@@ -456,27 +456,25 @@
 
                     ></androidx.appcompat.widget.AppCompatTextView>
 
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/user_name_data_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/user_name_text"
-                    app:layout_constraintTop_toTopOf="parent"
-
+                    android:fontFamily="@font/raleway_medium"
                     android:text="livelypencilefeatures09091"
                     android:textColor="@color/settingEditBackgroundColor"
-                    app:layout_constraintVertical_bias="0.8"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    android:fontFamily="@font/raleway_medium"
                     android:textSize="@dimen/_10sdp"
 
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.109"
+                    app:layout_constraintStart_toEndOf="@+id/user_name_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.801"
 
 
                     ></androidx.appcompat.widget.AppCompatTextView>
-
-
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/change_username_text_layout"

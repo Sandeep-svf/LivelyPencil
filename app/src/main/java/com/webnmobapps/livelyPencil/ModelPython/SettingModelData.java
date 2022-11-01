@@ -8,6 +8,9 @@ public class SettingModelData {
 @SerializedName("id")
 @Expose
 public Integer id;
+    @SerializedName("image")
+    @Expose
+    public String image;
 @SerializedName("username")
 @Expose
 public String username;
@@ -53,5 +56,9 @@ public String country;
 
     public String getCountry() {
         return country;
+    }
+
+    public String getImage() {
+        return image;
     }
 }
