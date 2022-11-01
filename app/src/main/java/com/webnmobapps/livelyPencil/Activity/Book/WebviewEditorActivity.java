@@ -45,7 +45,7 @@ public class WebviewEditorActivity extends AppCompatActivity {
 
         web.getSettings().setAllowContentAccess(true);
 
-        web.loadUrl(finalUrl);
+        web.loadUrl("http://69.49.235.253:8001/4");
 
 
     }

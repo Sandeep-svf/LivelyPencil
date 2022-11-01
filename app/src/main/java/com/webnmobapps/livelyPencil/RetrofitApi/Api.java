@@ -17,7 +17,6 @@ import com.webnmobapps.livelyPencil.Model.Edit_Personal_Information_Model;
 import com.webnmobapps.livelyPencil.Model.EducationModel;
 import com.webnmobapps.livelyPencil.Model.GroupAgeModel;
 import com.webnmobapps.livelyPencil.Model.IntrestListModel;
-import com.webnmobapps.livelyPencil.Model.LoginModel;
 import com.webnmobapps.livelyPencil.Model.NotificationCountModel;
 import com.webnmobapps.livelyPencil.Model.NotificationListModel;
 import com.webnmobapps.livelyPencil.Model.PPSettingsModel;
@@ -36,7 +35,6 @@ import com.webnmobapps.livelyPencil.Model.StreamSettingModel;
 import com.webnmobapps.livelyPencil.Model.TvListModel;
 import com.webnmobapps.livelyPencil.Model.TvSettingsModel;
 import com.webnmobapps.livelyPencil.Model.UserWallListModel;
-import com.webnmobapps.livelyPencil.Model.UserWallModel;
 import com.webnmobapps.livelyPencil.ModelPython.BookListModel;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
@@ -44,9 +42,12 @@ import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
-import com.webnmobapps.livelyPencil.ModelPython.NotificationModel;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.RoleSettingModel;
+import com.webnmobapps.livelyPencil.ModelPython.SettingModel;
+import com.webnmobapps.livelyPencil.ModelPython.UserProfileModel;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
 
 import java.util.List;
@@ -60,6 +61,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Url;
 
@@ -360,6 +362,28 @@ public interface Api {
     Call<BookListModel> BOOK_LIST_MODEL_CALL (@Header("Authorization") String Authorization);
 
     @GET("notificationsetting/")
-    Call<NotificationModel> NOTIFICATION_MODEL_SETTINGS_CALL (@Header("Authorization") String Authorization);
+    Call<NotificationSettingModel> NOTIFICATION_MODEL_SETTINGS_CALL (@Header("Authorization") String Authorization);
+
+    @GET("rolesetting/")
+    Call<RoleSettingModel> ROLE_SETTING_MODEL_CALL (@Header("Authorization") String Authorization);
+
+    @FormUrlEncoded
+    @PUT("notificationsetting/")
+    Call<CommonStatusMessageModelPython> NOTIFICATION_MODEL_CHANGE_SETTINGS_CALL (@Header("Authorization") String Authorization,
+                                                                                  @Field("notification") String notification );
+
+
+    @FormUrlEncoded
+    @PUT("rolesetting/")
+    Call<CommonStatusMessageModelPython> ROLE_CHANGE_SETTINGS_CALL (@Header("Authorization") String Authorization,
+                                                                                  @Field("role") String role );
+
+
+    @GET("profile/")
+    Call<UserProfileModel> USER_PROFILE_MODEL_CALL (@Header("Authorization") String Authorization);
+
+
+    @GET("setting/")
+    Call<SettingModel> SETTING_MODEL_CALL (@Header("Authorization") String Authorization);
 
 }
