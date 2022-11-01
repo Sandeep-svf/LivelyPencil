@@ -48,8 +48,10 @@ import com.webnmobapps.livelyPencil.Activity.Utility.SupportActivity;
 import com.webnmobapps.livelyPencil.Model.CheckUserModel;
 import com.webnmobapps.livelyPencil.Model.RegisterModel;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -75,7 +77,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     LinearLayoutCompat email_edittext222;
     AppCompatTextView text_with_email, text_with_phone,login, joinus, support, help_pages;
     private String userPhone, userEmail;
-    String countryCode;
+    String countryCode,accessToken,finalAccessToken;
     CountryCodePicker country_code_picker;
     AlertDialog dialogs;
     private String regexEmail = "(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[A-Za-z0-9]:(?:|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
@@ -98,7 +100,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         intis();
 
 
-
+        SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+        // user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,9 +118,10 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     //forget_password_api();
 
                    // check_user_api();
-                    Intent intent = new Intent(ForgetPasswordActivity.this, ForgetPaawordPasscodeActivity.class);
-                    intent.putExtra("userEmail",userEmail);
-                    startActivity(intent);
+
+                    request_code_api();
+
+
 
                 }
             }
@@ -312,6 +318,114 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     }
 
+    private void request_code_api() {
+
+
+
+        final ProgressDialog pd = new ProgressDialog(ForgetPasswordActivity.this);
+        pd.setCancelable(false);
+        pd.setMessage("loading...");
+        pd.show();
+
+        String roleStatus="";
+
+     
+
+
+
+        Call<CommonStatusMessageModelPython> call = API_Client.getClient().COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_REQUEST_OTP(finalAccessToken,userEmail);
+
+        call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                pd.dismiss();
+
+
+                try {
+                    if (response.isSuccessful()) {
+                        String message = response.body().getMessage();
+                        String success = response.body().getStatus();
+
+                        if (success.equals("true") || success.equals("True")) {
+                            Toast.makeText(ForgetPasswordActivity.this, message, Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            Intent intent = new Intent(ForgetPasswordActivity.this, ForgetPaawordPasscodeActivity.class);
+                            intent.putExtra("userEmail",userEmail);
+                            startActivity(intent);
+
+                        } else {
+                            Toast.makeText(ForgetPasswordActivity.this, "This email is not registered with us.", Toast.LENGTH_LONG).show();
+                            pd.dismiss();
+                        }
+
+
+                    } else {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Toast.makeText(ForgetPasswordActivity.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                            switch (response.code()) {
+                                case 400:
+                                    alert_dialog_message("400");
+                                    //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 401:
+                                    alert_dialog_message("401");
+                                    // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 404:
+                                    alert_dialog_message("404");
+                                    //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 500:
+                                    alert_dialog_message("500");
+                                    //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 503:
+                                    alert_dialog_message("503");
+                                    // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 504:
+                                    alert_dialog_message("504");
+                                    //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 511:
+                                    alert_dialog_message("511");
+                                    // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    alert_dialog_message("default");
+                                    //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(ForgetPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                } catch (
+                        Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                Log.e("bhgyrrrthbh", String.valueOf(t));
+                if (t instanceof IOException) {
+                    Toast.makeText(ForgetPasswordActivity.this, "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                } else {
+                    Log.e("conversion issue", t.getMessage());
+                    Toast.makeText(ForgetPasswordActivity.this, "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            }
+        });
+
+    }
+    
+
     private boolean validation ()
     {
         if(key.equals("1") )
@@ -352,6 +466,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         return  true;
     }
 
+    
+    
     private void alert_dialog_message(String value) {
 
         final LayoutInflater inflater = ForgetPasswordActivity.this.getLayoutInflater();

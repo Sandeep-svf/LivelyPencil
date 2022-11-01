@@ -1,14 +1,18 @@
 package com.webnmobapps.livelyPencil.Activity.Login;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,8 +34,10 @@ import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.PasscodeValidationActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.ProfilePhotoActivity;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -54,12 +60,17 @@ public class ForgetPaawordPasscodeActivity extends AppCompatActivity {
     OtpTextView otpTextView;
     AlertDialog dialogs;
 
+    String accessToken, finalAccessToken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_paaword_passcode);
 
-
+        SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+        // user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -122,19 +133,137 @@ public class ForgetPaawordPasscodeActivity extends AppCompatActivity {
                    verifyCode();
                 }*/
 
-                Intent intent = new Intent(ForgetPaawordPasscodeActivity.this, ResetPasswordActivity.class);
-                startActivity(intent);
+
+                if(validation())
+                {
+                    email_verification_otp_api();
+                }
+
+
 
             }
         });
     }
 
+    private void email_verification_otp_api() {
+       
+
+
+
+            final ProgressDialog pd = new ProgressDialog(ForgetPaawordPasscodeActivity.this);
+            pd.setCancelable(false);
+            pd.setMessage("loading...");
+            pd.show();
+
+            String emailData = userEmail;
+
+
+
+
+
+            Call<CommonStatusMessageModelPython> call = API_Client.getClient().COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_OTP_VERIFICATION(finalAccessToken,userEmail,otpTextView.getOTP().toString());
+
+            call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                    pd.dismiss();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = response.body().getStatus();
+
+                            if (success.equals("true") || success.equals("True")) {
+                                Toast.makeText(ForgetPaawordPasscodeActivity.this, message, Toast.LENGTH_SHORT).show();
+                                pd.dismiss();
+                                Intent intent = new Intent(ForgetPaawordPasscodeActivity.this, ResetPasswordActivity.class);
+                                intent.putExtra("email",userEmail);
+                                intent.putExtra("otp",otpTextView.getOTP().toString());
+                                startActivity(intent);
+
+                            } else {
+                                Toast.makeText(ForgetPaawordPasscodeActivity.this, "This email is not registered with us.", Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                            }
+
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(ForgetPaawordPasscodeActivity.this, jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                                switch (response.code()) {
+                                    case 400:
+                                        alert_dialog_message("400");
+                                        //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        alert_dialog_message("401");
+                                        // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        alert_dialog_message("404");
+                                        //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        alert_dialog_message("500");
+                                        //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        alert_dialog_message("503");
+                                        // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        alert_dialog_message("504");
+                                        //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        alert_dialog_message("511");
+                                        // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        alert_dialog_message("default");
+                                        //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(ForgetPaawordPasscodeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                    Log.e("bhgyrrrthbh", String.valueOf(t));
+                    if (t instanceof IOException) {
+                        Toast.makeText(ForgetPaawordPasscodeActivity.this, "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(ForgetPaawordPasscodeActivity.this, "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            });
+
+        }
+
     private boolean validation() {
 
+        String otp = otpTextView.getOTP().toString();
         if(otpTextView.getOTP().length() != 6)
         {
             alert_dialog_message("3");
             return  false;
+        }else if(otp.equals("")){
+            alert_dialog_message("78");
+            return false;
         }
 
         return  true;
@@ -464,6 +593,8 @@ public class ForgetPaawordPasscodeActivity extends AppCompatActivity {
         }else if(value.equals("5"))
         {
             error_message.setText(R.string.on_failure_two);
+        }else if(value.equals("78")){
+            error_message.setText("Please enter OTP");
         }
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(ForgetPaawordPasscodeActivity.this);

@@ -3,6 +3,8 @@ package com.webnmobapps.livelyPencil.Activity.Book;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -29,22 +31,27 @@ public class WebviewEditorActivity extends AppCompatActivity {
         // linl ->  http://69.49.235.253:8001/
         //http://69.49.235.253:8001/
 
-        web.setWebViewClient(new WebViewClient());
 
-        web.getSettings().setLoadsImagesAutomatically(true);
+
+       // web.getSettings().setLoadsImagesAutomatically(true);
 
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setDomStorageEnabled(true);
 
-        web.getSettings().setBuiltInZoomControls(true);
+       // web.getSettings().setBuiltInZoomControls(true);
 
         //   web.getSettings().setSupportZoom(true);
-        web.getSettings().setLoadWithOverviewMode(true);
+        //web.getSettings().setLoadWithOverviewMode(true);
 
-        web.getSettings().setUseWideViewPort(true);
+       // web.getSettings().setUseWideViewPort(true);
 
-        web.getSettings().setAllowContentAccess(true);
+       // web.getSettings().setAllowContentAccess(true);
 
+        web.getSettings().setPluginState(WebSettings.PluginState.ON);
+        web.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        web.setLayerType(View.LAYER_TYPE_NONE, null);
+
+        web.setWebViewClient(new WebViewClient());
         web.loadUrl("http://69.49.235.253:8001/4");
 
 

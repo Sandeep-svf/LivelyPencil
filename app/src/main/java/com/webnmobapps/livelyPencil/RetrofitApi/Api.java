@@ -386,4 +386,38 @@ public interface Api {
     @GET("setting/")
     Call<SettingModel> SETTING_MODEL_CALL (@Header("Authorization") String Authorization);
 
+    @FormUrlEncoded
+    @POST("resetrequest/")
+    Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_REQUEST_OTP
+            (@Header("Authorization") String Authorization,
+             @Field("email") String email);
+
+
+
+    @FormUrlEncoded
+    @POST("resetpassword/")
+    Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_OTP_VERIFICATION
+            (@Header("Authorization") String Authorization,
+             @Field("email") String email,
+             @Field("reset_password_otp") String reset_password_otp);
+
+
+    @FormUrlEncoded
+    @PUT("resetpassworddone/")
+    Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_RESET_PASSWORD
+            (@Header("Authorization") String Authorization,
+             @Field("email") String email,
+             @Field("reset_password_otp") String reset_password_otp,
+             @Field("password") String password);
+
+
+
+    @Multipart
+    @POST("support/")
+    Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_SUPPORT(
+            @Header("Authorization") String Authorization,
+            @Part("email") String email,
+            @Part("name") String name,
+            @Part("about") String about,
+            @Part MultipartBody.Part image);
 }
