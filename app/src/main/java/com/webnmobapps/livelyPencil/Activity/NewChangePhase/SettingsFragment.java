@@ -132,7 +132,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
 
                 //  open popup
                 final LayoutInflater inflater =getActivity().getLayoutInflater();
-                View alertLayout = inflater.inflate(R.layout.test_dialog_xml, null);
+                View alertLayout = inflater.inflate(R.layout.test_dialog_xml2, null);
 
                  AppCompatEditText userNameEditText = alertLayout.findViewById(R.id.userNameEditText);
                  AppCompatButton userNameSaveButton  = alertLayout.findViewById(R.id.userNameSaveButton);
