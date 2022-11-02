@@ -3,4 +3,13 @@
     <external-path
         name="PikMe"
         path="Android/notificationModelSettingData/com.pik.me.datingapp12/files/Pictures"/>
+    <cache-path
+        name="cache"
+        path="." />
+    <external-cache-path
+        name="external_cache"
+        path="." />
+    <files-path
+        name="files"
+        path="." />
 </paths>

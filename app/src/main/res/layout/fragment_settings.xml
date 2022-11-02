@@ -510,7 +510,7 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/user_name_text"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
 
 
 
@@ -540,11 +540,9 @@
 
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-
-                    android:background="@drawable/personal_info_background"
-
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.1"
@@ -552,31 +550,29 @@
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/user_name_text"
-                    android:layout_marginTop="10dp"
-
-
-
+                    android:layout_marginTop="20dp"
 
                     app:layout_constraintWidth_percent="0.4"
 
                     >
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/language_editText"
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/save_change_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
 
 
-                        android:textStyle="bold"
-                        android:background="@null"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/text_color"
+                        android:text="Save Change"
+                        android:textColor="@drawable/text_color"
+                        android:fontFamily="@font/raleway_bold"
+                        android:background="@drawable/ic_continue_credentials"
+
                         android:layout_marginLeft="5dp"
 
                         android:inputType="text"
                         android:maxLength="30"
                         android:maxLines="1"
-                        android:textSize="@dimen/text_size"></androidx.appcompat.widget.AppCompatEditText>
+                        android:textSize="@dimen/text_size"></androidx.appcompat.widget.AppCompatButton>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

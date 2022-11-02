@@ -415,9 +415,8 @@ public interface Api {
     @Multipart
     @POST("support/")
     Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_SUPPORT(
-            @Header("Authorization") String Authorization,
             @Part("email") RequestBody email,
             @Part("name") RequestBody name,
             @Part("about") RequestBody about,
-            @Part MultipartBody.Part image);
+            @Part MultipartBody.Part[] image);
 }

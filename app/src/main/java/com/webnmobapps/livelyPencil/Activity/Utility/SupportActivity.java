@@ -36,6 +36,7 @@ import com.bumptech.glide.Glide;
 import com.webnmobapps.livelyPencil.Activity.ImportDocHelperClass.ImagesActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 
@@ -94,19 +95,11 @@ public class SupportActivity extends AppCompatActivity {
         attach_file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // open file manager for select pictures
-               /* Intent intent = new Intent(SupportActivity.this, ImagesActivity.class);
-                startActivity(intent);*/
+
                 Intent intent = new Intent(SupportActivity.this, ImagesActivity.class);
                 intent.putExtra("image_activity", true);
                 startActivityForResult(intent,1);
 
-//                String[] mimeTypes = {"image/*"};
-//
-//                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT).setType("*/*")
-//                        .putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-//                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//                startActivityForResult(intent,PICK_IMAGE_MULTIPLE);
                }
         });
 
@@ -192,21 +185,22 @@ public class SupportActivity extends AppCompatActivity {
         pd.show();
 
         // calling API
-        Call<SmFlaxibleModel> call = API_Client.getClient().support_form(nameSurnameDataRB,
+        Call<CommonStatusMessageModelPython> call = API_Client.getClient().COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_SUPPORT(
                 emailDataRB,
+                nameSurnameDataRB,
                 aboutDataRB,
                 helpreportImagesParts);
-        call.enqueue(new Callback<SmFlaxibleModel>() {
+        call.enqueue(new Callback<CommonStatusMessageModelPython>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onResponse(Call<SmFlaxibleModel> call, Response<SmFlaxibleModel> response) {
+            public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
                 pd.dismiss();
 
 
                 try {
                     //if api response is successful ,taking message and success
                     if (response.isSuccessful()) {
-                        String success = String.valueOf(response.body().getSuccess());
+                        String success = String.valueOf(response.body());
                         String   message = response.body().getMessage();
 
                         // if sucess is true , take all data in to list and set adapter
@@ -268,7 +262,7 @@ public class SupportActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<SmFlaxibleModel> call, Throwable t) {
+            public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
                 Log.e("image_path_screening","Throwable***"+t);
                 if (t instanceof IOException) {
                     Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)"+t.getMessage(), Toast.LENGTH_SHORT).show();

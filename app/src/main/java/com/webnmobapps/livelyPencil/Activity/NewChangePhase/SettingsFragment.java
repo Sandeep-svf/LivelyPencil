@@ -1,27 +1,43 @@
 package com.webnmobapps.livelyPencil.Activity.NewChangePhase;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
+import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
+import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
+import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelSettingData;
@@ -37,6 +53,7 @@ import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -46,6 +63,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerdatepicker.DatePickerDialog.OnDateSetListener {
+
+    private static final int REQUEST_IMAGE = 100;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
 
     AppCompatImageView support_center_image;
     ConstraintLayout chang_user_profile_layout;
@@ -58,6 +78,25 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     private String notificatinStatus, roleStatus;
     CircleImageView usere_profile_circle_image_view;
     AppCompatTextView user_name_data_text;
+    AlertDialog dialogs;
+
+    AppCompatButton save_change_button;
+
+    private String userName, userSurName, streamName, dob, appUserName, country;
+
+
+    private Uri uri;
+    private static final int PICK_IMAGE_G = 12547;
+    public static final int RESULT_OK = -1;
+    private Uri img;
+    private File profileImage, streamImage;
+    private ContentValues values7;
+    private Uri imageUri7;
+    private static final int CAMERA_PIC_REQUEST_R = 25418;
+    private Bitmap thumbnail6;
+    private String imageBase64 , key;
+    private Uri selectedImageUri;
+
 
 
     @Override
@@ -80,6 +119,69 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
         user_profle_api();
 
 
+        save_change_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                get_form_data();
+                if(validation()){
+                    // update APIs
+                    settings_update_api();
+                }
+            }
+        });
+
+
+        chang_user_profile_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final LayoutInflater inflater =getActivity().getLayoutInflater();
+                View alertLayout = inflater.inflate(R.layout.test_dialog_xml, null);
+
+                final ImageView close_dialog = alertLayout.findViewById(R.id.close_dialog);
+                final ImageView camera_icon = alertLayout.findViewById(R.id.camera_icon);
+                final ImageView browse_icon = alertLayout.findViewById(R.id.browse_icon);
+
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+                alert.setView(alertLayout);
+                alert.setCancelable(false);
+
+                dialogs = alert.create();
+                dialogs.show();
+                dialogs.setCanceledOnTouchOutside(true);
+
+
+
+                close_dialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogs.dismiss();
+                    }
+                });
+
+                camera_icon.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onClick(View view) {
+                        profile_camera_open();
+                        dialogs.dismiss();
+                    }
+                });
+
+
+
+
+                browse_icon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        gallery();
+                        dialogs.dismiss();
+                    }
+                });
+            }
+        });
+        
+        
         stream_privacy_setting_switchmaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +221,185 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
 
 
         return view;
+    }
+
+    private boolean validation() {
+
+
+
+        return true;
+    }
+
+    private void settings_update_api(){
+
+    }
+
+    private void get_form_data() {
+        userName = name_editText.getText().toString();
+        userSurName = surname_editText.getText().toString();
+        streamName = streamname_editText.getText().toString();
+        country = country_name_editText.getText().toString();
+        dob = dayData+monthData+yearData;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void profile_camera_open() {
+
+        PackageManager packageManager = getActivity().getPackageManager();
+
+        boolean readExternal = Permission.checkPermissionReadExternal(getActivity());
+        boolean writeExternal = Permission.checkPermissionReadExternal2(getActivity());
+        boolean camera = Permission.checkPermissionCamera(getActivity());
+
+        if (camera && writeExternal && readExternal ) {
+            if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+
+
+
+                Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
+                intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
+
+                // setting aspect ratio
+                intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+                intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+                intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+
+                // setting maximum bitmap width and height
+                intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
+                intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
+                intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_HEIGHT, 1000);
+
+                startActivityForResult(intent, REQUEST_IMAGE);
+
+
+            }
+        } else {
+            Toast.makeText(getActivity(), "camera permission required", Toast.LENGTH_LONG).show();
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        }
+
+    }
+
+    private void gallery() {
+
+        boolean readExternal = Permission.checkPermissionReadExternal(getActivity());
+        boolean writeExternal = Permission.checkPermissionReadExternal2(getActivity());
+        boolean camera = Permission.checkPermissionCamera(getActivity());
+        if (readExternal && camera ) {
+      /*      Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, PICK_IMAGE_G);*/
+
+
+            Intent intent = new Intent(getActivity(), ImagePickerActivity.class);
+            intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
+
+            // setting aspect ratio
+            intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+            intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+            intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+            startActivityForResult(intent, REQUEST_IMAGE);
+
+        }else
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+         if ( requestCode == CAMERA_PIC_REQUEST_R && resultCode == RESULT_OK )
+        {
+            key = "1";
+            //  Toast.makeText(this, "R Code Working", Toast.LENGTH_SHORT).show();
+
+
+            try {
+                thumbnail6 = MediaStore.Images.Media.getBitmap(
+                        getActivity().getContentResolver(), imageUri7);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //setUserProfile.setImageBitmap(thumbnail);
+
+
+            File file = new File(getRealPathFromURIs(imageUri7));
+
+            Glide.with(getActivity())
+                    .load(file)
+                    .placeholder(R.color.text_color)
+                    .into(usere_profile_circle_image_view);
+
+
+
+            profileImage  = new File(getRealPathFromURIs(imageUri7));
+        } else if(requestCode == REQUEST_IMAGE)
+        {
+
+
+            if (resultCode == Activity.RESULT_OK) {
+                uri = data.getParcelableExtra("path");
+
+
+
+                // String sel_path = getpath(uri);
+                try {
+                    // You can update this bitmap to your server
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
+
+                    // loading profile image from local cache
+                    //loadProfile(uri.toString());
+                    streamImage = new File(uri.getPath());
+                    Log.e("file ", "path " + streamImage.getAbsolutePath());
+                    profileImage = streamImage;
+
+                    Uri uu = Uri.fromFile(streamImage);
+                    Glide.with(this).load(uu)
+                            .into(usere_profile_circle_image_view);
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+
+
+    }
+    public String getRealPathFromURIs(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+    public String getPath(Uri uri)
+    {
+        Cursor cursor=null;
+        try {
+            String[] projection = {MediaStore.Images.Media.DATA};
+            cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+            if (cursor == null) return null;
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+
+            return cursor.getString(column_index);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return "";
     }
 
     private void user_profle_api() {
@@ -692,6 +973,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     }
 
     private void intis(View view) {
+        save_change_button = view.findViewById(R.id.save_change_button);
         user_name_data_text = view.findViewById(R.id.user_name_data_text);
         change_username_text_layout = view.findViewById(R.id.change_username_text_layout);
         support_center_image = view.findViewById(R.id.support_center_image);
