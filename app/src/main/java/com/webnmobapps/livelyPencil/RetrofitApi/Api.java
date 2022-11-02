@@ -386,6 +386,19 @@ public interface Api {
     @GET("setting/")
     Call<SettingModel> SETTING_MODEL_CALL (@Header("Authorization") String Authorization);
 
+
+    @Multipart
+    @PUT("setting/")
+    Call<SettingModel> SETTING_MODEL_CALL_UPDATE (@Header("Authorization") String Authorization,
+                                                  @Part("id") RequestBody id,
+                                                  @Part("username") RequestBody username,
+                                                  @Part("first_name") RequestBody first_name,
+                                                  @Part("last_name") RequestBody last_name,
+                                                  @Part("stream_title") RequestBody stream_title,
+                                                  @Part("birth_date") RequestBody birth_date,
+                                                  @Part("country") RequestBody country,
+                                                  @Part MultipartBody.Part image);
+
     @FormUrlEncoded
     @POST("resetrequest/")
     Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_REQUEST_OTP

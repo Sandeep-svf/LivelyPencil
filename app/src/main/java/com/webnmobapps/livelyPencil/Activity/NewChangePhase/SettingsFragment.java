@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,12 +32,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
+import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
@@ -58,6 +62,9 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,7 +89,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
 
     AppCompatButton save_change_button;
 
-    private String userName, userSurName, streamName, dob, appUserName, country;
+    private String userName, userSurName, streamName, dob, appUserName, country, userId;
 
 
     private Uri uri;
@@ -96,7 +103,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     private Bitmap thumbnail6;
     private String imageBase64 , key;
     private Uri selectedImageUri;
-
+    private String temp;
 
 
     @Override
@@ -119,10 +126,59 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
         user_profle_api();
 
 
+        change_username_text_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //  open popup
+                final LayoutInflater inflater =getActivity().getLayoutInflater();
+                View alertLayout = inflater.inflate(R.layout.test_dialog_xml, null);
+
+                 AppCompatEditText userNameEditText = alertLayout.findViewById(R.id.userNameEditText);
+                 AppCompatButton userNameSaveButton  = alertLayout.findViewById(R.id.userNameSaveButton);
+                 ImageView close_dialog = alertLayout.findViewById(R.id.close_dialog);
+
+                final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+                alert.setView(alertLayout);
+                alert.setCancelable(false);
+
+                dialogs = alert.create();
+                dialogs.show();
+                dialogs.setCanceledOnTouchOutside(true);
+
+                close_dialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogs.dismiss();
+                    }
+                });
+
+                userNameSaveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        temp = userNameEditText.getText().toString();
+
+                        Log.e("check_username",temp+"ok");
+                        get_form_data("2");
+
+                        settings_update_api();
+                        dialogs.dismiss();
+                    }
+                });
+
+
+
+
+
+            }
+        });
+
+
         save_change_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                get_form_data();
+                get_form_data("1");
                 if(validation()){
                     // update APIs
                     settings_update_api();
@@ -224,22 +280,248 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     }
 
     private boolean validation() {
+        if(userName.equals("")){
+            alert_dialog_message("1");
+            return false;
 
+        }else if(userSurName.equals("")){
+            alert_dialog_message("2");
+            return false;
+
+        }else if(streamName.equals("")){
+            alert_dialog_message("3");
+            return false;
+
+        }else if(country.equals("")){
+            alert_dialog_message("4");
+            return false;
+
+        }
 
 
         return true;
     }
+    private void alert_dialog_message(String value) {
 
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.test_dialog_xml_otp, null);
+
+        final ImageView close_dialog = alertLayout.findViewById(R.id.close_dialog);
+        final TextView error_message = alertLayout.findViewById(R.id.error_message);
+
+
+        if(value.equals("1"))
+        {
+            error_message.setText(getResources().getString(R.string.please_enter_name));
+        }else if(value.equals("2"))
+        {
+            error_message.setText(getResources().getString(R.string.please_enter_surname));
+        }else if(value.equals("3"))
+        {
+            error_message.setText(getResources().getString(R.string.please_enter_stream));
+        }else if(value.equals("4"))
+        {
+            error_message.setText(getResources().getString(R.string.please_enter_country));
+        }else if(value.equals("5"))
+        {
+            error_message.setText(getResources().getString(R.string.please_enter_phone));
+        }else if(value.equals("6"))
+        {
+            error_message.setText(getResources().getString(R.string.Please_remove_zero_from_start));
+        }else if(value.equals("7"))
+        {
+            error_message.setText(getResources().getString(R.string.please_enter_10_digit_valid));
+        }else if(value.equals("12222"))
+        {
+            error_message.setText(getResources().getString(R.string.already_register));
+        }else if(value.equals("400"))
+        {
+            error_message.setText(getResources().getString(R.string.case_4_0_0));
+        }else if(value.equals("401"))
+        {
+            error_message.setText(getResources().getString(R.string.case_4_0_1));
+        }else if(value.equals("404"))
+        {
+            error_message.setText(getResources().getString(R.string.case_4_0_4));
+        }else if(value.equals("500"))
+        {
+            error_message.setText(getResources().getString(R.string.case_5_0_0));
+        }else if(value.equals("503"))
+        {
+            error_message.setText(getResources().getString(R.string.case_5_0_3));
+        }else if(value.equals("504"))
+        {
+            error_message.setText(getResources().getString(R.string.case_5_0_4));
+        }else if(value.equals("511"))
+        {
+            error_message.setText(getResources().getString(R.string.case_5_1_1));
+        }else if(value.equals("504"))
+        {
+            error_message.setText(getResources().getString(R.string.case_5_0_4));
+        }else if(value.equals("default"))
+        {
+            error_message.setText(getResources().getString(R.string.default_api_error));
+        }
+
+
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+
+        dialogs = alert.create();
+        dialogs.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogs.show();
+        dialogs.setCanceledOnTouchOutside(true);
+
+
+        close_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialogs.dismiss();
+            }
+        });
+    }
     private void settings_update_api(){
+
+        final ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setCancelable(false);
+        pd.setMessage("loading...");
+        pd.show();
+
+        MultipartBody.Part userProifleImage;
+
+     //   filePart1 = MultipartBody.Part.createFormData("nationalId", "", RequestBody.create(MediaType.parse("image/*"), ""));
+
+
+        if(profileImage == null){
+            userProifleImage = MultipartBody.Part.createFormData("image", "", RequestBody.create(MediaType.parse("image/*"), ""));
+
+        }else{
+            userProifleImage = MultipartBody.Part.createFormData("image", profileImage.getName(), RequestBody.create(MediaType.parse("image/*"), profileImage));
+
+        }
+
+
+        RequestBody bookNameDataRB = RequestBody.create(MediaType.parse("text/plain"), userName);
+        RequestBody userIdDataRB = RequestBody.create(MediaType.parse("text/plain"), userId);
+        RequestBody userSurNameRB = RequestBody.create(MediaType.parse("text/plain"), userSurName);
+        RequestBody dobDataRB = RequestBody.create(MediaType.parse("text/plain"), dob);
+        RequestBody appUserNameDataRB = RequestBody.create(MediaType.parse("text/plain"), appUserName);
+        RequestBody countryDataRB = RequestBody.create(MediaType.parse("text/plain"), country);
+        RequestBody streamNameDataRB = RequestBody.create(MediaType.parse("text/plain"), streamName);
+
+
+
+        Call<SettingModel> call = API_Client.getClient().SETTING_MODEL_CALL_UPDATE(finalAccessToken,userIdDataRB,
+                appUserNameDataRB, userSurNameRB, userSurNameRB,streamNameDataRB,dobDataRB,countryDataRB,userProifleImage);
+
+        call.enqueue(new Callback<SettingModel>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(Call<SettingModel> call, Response<SettingModel> response) {
+                pd.dismiss();
+
+
+                try {
+                    if (response.isSuccessful()) {
+                        String message = response.body().getMessage();
+                        String success = response.body().getStatus();
+
+                        if (success.equals("true") || success.equals("True")) {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                            user_profle_api();
+                            pd.dismiss();
+
+                        } else {
+                          //  alert_dialog_message("7");
+                            pd.dismiss();
+                        }
+
+
+                    } else {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Toast.makeText(getActivity(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+
+                            switch (response.code()) {
+                                case 400:
+                                    alert_dialog_message("400");
+                                    //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 401:
+                                    alert_dialog_message("401");
+                                    // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 404:
+                                    alert_dialog_message("404");
+                                    //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 500:
+                                    alert_dialog_message("500");
+                                    //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 503:
+                                    alert_dialog_message("503");
+                                    // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 504:
+                                    alert_dialog_message("504");
+                                    //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 511:
+                                    alert_dialog_message("511");
+                                    // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    alert_dialog_message("default");
+                                    //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                } catch (
+                        Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SettingModel> call, Throwable t) {
+                Log.e("bhgyrrrthbh", String.valueOf(t));
+                if (t instanceof IOException) {
+                    Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                } else {
+                    Log.e("conversion issue", t.getMessage());
+                    Toast.makeText(getActivity(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            }
+        });
+
 
     }
 
-    private void get_form_data() {
+    private void get_form_data(String key) {
         userName = name_editText.getText().toString();
         userSurName = surname_editText.getText().toString();
         streamName = streamname_editText.getText().toString();
         country = country_name_editText.getText().toString();
-        dob = dayData+monthData+yearData;
+        if(key.equals("1")){
+            appUserName = user_name_data_text.getText().toString();
+
+        }else
+        {
+            appUserName = temp;
+        }
+        Log.e("check_username",appUserName+"final_value");
+       
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -440,10 +722,11 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                                 name_editText.setText(settingModelData.getFirstName());
                                 surname_editText.setText(settingModelData.getLastName());
                                 streamname_editText.setText(settingModelData.getStreamTitle());
-                                user_name_data_text.setText(settingModelData.getUsername());
-                                date_spin.setText("null");
-                                month_spin.setText("null");
-                                year_spin.setText("null");
+
+                                userId = String.valueOf(settingModelData.getId());
+                                appUserName = settingModelData.getUsername();
+                                user_name_data_text.setText(appUserName);
+
                                 Glide.with(getActivity()).load(API_Client.BASE_IMAGE+settingModelData.getImage())
                                         .placeholder(R.drawable.ic_launcher_background)
                                         .into(usere_profile_circle_image_view);
@@ -451,9 +734,27 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                                     country_name_editText.setText(settingModelData.getCountry());
                                 } catch (Exception exception) {
                                     exception.printStackTrace();
-                                }finally {
-                                    country_name_editText.setText("null");
+
                                 }
+
+                                String dobRawData,year,month,day;
+
+                                dobRawData = settingModelData.getBirthDate();
+                                dob = settingModelData.getBirthDate();
+
+                                try {
+                                    String[] parts = dobRawData.split("-");
+                                    year = parts[0];
+                                    month = parts[1];
+                                    day = parts[2];
+
+                                    date_spin.setText(day);
+                                    month_spin.setText(month);
+                                    year_spin.setText(year);
+                                } catch (Exception exception) {
+                                    exception.printStackTrace();
+                                }
+
                                /* UserProfileModel userProfileModel = response.body();
                                 UserProfileData userProfileData = userProfileModel.getUserProfileData();
 
@@ -992,9 +1293,94 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
 
 
     @Override
-    public void onDateSet(com.tsongkha.spinnerdatepicker.DatePicker  view, int year, int month, int dayOfMonth) {
+    public void onDateSet(com.tsongkha.spinnerdatepicker.DatePicker  view, int year, int monthOfYear, int dayOfMonth) {
+        monthOfYear = ++monthOfYear;
+        Log.e("check","working.*&###########"+year+monthOfYear+dayOfMonth);
+        if(monthOfYear == 0)
+        {
+            month_spin.setText("Jan");
+            monthData = "Jan";
+        }
 
-        Log.e("check","working.*&###########"+year+month+dayOfMonth);
+        if(monthOfYear == 1)
+        {
+            month_spin.setText("Feb");
+            monthData = "Feb";
+        }
+
+        if(monthOfYear == 2)
+        {
+            month_spin.setText("Mar");
+            monthData = "Mar";
+        }
+
+        if(monthOfYear == 3)
+        {
+            month_spin.setText("Apr");
+            monthData = "Apr";
+        }
+
+        if(monthOfYear == 4)
+        {
+            month_spin.setText("May");
+            monthData = "May";
+        }
+
+        if(monthOfYear == 5)
+        {
+            month_spin.setText("Jun");
+            monthData = "Jun";
+        }
+
+        if(monthOfYear == 6)
+        {
+            month_spin.setText("Jul");
+            monthData = "Jul";
+        }
+
+        if(monthOfYear == 7)
+        {
+            month_spin.setText("Aug");
+            monthData = "Aug";
+        }
+
+        if(monthOfYear == 8)
+        {
+            month_spin.setText("Sep");
+            monthData = "Sep";
+        }
+
+        if(monthOfYear == 9)
+        {
+            month_spin.setText("Oct");
+            monthData = "Oct";
+        }
+
+        if(monthOfYear == 10)
+        {
+            month_spin.setText("Nov");
+            monthData = "Nov";
+        }
+
+        if(monthOfYear == 11)
+        {
+            month_spin.setText("Dec");
+            monthData = "Dec";
+        }
+
+
+        year_spin.setText(String.valueOf(year));
+        date_spin.setText(String.valueOf(dayOfMonth));
+        yearData = String.valueOf(year);
+
+
+
+        Log.e("dfssdfsdfsd", String.valueOf(dayOfMonth));
+        Log.e("dfssdfsdfsd", String.valueOf(monthData));
+        Log.e("dfssdfsdfsd", String.valueOf(year));
+
+        dob = year+"-"+String.valueOf(monthOfYear)+"-"+dayOfMonth;
+
     }
 
 
