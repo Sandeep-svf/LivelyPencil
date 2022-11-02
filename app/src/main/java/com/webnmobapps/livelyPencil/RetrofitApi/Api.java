@@ -40,6 +40,7 @@ import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.LiveUserPythonModel;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
@@ -277,7 +278,8 @@ public interface Api {
                                                                    @Header("Authorization") String Authorization);
 
 
-    @GET
+
+    @POST
     Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url,
                                                                     @Header("Authorization") String Authorization);
 
@@ -432,4 +434,9 @@ public interface Api {
             @Part("name") RequestBody name,
             @Part("about") RequestBody about,
             @Part MultipartBody.Part[] image);
+
+
+    @FormUrlEncoded
+    @POST("liveusers/")
+    Call<LiveUserPythonModel> LIVE_USER_PYTHON_MODEL_CALL(@Header("Authorization") String Authorization);
 }

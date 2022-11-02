@@ -96,9 +96,9 @@ public class HomeActivity extends AppCompatActivity {
         accessToken=sharedPreferences.getString("accessToken","");
 
         // API
-        notificaiton_count_api();
-        message_count_api();
-        followers_count_api();
+        //notificaiton_count_api();
+        //message_count_api();
+        //followers_count_api();
 
         // Default fragment
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();

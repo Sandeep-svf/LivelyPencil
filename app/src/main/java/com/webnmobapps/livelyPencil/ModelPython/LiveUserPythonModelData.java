@@ -3,7 +3,7 @@ package com.webnmobapps.livelyPencil.ModelPython;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LiveUserListDataPython {
+public class LiveUserPythonModelData {
 
 @SerializedName("id")
 @Expose
@@ -13,10 +13,10 @@ public Integer id;
 public String firstName;
 @SerializedName("last_name")
 @Expose
-public Object lastName;
+public String lastName;
 @SerializedName("stream_title")
 @Expose
-public Object streamTitle;
+public String streamTitle;
 @SerializedName("stream_cover_image")
 @Expose
 public String streamCoverImage;
@@ -38,14 +38,9 @@ public Integer followersCount;
 @SerializedName("likes_count")
 @Expose
 public Integer likesCount;
-
-    @SerializedName("followed")
-    @Expose
-    public Boolean followed;
-
-    public Boolean getFollowed() {
-        return followed;
-    }
+@SerializedName("followed")
+@Expose
+public Boolean followed;
 
     public Integer getId() {
         return id;
@@ -55,11 +50,11 @@ public Integer likesCount;
         return firstName;
     }
 
-    public Object getLastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public Object getStreamTitle() {
+    public String getStreamTitle() {
         return streamTitle;
     }
 
@@ -89,5 +84,9 @@ public Integer likesCount;
 
     public Integer getLikesCount() {
         return likesCount;
+    }
+
+    public Boolean getFollowed() {
+        return followed;
     }
 }
