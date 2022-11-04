@@ -276,7 +276,10 @@ public interface Api {
 
 
     @GET
-    Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url, @Header("Authorization") String Authorization);
+
+    Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url,
+                                                                    @Header("Authorization") String Authorization);
+
 
     @FormUrlEncoded
     @POST("popular-tv")
@@ -423,7 +426,8 @@ public interface Api {
     Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_SUPPORT(
             @Part("email") RequestBody email,
             @Part("name") RequestBody name,
-            @Part("about") RequestBody about);
+            @Part("about") RequestBody about,
+            @Part MultipartBody.Part[] image);
 
 }
 
