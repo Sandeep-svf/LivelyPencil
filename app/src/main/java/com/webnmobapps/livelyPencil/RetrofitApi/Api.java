@@ -276,7 +276,6 @@ public interface Api {
 
 
     @GET
-
     Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url,
                                                                     @Header("Authorization") String Authorization);
 
@@ -428,7 +427,6 @@ public interface Api {
             @Part("name") RequestBody name,
             @Part("about") RequestBody about,
             @Part MultipartBody.Part[] image);
-
 }
 
 
