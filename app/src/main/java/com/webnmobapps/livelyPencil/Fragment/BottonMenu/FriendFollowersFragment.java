@@ -80,6 +80,7 @@ public class FriendFollowersFragment extends Fragment {
             pd.setMessage("loading...");
             pd.show();
 
+
             Call<LiveUserListModelPython> call = API_Client.getClient().LIVE_USER_LIST_MODEL_PYTHON_CALL("liveusers/",finalAccessToken);
 
             call.enqueue(new Callback<LiveUserListModelPython>() {
@@ -99,7 +100,6 @@ public class FriendFollowersFragment extends Fragment {
                                 liveUserListDataPythonArrayList = response.body().getData();
 
 
-                                Log.e("list_size",liveUserListDataPythonArrayList.size()+"ok");
                                 RecyclerView.LayoutManager topLayoutManager = new GridLayoutManager(getActivity(), 2);
                                 rcv_friend_followers.setLayoutManager(topLayoutManager);
                                 rcv_friend_followers.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));

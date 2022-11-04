@@ -39,14 +39,6 @@ public Integer followersCount;
 @Expose
 public Integer likesCount;
 
-    @SerializedName("followed")
-    @Expose
-    public Boolean followed;
-
-    public Boolean getFollowed() {
-        return followed;
-    }
-
     public Integer getId() {
         return id;
     }
