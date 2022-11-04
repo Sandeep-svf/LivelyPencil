@@ -69,32 +69,31 @@ public interface Api {
 
 
     @POST("Interesting")
-    Call<IntrestListModel> IntrestList ();
+    Call<IntrestListModel> IntrestList();
 
 
     @GET("interestings/")
     Call<InterestingModelPython> IntrestList2();
 
     @POST("getAge")
-    Call<GroupAgeModel> groupAge ();
-
+    Call<GroupAgeModel> groupAge();
 
 
     @FormUrlEncoded
     @POST("login/")
-    Call<LoginModelPython> login (
-                             @Field("email") String email,
-                             @Field("password") String password,
-                             @Field("device_token") String device_toke);
+    Call<LoginModelPython> login(
+            @Field("email") String email,
+            @Field("password") String password,
+            @Field("device_token") String device_toke);
 
     @FormUrlEncoded
     @POST("check-user")
-    Call<CheckUserModel> checkUser (@Field("username") String username);
+    Call<CheckUserModel> checkUser(@Field("username") String username);
 
 
     @Multipart
     @POST("registation-api")
-    Call<RegisterModel>register(
+    Call<RegisterModel> register(
             @Part("device_token") RequestBody device_token,
             @Part("firstname") RequestBody firstname,
             @Part("lastname") RequestBody lastname,
@@ -110,219 +109,213 @@ public interface Api {
 
     @Multipart
     @POST("register/")
-    Call<LoginModelPython> register2(@Part("interesting")   List<Integer> interesting,
-                                     @Part ("first_name") RequestBody first_name,
-                                     @Part ("last_name") RequestBody last_name,
-                                     @Part ("email") RequestBody email,
-                                     @Part ("stream_title") RequestBody stream_title,
-                                     @Part ("role") RequestBody role,
-                                     @Part ("password") RequestBody password,
+    Call<LoginModelPython> register2(@Part("interesting") List<Integer> interesting,
+                                     @Part("first_name") RequestBody first_name,
+                                     @Part("last_name") RequestBody last_name,
+                                     @Part("email") RequestBody email,
+                                     @Part("stream_title") RequestBody stream_title,
+                                     @Part("role") RequestBody role,
+                                     @Part("password") RequestBody password,
                                      @Part MultipartBody.Part stream_cover_image,
                                      @Part MultipartBody.Part image);
 
 
     @FormUrlEncoded
     @POST("showpersonalInformation")
-    Call<Personal_Information_Settings_Model> PersonalInformationDetails (@Field("user_id") String user_id);
+    Call<Personal_Information_Settings_Model> PersonalInformationDetails(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("showpersonalInformation")
-    Call<  PersonalInformationSettingWizardModel> personalInformationSettingWizardModelCall (@Field("user_id") String user_id);
-
+    Call<PersonalInformationSettingWizardModel> personalInformationSettingWizardModelCall(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("addPersonalInformation")
-    Call<Edit_Personal_Information_Model> EditPersonalInformation (@Field("user_id") String user_id,
-                                                  @Field("birth_date") String birth_date,
-                                                  @Field("gender") String gender,
-                                                  @Field("Location") String Location,
-                                                  @Field("relationship") String relationship,
-                                                  @Field("aboutme") String aboutme,
-                                                  @Field("firstname") String firstname,
-                                                  @Field("lastname") String lastname);
+    Call<Edit_Personal_Information_Model> EditPersonalInformation(@Field("user_id") String user_id,
+                                                                  @Field("birth_date") String birth_date,
+                                                                  @Field("gender") String gender,
+                                                                  @Field("Location") String Location,
+                                                                  @Field("relationship") String relationship,
+                                                                  @Field("aboutme") String aboutme,
+                                                                  @Field("firstname") String firstname,
+                                                                  @Field("lastname") String lastname);
 
     @POST("show-country")
-    Call<CountryListModel> countryList ();
+    Call<CountryListModel> countryList();
 
     @FormUrlEncoded
     @POST("show-city")
-    Call<CityListModel> cityList (@Field("cid") String cid);
+    Call<CityListModel> cityList(@Field("cid") String cid);
 
     @FormUrlEncoded
     @POST("personalizationPrivacy")
-    Call<PersonalizationPrivacyModel> personalizationPrivacy (@Field("user_id") String user_id,
-                                                              @Field("key") String key,
-                                                              @Field("status") String status);
+    Call<PersonalizationPrivacyModel> personalizationPrivacy(@Field("user_id") String user_id,
+                                                             @Field("key") String key,
+                                                             @Field("status") String status);
 
     @FormUrlEncoded
     @POST("showpersonalizationPrivacy")
-    Call<PPSettingsModel> ppSettingsDetails (@Field("user_id") String user_id);
+    Call<PPSettingsModel> ppSettingsDetails(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("showstreamSetting")
-    Call<StreamSettingModel> streamSettingDetails (@Field("user_id") String user_id);
+    Call<StreamSettingModel> streamSettingDetails(@Field("user_id") String user_id);
 
     @Multipart
     @POST("addstreamSetting")
-    Call<EditStreamSettingModel> editStreamSetting (@Part("user_id") RequestBody user_id,
-                                                    @Part("username") RequestBody username,
-                                                    @Part("streamtitle") RequestBody streamtitle,
-                                                    @Part("streamaboutme") RequestBody streamaboutme,
-                                                    @Part MultipartBody.Part streamcoverimage);
+    Call<EditStreamSettingModel> editStreamSetting(@Part("user_id") RequestBody user_id,
+                                                   @Part("username") RequestBody username,
+                                                   @Part("streamtitle") RequestBody streamtitle,
+                                                   @Part("streamaboutme") RequestBody streamaboutme,
+                                                   @Part MultipartBody.Part streamcoverimage);
 
     @FormUrlEncoded
     @POST("show-tv")
-    Call<TvSettingsModel> tvSettingDetails (@Field("user_id") String user_id);
+    Call<TvSettingsModel> tvSettingDetails(@Field("user_id") String user_id);
 
 
     @Multipart
     @POST("show-tv-update")
-    Call<EditTVSettingModel> editTvSetting (@Part("id") RequestBody id,
-                                            @Part("topic") RequestBody topic,
-                                            @Part("agegroup") RequestBody agegroup,
-                                            @Part("otherTags") RequestBody otherTags,
-                                            @Part MultipartBody.Part tvlogo,
-                                            @Part MultipartBody.Part tvcover);
+    Call<EditTVSettingModel> editTvSetting(@Part("id") RequestBody id,
+                                           @Part("topic") RequestBody topic,
+                                           @Part("agegroup") RequestBody agegroup,
+                                           @Part("otherTags") RequestBody otherTags,
+                                           @Part MultipartBody.Part tvlogo,
+                                           @Part MultipartBody.Part tvcover);
 
     @FormUrlEncoded
     @POST("show-radio")
-    Call<RadioSettingsModel> radioSettingDetails (@Field("user_id") String user_id);
+    Call<RadioSettingsModel> radioSettingDetails(@Field("user_id") String user_id);
 
 
     @Multipart
     @POST("show-radio-Update")
-    Call<EditRadioSettingsModel> editRadioSetting (@Part("id") RequestBody id,
-                                                @Part("topic") RequestBody topic,
-                                                @Part("agegroup") RequestBody agegroup,
-                                                @Part("otherTags") RequestBody otherTags,
-                                                @Part MultipartBody.Part radiologo,
-                                                @Part MultipartBody.Part radiocover);
+    Call<EditRadioSettingsModel> editRadioSetting(@Part("id") RequestBody id,
+                                                  @Part("topic") RequestBody topic,
+                                                  @Part("agegroup") RequestBody agegroup,
+                                                  @Part("otherTags") RequestBody otherTags,
+                                                  @Part MultipartBody.Part radiologo,
+                                                  @Part MultipartBody.Part radiocover);
 
 
     @FormUrlEncoded
     @POST("contactInformation")
-    Call<ContactInformationModel> contactInformation (@Field("user_id") String user_id);
+    Call<ContactInformationModel> contactInformation(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("updatecontactInformation")
-    Call<EditContactSettingModel> editContactInformation (@Field("user_id") String user_id,
-                                                          @Field("email") String email,
-                                                          @Field("phone") String phone,
-                                                          @Field("url") String url);
+    Call<EditContactSettingModel> editContactInformation(@Field("user_id") String user_id,
+                                                         @Field("email") String email,
+                                                         @Field("phone") String phone,
+                                                         @Field("url") String url);
 
 
     @FormUrlEncoded
     @POST("streampagesetting")
-    Call<StreamPageSettingsModel> sreamPageSettingsDetails (@Field("user_id") String user_id);
+    Call<StreamPageSettingsModel> sreamPageSettingsDetails(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("sharepagesetting")
-    Call<ShareSettingDetailsModel> shareSettingsDetails (@Field("user_id") String user_id);
+    Call<ShareSettingDetailsModel> shareSettingsDetails(@Field("user_id") String user_id);
 
     // done
     @FormUrlEncoded
     @POST("addsharepagesetting")
-    Call<EditShareSettingsModel> editShareSetting (@Field("user_id") String user_id,
-                                                   @Field("key") String key,
-                                                   @Field("status") String status
-                                                   );
+    Call<EditShareSettingsModel> editShareSetting(@Field("user_id") String user_id,
+                                                  @Field("key") String key,
+                                                  @Field("status") String status
+    );
 
     @FormUrlEncoded
     @POST("notificationList")
-    Call<NotificationListModel> notificationList (@Field("user_id") String user_id);
-
+    Call<NotificationListModel> notificationList(@Field("user_id") String user_id);
 
 
     @GET("notifications/")
-    Call<NotificationModelPython> NOTIFICATION_MODEL_PYTHON_CALL (@Header("Authorization") String Authorization);
+    Call<NotificationModelPython> NOTIFICATION_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization);
 
 
     @POST("notifications/")
-    Call<CommonStatusMessageModelPython> CLEAR_ALL_NOTIFICATION_PYTHON_CALL (@Header("Authorization") String Authorization);
+    Call<CommonStatusMessageModelPython> CLEAR_ALL_NOTIFICATION_PYTHON_CALL(@Header("Authorization") String Authorization);
 
 
     @POST
-    Call<CommonStatusMessageModelPython> notificaitonSingleDelete (@Url String url,
-                                                                   @Header("Authorization")String Authorization);
+    Call<CommonStatusMessageModelPython> notificaitonSingleDelete(@Url String url,
+                                                                  @Header("Authorization") String Authorization);
 
     @FormUrlEncoded
     @POST("notificationRemoveAll")
-    Call<SmFlaxibleModel> notificationClearAll (@Field("user_id") String user_id);
+    Call<SmFlaxibleModel> notificationClearAll(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("showpoststeam")
-    Call<StreamPageModel> stramPageList (@Field("user_id") String user_id);
-
+    Call<StreamPageModel> stramPageList(@Field("user_id") String user_id);
 
 
     @GET("posts/")
-    Call<PostListModelPython> POST_LIST_MODEL_PYTHON_CALL (@Header("Authorization") String Authorization);
+    Call<PostListModelPython> POST_LIST_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization);
 
 
     @GET
-    Call<UserProfileModelPython> USER_PROFILE_MODEL_PYTHON_CALL (@Url String url,
-            @Header("Authorization") String Authorization);
+    Call<UserProfileModelPython> USER_PROFILE_MODEL_PYTHON_CALL(@Url String url,
+                                                                @Header("Authorization") String Authorization);
 
     @GET("myfollowers/")
-    Call<MyFollowersModel> MY_FOLLOWERS_MODEL_CALL (@Header("Authorization") String Authorization);
-
-
-
-    @GET
-    Call<FollowersListModelPython> FOLLOWERS_LIST_MODEL_PYTHON_CALL (@Url String url,
-                                                                   @Header("Authorization") String Authorization);
+    Call<MyFollowersModel> MY_FOLLOWERS_MODEL_CALL(@Header("Authorization") String Authorization);
 
 
     @GET
-    Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url,
+    Call<FollowersListModelPython> FOLLOWERS_LIST_MODEL_PYTHON_CALL(@Url String url,
                                                                     @Header("Authorization") String Authorization);
+
+
+    @GET
+    Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL(@Url String url,
+                                                                   @Header("Authorization") String Authorization);
 
     @FormUrlEncoded
     @POST("popular-tv")
-    Call<TvListModel> popularTvList (@Field("user_id") String user_id);
+    Call<TvListModel> popularTvList(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("popular-radio")
-    Call<RadioListModel> popularRadioList (@Field("user_id") String user_id);
+    Call<RadioListModel> popularRadioList(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("notificationCount")
-    Call<NotificationCountModel> notificationCount (@Field("user_id") String user_id);
+    Call<NotificationCountModel> notificationCount(@Field("user_id") String user_id);
 
 
     @FormUrlEncoded
     @POST("notificationRead")
-    Call<SmFlaxibleModel> notificationRead (@Field("user_id") String user_id);
+    Call<SmFlaxibleModel> notificationRead(@Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("Show-wall")
-    Call<UserWallListModel> userWallLlist ();
+    Call<UserWallListModel> userWallLlist();
 
     // Done
 
     @FormUrlEncoded
     @POST("email-verification")
-    Call<SmFlaxibleModel> emailVerification (@Field("email") String email,
-                                             @Field("token") String token);
-
+    Call<SmFlaxibleModel> emailVerification(@Field("email") String email,
+                                            @Field("token") String token);
 
 
     @FormUrlEncoded
     @POST("otp-verification")
-    Call<SmFlaxibleModel> emailVerificationOtp (@Field("email") String email,
-                                             @Field("otp") String otp);
+    Call<SmFlaxibleModel> emailVerificationOtp(@Field("email") String email,
+                                               @Field("otp") String otp);
 
 
     @FormUrlEncoded
     @POST("forget-password")
-    Call<SmFlaxibleModel> chnage_password (@Field("username") String username,
-                                           @Field("password") String password);
-
+    Call<SmFlaxibleModel> chnage_password(@Field("username") String username,
+                                          @Field("password") String password);
 
 
     @Multipart
@@ -334,7 +327,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("papulardataList")
-    Call<PopularListModel> POPULAR_LIST_MODEL_CALL (@Field("loginId") String loginId
+    Call<PopularListModel> POPULAR_LIST_MODEL_CALL(@Field("loginId") String loginId
 
     );
 
@@ -353,58 +346,57 @@ public interface Api {
 
     @Multipart
     @POST("addbook/")
-    Call<CommonStatusMessageModelPython> ADD_BOOK_MODEL_CALL (@Header("Authorization") String Authorization,
-                                                              @Part("book_name") RequestBody book_name,
-                                                              @Part("book_descriptions") RequestBody book_descriptions,
-                                                              @Part MultipartBody.Part book_image);
+    Call<CommonStatusMessageModelPython> ADD_BOOK_MODEL_CALL(@Header("Authorization") String Authorization,
+                                                             @Part("book_name") RequestBody book_name,
+                                                             @Part("book_descriptions") RequestBody book_descriptions,
+                                                             @Part MultipartBody.Part book_image);
 
     @GET("bookslist/")
-    Call<BookListModel> BOOK_LIST_MODEL_CALL (@Header("Authorization") String Authorization);
+    Call<BookListModel> BOOK_LIST_MODEL_CALL(@Header("Authorization") String Authorization);
 
     @GET("notificationsetting/")
-    Call<NotificationSettingModel> NOTIFICATION_MODEL_SETTINGS_CALL (@Header("Authorization") String Authorization);
+    Call<NotificationSettingModel> NOTIFICATION_MODEL_SETTINGS_CALL(@Header("Authorization") String Authorization);
 
     @GET("rolesetting/")
-    Call<RoleSettingModel> ROLE_SETTING_MODEL_CALL (@Header("Authorization") String Authorization);
+    Call<RoleSettingModel> ROLE_SETTING_MODEL_CALL(@Header("Authorization") String Authorization);
 
     @FormUrlEncoded
     @PUT("notificationsetting/")
-    Call<CommonStatusMessageModelPython> NOTIFICATION_MODEL_CHANGE_SETTINGS_CALL (@Header("Authorization") String Authorization,
-                                                                                  @Field("notification") String notification );
+    Call<CommonStatusMessageModelPython> NOTIFICATION_MODEL_CHANGE_SETTINGS_CALL(@Header("Authorization") String Authorization,
+                                                                                 @Field("notification") String notification);
 
 
     @FormUrlEncoded
     @PUT("rolesetting/")
-    Call<CommonStatusMessageModelPython> ROLE_CHANGE_SETTINGS_CALL (@Header("Authorization") String Authorization,
-                                                                                  @Field("role") String role );
+    Call<CommonStatusMessageModelPython> ROLE_CHANGE_SETTINGS_CALL(@Header("Authorization") String Authorization,
+                                                                   @Field("role") String role);
 
 
     @GET("profile/")
-    Call<UserProfileModel> USER_PROFILE_MODEL_CALL (@Header("Authorization") String Authorization);
+    Call<UserProfileModel> USER_PROFILE_MODEL_CALL(@Header("Authorization") String Authorization);
 
 
     @GET("setting/")
-    Call<SettingModel> SETTING_MODEL_CALL (@Header("Authorization") String Authorization);
+    Call<SettingModel> SETTING_MODEL_CALL(@Header("Authorization") String Authorization);
 
 
     @Multipart
     @PUT("setting/")
-    Call<SettingModel> SETTING_MODEL_CALL_UPDATE (@Header("Authorization") String Authorization,
-                                                  @Part("id") RequestBody id,
-                                                  @Part("username") RequestBody username,
-                                                  @Part("first_name") RequestBody first_name,
-                                                  @Part("last_name") RequestBody last_name,
-                                                  @Part("stream_title") RequestBody stream_title,
-                                                  @Part("birth_date") RequestBody birth_date,
-                                                  @Part("country") RequestBody country,
-                                                  @Part MultipartBody.Part image);
+    Call<SettingModel> SETTING_MODEL_CALL_UPDATE(@Header("Authorization") String Authorization,
+                                                 @Part("id") RequestBody id,
+                                                 @Part("username") RequestBody username,
+                                                 @Part("first_name") RequestBody first_name,
+                                                 @Part("last_name") RequestBody last_name,
+                                                 @Part("stream_title") RequestBody stream_title,
+                                                 @Part("birth_date") RequestBody birth_date,
+                                                 @Part("country") RequestBody country,
+                                                 @Part MultipartBody.Part image);
 
     @FormUrlEncoded
     @POST("resetrequest/")
     Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_REQUEST_OTP
             (@Header("Authorization") String Authorization,
              @Field("email") String email);
-
 
 
     @FormUrlEncoded
@@ -424,7 +416,6 @@ public interface Api {
              @Field("password") String password);
 
 
-
     @Multipart
     @POST("support/")
     Call<CommonStatusMessageModelPython> COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL_SUPPORT(
@@ -432,5 +423,4 @@ public interface Api {
             @Part("name") RequestBody name,
             @Part("about") RequestBody about,
             @Part MultipartBody.Part[] image);
-
 }
