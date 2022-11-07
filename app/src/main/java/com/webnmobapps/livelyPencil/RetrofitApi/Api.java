@@ -1,8 +1,4 @@
 package com.webnmobapps.livelyPencil.RetrofitApi;
-
-
-
-
 import com.webnmobapps.livelyPencil.Model.BusinessModel;
 import com.webnmobapps.livelyPencil.Model.CheckUserModel;
 import com.webnmobapps.livelyPencil.Model.CityListModel;
