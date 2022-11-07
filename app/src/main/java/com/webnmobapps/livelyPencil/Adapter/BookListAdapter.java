@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,13 +74,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
 class BookListViewHolder extends RecyclerView.ViewHolder {
     AppCompatTextView book_description,book_name;
     CircleImageView book_cover_image;
-    ConstraintLayout book_layout;
+    AppCompatImageView book_layout;
 
     public BookListViewHolder(@NonNull View itemView) {
         super(itemView);
         book_name = itemView.findViewById(R.id.book_name);
         book_description = itemView.findViewById(R.id.book_description);
         book_cover_image = itemView.findViewById(R.id.book_cover_image);
-        book_layout = itemView.findViewById(R.id.book_layout);
+        book_layout = itemView.findViewById(R.id.bhu1);
     }
 }

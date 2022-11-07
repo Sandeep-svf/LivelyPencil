@@ -280,4 +280,5 @@
     <string name="select_book_image">Please select Book Cover Image</string>
     <string name="please_enter_stream">Please enter stream name</string>
     <string name="please_enter_country">Please enter country</string>
+    <string name="book_list">Book List</string>
 </resources>

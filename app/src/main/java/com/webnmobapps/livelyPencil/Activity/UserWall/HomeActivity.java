@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     private String user_id,accessToken;
     private int notificationCount;
     AppCompatTextView notification_count;
-    AppCompatImageView contant_icon;
+    AppCompatImageView contant_icon,settings_image_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,24 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
         accessToken=sharedPreferences.getString("accessToken","");
+
+
+        settings_image_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calling settings activity/fregment....
+                SettingsFragment settingsFragment = new SettingsFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                //  ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                fragmentTransaction.replace(R.id.fragment_contaner, settingsFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+            }
+        });
+
 
         // API
         notificaiton_count_api();
@@ -817,6 +835,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void inits() {
         contant_icon = findViewById(R.id.contant_icon);
+        settings_image_layout = findViewById(R.id.settings_image_layout);
         n_count_layout = findViewById(R.id.n_count_layout);
         notification_count = findViewById(R.id.notification_count);
         page_top_icon = findViewById(R.id.page_top_icon);

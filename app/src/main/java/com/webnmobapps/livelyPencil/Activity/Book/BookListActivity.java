@@ -3,6 +3,7 @@ package com.webnmobapps.livelyPencil.Activity.Book;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +50,7 @@ public class BookListActivity extends AppCompatActivity {
     List<BookListData> bookListDataList = new ArrayList<>();
     AlertDialog dialogs;
     private String finalAccessToken,accessToken,user_id;
+    AppCompatImageView create_book_icon;
 
 
     @Override
@@ -56,6 +58,14 @@ public class BookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         inits();
+
+        create_book_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookListActivity.this, CreateBookActivity.class);
+                startActivity(intent);
+            }
+        });
 
         SharedPreferences sharedPreferences= BookListActivity.this.getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
@@ -229,5 +239,14 @@ public class BookListActivity extends AppCompatActivity {
     }
     private void inits() {
         rcv_book_list = findViewById(R.id.rcv_book_list);
+        create_book_icon = findViewById(R.id.create_book_icon);
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        book_list_api();
     }
 }
