@@ -43,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FriendFollowersFragment extends Fragment {
+public class LiveUserFragment extends Fragment {
 
 
     RecyclerView rcv_friend_followers;
@@ -64,10 +64,6 @@ public class FriendFollowersFragment extends Fragment {
         finalAccessToken = StaticKey.prefixTokem+accessToken;
 
         live_user_api();
-
-
-
-
 
         return view;
     }

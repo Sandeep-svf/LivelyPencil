@@ -3,7 +3,6 @@ package com.webnmobapps.livelyPencil.Fragment.BottonMenu;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +21,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.provider.MediaStore;
@@ -35,17 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.tabs.TabLayout;
-import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
-import com.webnmobapps.livelyPencil.Adapter.PageAdapter;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
-import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileData;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModel;
-import com.webnmobapps.livelyPencil.ModelPython.SettingModelData;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileDataPython;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
 import com.webnmobapps.livelyPencil.R;
@@ -627,7 +620,7 @@ public class ProfileFragment extends Fragment {
     {
         {
             adapter.addFragment(new PageFragment());
-            adapter.addFragment(new FriendFollowersFragment());
+            adapter.addFragment(new LiveUserFragment());
 
         }
 

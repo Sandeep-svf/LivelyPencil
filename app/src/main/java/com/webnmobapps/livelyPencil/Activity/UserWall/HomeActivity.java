@@ -17,7 +17,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -33,33 +32,20 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.webnmobapps.livelyPencil.Activity.Book.BookListActivity;
 import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
-import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
-import com.webnmobapps.livelyPencil.Activity.Login.LoginActivity;
 import com.webnmobapps.livelyPencil.Activity.Login.LoginJoinusActivity;
 import com.webnmobapps.livelyPencil.Activity.NewChangePhase.SettingsFragment;
-import com.webnmobapps.livelyPencil.Activity.PostType.CreateOfflinePostActivity;
-import com.webnmobapps.livelyPencil.Activity.PostType.Fragment.HomePostFragment;
-import com.webnmobapps.livelyPencil.Activity.Setting.PersonalInformationActivity;
-import com.webnmobapps.livelyPencil.Activity.Setting.SettingsActivity;
-import com.webnmobapps.livelyPencil.Activity.Utility.AudioStatus;
 import com.webnmobapps.livelyPencil.Activity.Utility.MediaPlayerUtils;
 import com.webnmobapps.livelyPencil.Activity.Utility.PrivacyPolicyActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.TermsConditionsActivity;
-import com.webnmobapps.livelyPencil.Adapter.SelectIntrestAdapter;
-import com.webnmobapps.livelyPencil.Fragment.BottonMenu.FriendFollowersFragment;
+import com.webnmobapps.livelyPencil.Fragment.BottonMenu.LiveUserFragment;
 import com.webnmobapps.livelyPencil.Fragment.BottonMenu.MessageEmailFragment;
 import com.webnmobapps.livelyPencil.Fragment.BottonMenu.NotificationFragment;
 import com.webnmobapps.livelyPencil.Fragment.BottonMenu.ProfileFragment;
 import com.webnmobapps.livelyPencil.Fragment.BottonMenu.SearchFragment;
 import com.webnmobapps.livelyPencil.Fragment.BottonMenu.UserWallFragment;
-import com.webnmobapps.livelyPencil.Fragment.TopMenu.GameFragment;
-import com.webnmobapps.livelyPencil.Fragment.TopMenu.MarketFragment;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.RadioFragment;
-import com.webnmobapps.livelyPencil.Fragment.TopMenu.TvFragment;
-import com.webnmobapps.livelyPencil.Model.IntrestListModel;
 import com.webnmobapps.livelyPencil.Model.NotificationCountModel;
-import com.webnmobapps.livelyPencil.Model.Record.IntrestListModelRecord;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
@@ -446,12 +432,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                FriendFollowersFragment friendFollowersFragment = new FriendFollowersFragment();
+                LiveUserFragment liveUserFragment = new LiveUserFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
                // ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-                fragmentTransaction.replace(R.id.fragment_contaner, friendFollowersFragment);
+                fragmentTransaction.replace(R.id.fragment_contaner, liveUserFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 

@@ -5,7 +5,7 @@
     android:background="@color/custom_bg2"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Fragment.BottonMenu.FriendFollowersFragment">
+    tools:context=".Fragment.BottonMenu.LiveUserFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
