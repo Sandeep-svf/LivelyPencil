@@ -692,6 +692,7 @@
             ></androidx.appcompat.widget.AppCompatTextView>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/help_pages"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -713,6 +714,7 @@
             android:id="@+id/support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
 
             android:textSize="@dimen/_18sdp"
             android:textColor="@color/text_color"
