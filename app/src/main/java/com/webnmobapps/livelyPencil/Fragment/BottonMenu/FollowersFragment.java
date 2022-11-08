@@ -9,10 +9,13 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.util.TypedValue;
@@ -21,10 +24,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.webnmobapps.livelyPencil.Activity.Book.BookListActivity;
 import com.webnmobapps.livelyPencil.Adapter.BookListAdapter;
 import com.webnmobapps.livelyPencil.Adapter.FollowersAdapter;
 import com.webnmobapps.livelyPencil.Adapter.FriendFollowersAdapter;
+import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
 import com.webnmobapps.livelyPencil.Model.FollowersModel;
 import com.webnmobapps.livelyPencil.Model.Record.FollowersModelData;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
@@ -51,6 +56,8 @@ public class FollowersFragment extends Fragment {
     private String finalAccessToken,accessToken;
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,10 +66,15 @@ public class FollowersFragment extends Fragment {
 
         rcv_followers = view.findViewById(R.id.rcv_followers);
 
+
+
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         // user_id=sharedPreferences.getString("UserID","");
         accessToken=sharedPreferences.getString("accessToken","");
         finalAccessToken = StaticKey.prefixTokem+accessToken;
+
+
+
 
         followers_api();
 
@@ -181,4 +193,5 @@ public class FollowersFragment extends Fragment {
             });
 
         }
+
 }

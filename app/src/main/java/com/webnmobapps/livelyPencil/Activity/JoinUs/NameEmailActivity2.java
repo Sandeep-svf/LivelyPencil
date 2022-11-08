@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.Login.LoginActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.R;
@@ -65,6 +66,14 @@ public class NameEmailActivity2 extends AppCompatActivity {
 
         intis();
 
+
+        back_to_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NameEmailActivity2.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         uesrProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override

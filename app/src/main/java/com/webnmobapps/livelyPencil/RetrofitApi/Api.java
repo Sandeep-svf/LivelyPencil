@@ -11,6 +11,7 @@ import com.webnmobapps.livelyPencil.Model.EditStreamSettingModel;
 import com.webnmobapps.livelyPencil.Model.EditTVSettingModel;
 import com.webnmobapps.livelyPencil.Model.Edit_Personal_Information_Model;
 import com.webnmobapps.livelyPencil.Model.EducationModel;
+import com.webnmobapps.livelyPencil.Model.FollowerProfileModel;
 import com.webnmobapps.livelyPencil.Model.FollowersModel;
 import com.webnmobapps.livelyPencil.Model.GroupAgeModel;
 import com.webnmobapps.livelyPencil.Model.IntrestListModel;
@@ -264,6 +265,8 @@ public interface Api {
 
 
 
+
+
     @GET
 
     Call<FollowersListModelPython> FOLLOWERS_LIST_MODEL_PYTHON_CALL(@Url String url);
@@ -426,11 +429,19 @@ public interface Api {
             @Part MultipartBody.Part[] image);
 
 
-
-
-
     @GET("myfollowers/")
     Call<FollowersModel> FOLLOWERS_MODEL_CALL(@Header("Authorization") String Authorization);
+
+    @GET
+    Call<FollowerProfileModel> FOLLOWER_PROFILE_MODEL_CALL(@Url String url,@Header("Authorization") String Authorization);
+
+
+
+    @FormUrlEncoded
+    @POST("profile-report/")
+    Call<CommonStatusMessageModelPython> REPORT_PROFILE_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization,
+                                                                                                @Field("report_to") String report_to);
+
 
 
 
