@@ -620,7 +620,7 @@ public class ProfileFragment extends Fragment {
     {
         {
             adapter.addFragment(new PageFragment());
-            adapter.addFragment(new LiveUserFragment());
+            adapter.addFragment(new FollowersFragment());
 
         }
 

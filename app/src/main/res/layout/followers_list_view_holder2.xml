@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/followers_user_details_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="14dp"
+        app:cardCornerRadius="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHeight_percent="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.975"
+
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintWidth_percent="0.45"
+
+                app:layout_constraintHeight_percent="0.5"
+
+                app:civ_border_width="4dp"
+                app:civ_border_color="@color/darkwhite"
+
+                android:src="@drawable/ic_launcher_background"
+                android:id="@+id/following_user_profile"
+                app:layout_constraintVertical_bias="0.05"
+
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:visibility="gone"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintWidth_percent="0.45"
+
+                app:layout_constraintHeight_percent="0.5"
+
+                app:civ_border_width="0.25dp"
+                app:civ_border_color="@color/black"
+
+                android:src="@color/green"
+
+
+                app:layout_constraintVertical_bias="0.38"
+
+                >
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/following_user_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:maxLines="1"
+
+                app:layout_constraintVertical_bias="0.6"
+
+                android:text="Lena Wilson"
+                android:gravity="center"
+                android:textColor="@color/settingEditBackgroundColor"
+                android:textSize="@dimen/_16sdp"
+                android:fontFamily="@font/raleway_bold"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:id="@+id/followers_stream_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                app:layout_constraintVertical_bias="0.72"
+
+                android:text="Car Lovers"
+                android:gravity="center"
+
+                android:textSize="@dimen/_14sdp"
+                android:fontFamily="@font/raleway_bold"
+
+                >
+
+            </androidx.appcompat.widget.AppCompatTextView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/live_add_follow_button"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+                app:layout_constraintHeight_percent="0.16"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                app:layout_constraintWidth_percent="0.6"
+                app:layout_constraintVertical_bias="0.95"
+
+                android:text="@string/followed"
+                android:textColor="@color/white"
+                android:fontFamily="@font/raleway_bold"
+                android:backgroundTint="@color/settingEditBackgroundColor"
+
+                android:background="@drawable/custom_bg212"
+
+                android:textSize="@dimen/_12sdp"
+                >
+
+            </androidx.appcompat.widget.AppCompatButton>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

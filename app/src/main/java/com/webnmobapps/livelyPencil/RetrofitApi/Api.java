@@ -11,6 +11,7 @@ import com.webnmobapps.livelyPencil.Model.EditStreamSettingModel;
 import com.webnmobapps.livelyPencil.Model.EditTVSettingModel;
 import com.webnmobapps.livelyPencil.Model.Edit_Personal_Information_Model;
 import com.webnmobapps.livelyPencil.Model.EducationModel;
+import com.webnmobapps.livelyPencil.Model.FollowersModel;
 import com.webnmobapps.livelyPencil.Model.GroupAgeModel;
 import com.webnmobapps.livelyPencil.Model.IntrestListModel;
 import com.webnmobapps.livelyPencil.Model.NotificationCountModel;
@@ -37,6 +38,7 @@ import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.MyFollowersData;
 import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
@@ -259,8 +261,7 @@ public interface Api {
     Call<UserProfileModelPython> USER_PROFILE_MODEL_PYTHON_CALL(@Url String url,
                                                                 @Header("Authorization") String Authorization);
 
-    @GET("myfollowers/")
-    Call<MyFollowersModel> MY_FOLLOWERS_MODEL_CALL(@Header("Authorization") String Authorization);
+
 
 
     @GET
@@ -423,6 +424,16 @@ public interface Api {
             @Part("name") RequestBody name,
             @Part("about") RequestBody about,
             @Part MultipartBody.Part[] image);
+
+
+
+
+
+    @GET("myfollowers/")
+    Call<FollowersModel> FOLLOWERS_MODEL_CALL(@Header("Authorization") String Authorization);
+
+
+
 }
 
 
