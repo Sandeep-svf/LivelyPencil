@@ -671,25 +671,49 @@
 
 
         </androidx.appcompat.widget.AppCompatTextView>
+
+
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/joinus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textSize="@dimen/_18sdp"
-            android:textColor="@color/text_color"
-            android:text="@string/join_us"
-            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
+            android:text="@string/join_us"
             app:layout_constraintVertical_bias="0.85"
 
-            app:layout_constraintHeight_percent="0.05"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/settingEditBackgroundColor"
+            android:textSize="@dimen/_16sdp">
 
-            ></androidx.appcompat.widget.AppCompatTextView>
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/terms_privacy_help_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:text="Terms / Privacy / Help"
+            app:layout_constraintVertical_bias="0.925"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/settingEditBackgroundColor"
+            android:textSize="@dimen/_16sdp"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/help_pages"
             android:visibility="gone"

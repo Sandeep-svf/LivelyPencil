@@ -37,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.hbb20.CountryCodePicker;
+import com.webnmobapps.livelyPencil.Activity.Book.WebviewEditorActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity2;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.PasscodeValidationActivity;
@@ -45,6 +46,7 @@ import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SetPasswordActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.HelpActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.SupportActivity;
+import com.webnmobapps.livelyPencil.MainActivity;
 import com.webnmobapps.livelyPencil.Model.CheckUserModel;
 import com.webnmobapps.livelyPencil.Model.RegisterModel;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
@@ -80,6 +82,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     String countryCode,accessToken,finalAccessToken;
     CountryCodePicker country_code_picker;
     AlertDialog dialogs;
+    AppCompatTextView terms_privacy_help_layout;
     private String regexEmail = "(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\\.)+[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[A-Za-z0-9]:(?:|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
 
 
@@ -104,6 +107,15 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         // user_id=sharedPreferences.getString("UserID","");
         accessToken=sharedPreferences.getString("accessToken","");
         finalAccessToken = StaticKey.prefixTokem+accessToken;
+
+        terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ForgetPasswordActivity.this, WebviewEditorActivity.class);
+                intent.putExtra("key","1");
+                startActivity(intent);
+            }
+        });
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -570,6 +582,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         support = findViewById(R.id.support);
         login_button = findViewById(R.id.login_button);
         help_pages = findViewById(R.id.help_pages);
+        terms_privacy_help_layout = findViewById(R.id.terms_privacy_help_layout);
 
 
 

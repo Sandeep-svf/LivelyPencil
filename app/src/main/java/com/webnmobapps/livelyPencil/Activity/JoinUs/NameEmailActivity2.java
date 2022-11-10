@@ -30,9 +30,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.Book.WebviewEditorActivity;
 import com.webnmobapps.livelyPencil.Activity.Login.LoginActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
+import com.webnmobapps.livelyPencil.MainActivity;
 import com.webnmobapps.livelyPencil.R;
 
 import java.io.File;
@@ -54,10 +56,11 @@ public class NameEmailActivity2 extends AppCompatActivity {
     private Uri selectedImageUri;
     private Bitmap thumbnail6;
     private String imageBase64 , key;
-    private File profileImage;
+    private File profileImage = null;
     private Uri imageUri6;
     private Uri uri;
     private static final int CAMERA_PIC_REQUEST_R = 34598;
+    AppCompatTextView terms_privacy_help_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,16 @@ public class NameEmailActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_name_email2);
 
         intis();
+
+        terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(NameEmailActivity2.this, WebviewEditorActivity.class);
+                intent.putExtra("key","1");
+                startActivity(intent);
+            }
+        });
 
 
         back_to_login.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +196,8 @@ public class NameEmailActivity2 extends AppCompatActivity {
         }else if (!emailData.matches(regexEmail)){
             alert_dialog_message("4");
             return false;
+        }else if(profileImage==null){
+            alert_dialog_message("54521");
         }
         return true;
     }
@@ -210,9 +225,9 @@ public class NameEmailActivity2 extends AppCompatActivity {
         }else if(value.equals("4"))
         {
             error_message.setText(getResources().getString(R.string.please_enter_valid_email));
-        }else if(value.equals("5"))
+        }else if(value.equals("54521"))
         {
-            error_message.setText(getResources().getString(R.string.please_enter_phone));
+            error_message.setText(getResources().getString(R.string.please_select_profile_image));
         }else if(value.equals("6"))
         {
             error_message.setText(getResources().getString(R.string.Please_remove_zero_from_start));
@@ -274,8 +289,9 @@ public class NameEmailActivity2 extends AppCompatActivity {
     }
 
     private void intis() {
-        help_area_layout = findViewById(R.id.help_area_layout);
+
         back_to_login = findViewById(R.id.back_to_login);
+        terms_privacy_help_layout = findViewById(R.id.terms_privacy_help_layout);
         email_edittext = findViewById(R.id.email_edittext);
         nameEditText = findViewById(R.id.nameEditText);
         surnameEditText = findViewById(R.id.surnameEditText);

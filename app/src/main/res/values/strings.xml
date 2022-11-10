@@ -281,4 +281,5 @@
     <string name="please_enter_stream">Please enter stream name</string>
     <string name="please_enter_country">Please enter country</string>
     <string name="book_list">Book List</string>
+    <string name="please_select_profile_image">Please select profile image.</string>
 </resources>

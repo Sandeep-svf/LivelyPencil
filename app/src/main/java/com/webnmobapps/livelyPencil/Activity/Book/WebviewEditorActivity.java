@@ -16,17 +16,25 @@ public class WebviewEditorActivity extends AppCompatActivity {
     WebView web;
     private final String  url = "http://69.49.235.253:8001/";
     private String bookId,finalUrl;
+    private String key="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview_editor);
 
-        web = findViewById(R.id.editor_webview);
-
+        key = getIntent().getStringExtra("key");
         //get id
         bookId = getIntent().getStringExtra("bookid");
-        finalUrl = url+bookId;
+
+        if(key.equals("1")){
+            finalUrl = "https://help.livelypencil.com";
+        }else{
+            finalUrl = url+bookId;
+        }
+
+        web = findViewById(R.id.editor_webview);
+
 
         // linl ->  http://69.49.235.253:8001/
         //http://69.49.235.253:8001/
@@ -52,7 +60,7 @@ public class WebviewEditorActivity extends AppCompatActivity {
         web.setLayerType(View.LAYER_TYPE_NONE, null);
 
         web.setWebViewClient(new WebViewClient());
-        web.loadUrl("http://69.49.235.253:8001/4");
+        web.loadUrl(finalUrl);
 
 
     }

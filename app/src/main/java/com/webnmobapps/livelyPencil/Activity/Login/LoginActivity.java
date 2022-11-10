@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.webnmobapps.livelyPencil.Activity.Book.WebviewEditorActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity2;
 import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
@@ -67,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     AlertDialog dialogs;
     private String loginMessage;
     private String UserID = "";
+    AppCompatTextView terms_privacy_help_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         inits();
+
+        terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, WebviewEditorActivity.class);
+                intent.putExtra("key","1");
+                startActivity(intent);
+            }
+        });
 
         forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -484,6 +495,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void inits() {
+        terms_privacy_help_layout = findViewById(R.id.terms_privacy_help_layout);
         forgot_password = findViewById(R.id.forgot_password);
         email_edittext123 = findViewById(R.id.email_edittext123);
         support = findViewById(R.id.support);
