@@ -196,7 +196,6 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.22"
-            app:layout_constraintHorizontal_bias="0.1"
 
 
             app:layout_constraintStart_toStartOf="parent"
@@ -207,6 +206,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_bold"
+               app:layout_constraintEnd_toEndOf="parent"
 
                 android:text="Lena Wilson"
 
@@ -226,6 +226,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_bold"
                 android:text="Travel News Guide"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintBottom_toTopOf="@+id/appCompatTextView6"
                 app:layout_constraintStart_toStartOf="parent"
@@ -239,6 +240,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_bold"
                 android:text="Joined on 23.08.2022"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -278,6 +280,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintHeight_percent="0.85"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

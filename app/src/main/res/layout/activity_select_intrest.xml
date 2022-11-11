@@ -42,10 +42,11 @@
         </androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.appcompat.widget.AppCompatImageView
+
             android:id="@+id/logo_image"
             android:layout_width="0dp"
             android:layout_height="45dp"
-            android:src="@drawable/ic_launcher"
+
             android:foregroundGravity="right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

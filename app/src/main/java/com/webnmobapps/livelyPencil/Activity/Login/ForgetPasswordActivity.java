@@ -77,7 +77,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private  String key = "1";
     AppCompatButton login_button;
     LinearLayoutCompat email_edittext222;
-    AppCompatTextView text_with_email, text_with_phone,login, joinus, support, help_pages;
+    AppCompatTextView text_with_email, text_with_phone,login, joinus, help_pages;
     private String userPhone, userEmail;
     String countryCode,accessToken,finalAccessToken;
     CountryCodePicker country_code_picker;
@@ -176,13 +176,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             }
         });
 
-        support.setOnClickListener(new View.OnClickListener() {
+     /*   support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ForgetPasswordActivity.this, SupportActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -579,7 +579,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         with_email = findViewById(R.id.with_email);
         joinus = findViewById(R.id.joinus);
         login = findViewById(R.id.login);
-        support = findViewById(R.id.support);
+
         login_button = findViewById(R.id.login_button);
         help_pages = findViewById(R.id.help_pages);
         terms_privacy_help_layout = findViewById(R.id.terms_privacy_help_layout);
@@ -590,7 +590,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         phone_edittext = findViewById(R.id.phone_edittext);
         active_phone_layout = findViewById(R.id.active_phone_layout);
         with_phone_green_text = findViewById(R.id.with_phone_green_text);
-        support = findViewById(R.id.support);
+
         active_email_layout = findViewById(R.id.active_email_layout);
         email_edittext = findViewById(R.id.email_edittext);
         help_pages = findViewById(R.id.help_pages);

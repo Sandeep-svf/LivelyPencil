@@ -198,6 +198,7 @@ public class NameEmailActivity2 extends AppCompatActivity {
             return false;
         }else if(profileImage==null){
             alert_dialog_message("54521");
+            return false;
         }
         return true;
     }
@@ -441,6 +442,7 @@ public class NameEmailActivity2 extends AppCompatActivity {
                     // loading profile image from local cache
                     //loadProfile(uri.toString());
                     File file = new File(uri.getPath());
+                    profileImage = new File(uri.getPath());
                     Log.e("file ", "path " + file.getAbsolutePath());
 
                     Uri uu = Uri.fromFile(file);

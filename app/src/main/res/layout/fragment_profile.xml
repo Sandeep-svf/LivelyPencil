@@ -38,7 +38,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/darkwhite"
+                android:background="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -179,7 +179,7 @@
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.22"
-                    app:layout_constraintHorizontal_bias="0.1"
+
 
 
                     app:layout_constraintStart_toStartOf="parent"
@@ -191,6 +191,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/raleway_bold"
 
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:text="Ayhan Ergezen"
 
 
@@ -209,6 +210,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/raleway_bold"
                         android:text="Livelypencil Features"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:textSize="@dimen/_14sdp"
                         app:layout_constraintBottom_toTopOf="@+id/appCompatTextView6"
                         app:layout_constraintStart_toStartOf="parent"
@@ -223,7 +225,7 @@
                         android:layout_height="wrap_content"
 
                         android:fontFamily="@font/raleway_bold"
-
+                        app:layout_constraintEnd_toEndOf="parent"
 
                         android:text="Joined on 23.08.2022"
 
@@ -278,6 +280,7 @@
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@color/white"
             app:layout_constraintHeight_percent="0.85"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

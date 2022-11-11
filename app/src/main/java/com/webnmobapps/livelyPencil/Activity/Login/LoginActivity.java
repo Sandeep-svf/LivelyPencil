@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private String userEmailPhoneData, userPasswordData, userEmail,userPhone ;
     AppCompatButton login_button;
     LinearLayoutCompat email_edittext123;
-    AppCompatTextView joinus, help_pages , support;
+    AppCompatTextView joinus, help_pages ;
     private String emailRegex = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private String device_token;
     AppCompatTextView  with_phone_green_text,with_email_green_text;
@@ -147,13 +147,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        support.setOnClickListener(new View.OnClickListener() {
+      /*  support.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SupportActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
 
@@ -498,7 +498,7 @@ public class LoginActivity extends AppCompatActivity {
         terms_privacy_help_layout = findViewById(R.id.terms_privacy_help_layout);
         forgot_password = findViewById(R.id.forgot_password);
         email_edittext123 = findViewById(R.id.email_edittext123);
-        support = findViewById(R.id.support);
+
         help_pages = findViewById(R.id.help_pages);
         joinus = findViewById(R.id.joinus);
         email_edit_text = findViewById(R.id.email_edit_text);
@@ -510,7 +510,7 @@ public class LoginActivity extends AppCompatActivity {
         phone_edittext = findViewById(R.id.phone_edittext);
         active_phone_layout = findViewById(R.id.active_phone_layout);
         with_phone_green_text = findViewById(R.id.with_phone_green_text);
-        support = findViewById(R.id.support);
+
         active_email_layout = findViewById(R.id.active_email_layout);
         email_edittext = findViewById(R.id.email_edittext);
         help_pages = findViewById(R.id.help_pages);

@@ -734,26 +734,7 @@
             app:layout_constraintHeight_percent="0.05"
 
             ></androidx.appcompat.widget.AppCompatTextView>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
 
-            android:textSize="@dimen/_18sdp"
-            android:textColor="@color/text_color"
-            android:text="@string/support"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            app:layout_constraintVertical_bias="0.97"
-
-            app:layout_constraintHeight_percent="0.05"
-
-            ></androidx.appcompat.widget.AppCompatTextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
