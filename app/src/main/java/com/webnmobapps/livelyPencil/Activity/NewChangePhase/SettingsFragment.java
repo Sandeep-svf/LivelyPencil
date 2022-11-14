@@ -2,6 +2,7 @@ package com.webnmobapps.livelyPencil.Activity.NewChangePhase;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,13 +26,17 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +44,14 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
+import com.webnmobapps.livelyPencil.Activity.Book.WebviewEditorActivity;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity;
+import com.webnmobapps.livelyPencil.Activity.JoinUs.NameEmailActivity2;
+import com.webnmobapps.livelyPencil.Activity.Login.LoginJoinusActivity;
+import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
+import com.webnmobapps.livelyPencil.Fragment.TopMenu.RadioFragment;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelSettingData;
@@ -88,6 +98,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     AlertDialog dialogs;
 
     AppCompatButton save_change_button;
+    AppCompatTextView terms_privacy_help_layout;
 
     private String userName, userSurName, streamName, dob, appUserName, country, userId;
 
@@ -104,6 +115,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     private String imageBase64 , key;
     private Uri selectedImageUri;
     private String temp;
+    private AppCompatButton logout_setting_button;
 
 
     @Override
@@ -125,6 +137,74 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
         role_setting_api();
         user_profle_api();
 
+        terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WebviewEditorActivity.class);
+                intent.putExtra("key","1");
+                startActivity(intent);
+            }
+        });
+
+        logout_setting_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.logout_dialog);
+                LinearLayout noDialogLogout = dialog.findViewById(R.id.noDialogLogout);
+                LinearLayout yesDialogLogout = dialog.findViewById(R.id.yesDialogLogout);
+
+
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                yesDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //relaseMediaPlayer();
+                        //geting userID data
+
+
+                        SharedPreferences getUserIdData = getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = getUserIdData.edit();
+                        editor.putString("UserID", "");
+
+
+                        editor.apply();
+                        Intent intent = new Intent(getActivity(), LoginJoinusActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("finish", true);
+                        startActivity(intent);
+
+//                        logout_api();
+                    }
+
+                });
+
+                noDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                 /*       RadioFragment radioFragment = new RadioFragment();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        //  ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                        fragmentTransaction.replace(R.id.fragment_contaner, radioFragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();*/
+
+
+
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
 
         change_username_text_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1274,6 +1354,8 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     }
 
     private void intis(View view) {
+        logout_setting_button = view.findViewById(R.id.logout_setting_button);
+        terms_privacy_help_layout = view.findViewById(R.id.terms_privacy_help_layout);
         save_change_button = view.findViewById(R.id.save_change_button);
         user_name_data_text = view.findViewById(R.id.user_name_data_text);
         change_username_text_layout = view.findViewById(R.id.change_username_text_layout);

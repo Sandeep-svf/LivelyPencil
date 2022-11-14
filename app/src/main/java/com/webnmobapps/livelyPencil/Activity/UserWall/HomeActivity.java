@@ -108,8 +108,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // API
         notificaiton_count_api();
-        message_count_api();
-        followers_count_api();
+
 
         // Default fragment
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -263,65 +262,65 @@ public class HomeActivity extends AppCompatActivity {
                             case R.id.logout:
                                 // Set the text color to red
 
-                                final Dialog dialog = new Dialog(HomeActivity.this);
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                dialog.setContentView(R.layout.logout_dialog);
-                                LinearLayout noDialogLogout = dialog.findViewById(R.id.noDialogLogout);
-                                LinearLayout yesDialogLogout = dialog.findViewById(R.id.yesDialogLogout);
+                                    final Dialog dialog = new Dialog(HomeActivity.this);
+                                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                    dialog.setContentView(R.layout.logout_dialog);
+                                    LinearLayout noDialogLogout = dialog.findViewById(R.id.noDialogLogout);
+                                    LinearLayout yesDialogLogout = dialog.findViewById(R.id.yesDialogLogout);
 
 
-                                dialog.show();
-                                Window window = dialog.getWindow();
-                                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    dialog.show();
+                                    Window window = dialog.getWindow();
+                                    window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                                yesDialogLogout.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        relaseMediaPlayer();
-                                        //geting userID data
-
-
-                                        SharedPreferences getUserIdData = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = getUserIdData.edit();
-                                        editor.putString("UserID", "");
+                                    yesDialogLogout.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            relaseMediaPlayer();
+                                            //geting userID data
 
 
-                                        editor.apply();
-                                        Intent intent = new Intent(HomeActivity.this, LoginJoinusActivity.class);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        intent.putExtra("finish", true);
-                                        startActivity(intent);
+                                            SharedPreferences getUserIdData = getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = getUserIdData.edit();
+                                            editor.putString("UserID", "");
 
-//                        logout_api();
-                                    }
 
-                                });
+                                            editor.apply();
+                                            Intent intent = new Intent(HomeActivity.this, LoginJoinusActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            intent.putExtra("finish", true);
+                                            startActivity(intent);
 
-                                noDialogLogout.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
+    //                        logout_api();
+                                        }
 
-                                        RadioFragment radioFragment = new RadioFragment();
-                                        FragmentManager fragmentManager = getSupportFragmentManager();
-                                        //  ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
-                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-                                        fragmentTransaction.replace(R.id.fragment_contaner, radioFragment);
-                                        fragmentTransaction.addToBackStack(null);
-                                        fragmentTransaction.commit();
+                                    });
 
-                                        relaseMediaPlayer();
+                                    noDialogLogout.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
 
-                                        page_top_icon.setImageResource(R.drawable.n_shelf);
-                                        tv_top_icon.setImageResource(R.drawable.n_tv);
-                                        radio_top_icon.setImageResource(R.drawable.n_radio_color);
-                                        market_top_icon.setImageResource(R.drawable.n_ads);
-                                        game_top_icon.setImageResource(R.drawable.n_game);
+                                            RadioFragment radioFragment = new RadioFragment();
+                                            FragmentManager fragmentManager = getSupportFragmentManager();
+                                            //  ((ConstraintLayout)findViewById(R.id.fragment_contaner)).removeAllViews();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+                                            fragmentTransaction.replace(R.id.fragment_contaner, radioFragment);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
 
-                                        dialog.dismiss();
-                                    }
-                                });
+                                            relaseMediaPlayer();
+
+                                            page_top_icon.setImageResource(R.drawable.n_shelf);
+                                            tv_top_icon.setImageResource(R.drawable.n_tv);
+                                            radio_top_icon.setImageResource(R.drawable.n_radio_color);
+                                            market_top_icon.setImageResource(R.drawable.n_ads);
+                                            game_top_icon.setImageResource(R.drawable.n_game);
+
+                                            dialog.dismiss();
+                                        }
+                                    });
 
                                 return true;
 
@@ -421,7 +420,7 @@ public class HomeActivity extends AppCompatActivity {
 
              //   home_icon.setImageResource(R.drawable.home);
               //  search_icon.setImageResource(R.drawable.search);
-                friends_followers_icon.setImageResource(R.drawable.friends_followers);
+                friends_followers_icon.setImageResource(R.drawable.liveusers_nonactive);
               //  messages_mailbox_icon.setImageResource(R.drawable.messages_mailbox);
                 notification_icon.setImageResource(R.drawable.notification);
             }
