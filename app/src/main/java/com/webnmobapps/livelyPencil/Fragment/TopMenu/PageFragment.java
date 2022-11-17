@@ -112,8 +112,6 @@ public class PageFragment extends Fragment {
         pd.show();
 
 
-
-
         Call<PostListModelPython> call = API_Client.getClient().POST_LIST_MODEL_PYTHON_CALL(finalAccessToken);
 
         call.enqueue(new Callback<PostListModelPython>() {
