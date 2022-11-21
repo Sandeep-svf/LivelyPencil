@@ -79,7 +79,6 @@ public class SelectIntrestAdapter extends RecyclerView.Adapter<SelectIntrestView
             }
         });*/
 
-
 //        if(id == 1)
 //        {
 //            holder.select_intrest.setChecked(true);
@@ -102,7 +101,6 @@ public class SelectIntrestAdapter extends RecyclerView.Adapter<SelectIntrestView
 
                 }else
                 {
-
                     intrestListModelRecords.get(position).setCheckBoolean(false);
                     get_position_eye_function.page_details2(position,id);
                 }

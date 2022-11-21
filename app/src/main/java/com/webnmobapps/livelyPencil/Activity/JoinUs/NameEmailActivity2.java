@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,12 +36,21 @@ import com.webnmobapps.livelyPencil.Activity.Login.LoginActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.MainActivity;
+import com.webnmobapps.livelyPencil.Model.CheckUserModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.R;
+import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NameEmailActivity2 extends AppCompatActivity {
 
@@ -61,6 +71,7 @@ public class NameEmailActivity2 extends AppCompatActivity {
     private Uri uri;
     private static final int CAMERA_PIC_REQUEST_R = 34598;
     AppCompatTextView terms_privacy_help_layout;
+    private String finalAccessToken, accessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +79,11 @@ public class NameEmailActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_name_email2);
 
         intis();
+
+        SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+        // user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
 
         terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,10 +182,118 @@ public class NameEmailActivity2 extends AppCompatActivity {
                     }catch (Exception exception){
                         exception.printStackTrace();
                     }
+                    
+                    check_user_api();
 
-                  // Calling intent
-                    Intent intent = new Intent(NameEmailActivity2.this,StreamPageActivity.class);
-                    startActivity(intent);
+
+                }
+            }
+        });
+
+    }
+
+    private void check_user_api() {
+     
+    
+
+        // show till load api data
+
+        final ProgressDialog pd = new ProgressDialog(NameEmailActivity2.this);
+        pd.setCancelable(false);
+        pd.setMessage("loading...");
+        pd.show();
+
+        Call<CommonStatusMessageModelPython> call = API_Client.getClient().CHECK_USER_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(
+                emailData
+        );
+
+
+
+        call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+            @Override
+            public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                pd.dismiss();
+                try {
+                    //if api response is successful ,taking message and success
+                    if (response.isSuccessful()) {
+                        String message = response.body().getMessage();
+                        String success = String.valueOf(response.body().getStatus());
+
+                        if (success.equals("true") || success.equals("True")) {
+
+                            // Calling intent
+                            Intent intent = new Intent(NameEmailActivity2.this,StreamPageActivity.class);
+                            startActivity(intent);
+                            pd.dismiss();
+                        } else {
+
+                            alert_dialog_message("12222");
+                            //Toast.makeText(getApplicationContext(), "Email already register", Toast.LENGTH_LONG).show();
+
+
+                            pd.dismiss();
+                        }
+
+                    } else {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                            switch (response.code()) {
+                                case 400:
+                                    alert_dialog_message("400");
+                                    //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 401:
+                                    alert_dialog_message("401");
+                                    // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 404:
+                                    alert_dialog_message("404");
+                                    //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 500:
+                                    alert_dialog_message("500");
+                                    //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 503:
+                                    alert_dialog_message("503");
+                                    // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 504:
+                                    alert_dialog_message("504");
+                                    //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 511:
+                                    alert_dialog_message("511");
+                                    // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    alert_dialog_message("default");
+                                    //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                } catch (
+                        Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                Log.e("conversion issue", t.getMessage());
+
+                if (t instanceof IOException) {
+                    Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                } else {
+                    Log.e("conversion issue", t.getMessage());
+                    Toast.makeText(getApplicationContext(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 }
             }
         });

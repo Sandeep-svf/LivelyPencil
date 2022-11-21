@@ -54,6 +54,7 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -355,7 +356,7 @@ public interface Api {
                                                              @Part("book_descriptions") RequestBody book_descriptions,
                                                              @Part MultipartBody.Part book_image);
 
-    @GET("bookslist/")
+    @GET("my-books-list/")
     Call<BookListModel> BOOK_LIST_MODEL_CALL(@Header("Authorization") String Authorization);
 
     @GET("notificationsetting/")
@@ -445,6 +446,16 @@ public interface Api {
 
 
 
+
+    @FormUrlEncoded
+    @POST("checkuser/")
+    Call<CommonStatusMessageModelPython> CHECK_USER_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Field("email") String email);
+
+
+
+    @DELETE
+    Call<CommonStatusMessageModelPython> DELETE_BOOK_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Url String url,
+            @Header("Authorization") String Authorization);
 
 
 }

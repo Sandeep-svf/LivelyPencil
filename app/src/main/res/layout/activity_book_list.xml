@@ -53,6 +53,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_book_icon"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3.5"
@@ -75,7 +76,7 @@
                     ></androidx.appcompat.widget.AppCompatTextView>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/create_book_icon"
+
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 app:layout_constraintEnd_toStartOf="@+id/create_book_text_layout"

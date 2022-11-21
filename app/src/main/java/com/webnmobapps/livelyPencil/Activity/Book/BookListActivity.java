@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +51,7 @@ public class BookListActivity extends AppCompatActivity {
     List<BookListData> bookListDataList = new ArrayList<>();
     AlertDialog dialogs;
     private String finalAccessToken,accessToken,user_id;
-    AppCompatImageView create_book_icon;
+    ConstraintLayout create_book_icon;
 
 
     @Override
@@ -111,7 +112,7 @@ public class BookListActivity extends AppCompatActivity {
                                 bookListDataList = response.body().getData();
                                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookListActivity.this,RecyclerView.VERTICAL,false);
                                 rcv_book_list.setLayoutManager(linearLayoutManager);
-                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,bookListDataList);
+                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,bookListDataList,finalAccessToken);
                                 rcv_book_list.setAdapter(bookListAdapter);
 
                             } else {
