@@ -354,6 +354,8 @@ public interface Api {
     Call<CommonStatusMessageModelPython> ADD_BOOK_MODEL_CALL(@Header("Authorization") String Authorization,
                                                              @Part("book_name") RequestBody book_name,
                                                              @Part("book_descriptions") RequestBody book_descriptions,
+                                                             @Part("book_status") RequestBody book_status,
+                                                             @Part("book_interests") List<Integer> book_interests,
                                                              @Part MultipartBody.Part book_image);
 
     @GET("my-books-list/")

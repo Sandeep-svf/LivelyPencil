@@ -38,6 +38,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
 
+import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
 import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
@@ -172,7 +173,11 @@ public class CreateBookActivity extends AppCompatActivity {
 
                     getUserFormData();
                     // calling APIs here.....
-                    create_book_api();
+                   // create_book_api();
+
+                    Intent intent =new Intent(CreateBookActivity.this, SelectIntrestActivity.class);
+                    intent.putExtra("key","1");
+                    startActivity(intent);
                     
                 }
             }
@@ -180,113 +185,7 @@ public class CreateBookActivity extends AppCompatActivity {
     }
 
 
-    private void create_book_api() {
 
-        final ProgressDialog pd = new ProgressDialog(CreateBookActivity.this);
-        pd.setCancelable(false);
-        pd.setMessage("loading...");
-        pd.show();
-
-        MultipartBody.Part bookCoverImage;
-        bookCoverImage = MultipartBody.Part.createFormData("book_image", profileImage.getName(), RequestBody.create(MediaType.parse("image/*"), profileImage));
-
-        RequestBody bookNameDataRB = RequestBody.create(MediaType.parse("text/plain"), bookNameData);
-        RequestBody bookDescriptionDataRB = RequestBody.create(MediaType.parse("text/plain"), bookDescriptionData);
-
-
-
-        
-        Call<CommonStatusMessageModelPython> call = API_Client.getClient().ADD_BOOK_MODEL_CALL(finalAccessToken,bookNameDataRB,bookDescriptionDataRB,bookCoverImage);
-
-        call.enqueue(new Callback<CommonStatusMessageModelPython>() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
-                pd.dismiss();
-
-
-                try {
-                    if (response.isSuccessful()) {
-                        String message = response.body().getMessage();
-                        String success = response.body().getStatus();
-                        
-                        if (success.equals("true") || success.equals("True")) {
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                            pd.dismiss();
-                            Intent intent = new Intent(CreateBookActivity.this, BookListActivity.class);
-                            startActivity(intent);
-                        } else {
-                          //  alert_dialog_message("7");
-                            pd.dismiss();
-                        }
-
-
-                    } else {
-                        try {
-                            JSONObject jObjError = new JSONObject(response.errorBody().string());
-                            Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
-
-                            switch (response.code()) {
-                                case 400:
-                                    alert_dialog_message("400");
-                                    //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 401:
-                                    alert_dialog_message("401");
-                                    // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 404:
-                                    alert_dialog_message("404");
-                                    //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 500:
-                                    alert_dialog_message("500");
-                                    //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 503:
-                                    alert_dialog_message("503");
-                                    // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 504:
-                                    alert_dialog_message("504");
-                                    //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
-                                    break;
-                                case 511:
-                                    alert_dialog_message("511");
-                                    // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
-                                    break;
-                                default:
-                                    alert_dialog_message("default");
-                                    //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
-                                    break;
-                            }
-
-                        } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                } catch (
-                        Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
-                Log.e("bhgyrrrthbh", String.valueOf(t));
-                if (t instanceof IOException) {
-                    Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
-                } else {
-                    Log.e("conversion issue", t.getMessage());
-                    Toast.makeText(getApplicationContext(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
-                }
-            }
-        });
-
-
-    }
     
     
     @RequiresApi(api = Build.VERSION_CODES.M)

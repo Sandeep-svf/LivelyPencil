@@ -168,6 +168,7 @@ public class StreamPageActivity extends AppCompatActivity {
                     editor.apply();
 
                     Intent intent = new Intent(StreamPageActivity.this, SelectIntrestActivity.class);
+                    intent.putExtra("key","0");
                     startActivity(intent);
                 }
             }
