@@ -265,7 +265,10 @@
         <activity
             android:name=".Activity.JoinUs.SelectIntrestActivity"
             android:exported="true"
-            android:screenOrientation="locked" />
+            android:screenOrientation="locked" >
+
+
+        </activity>
         <activity
             android:name=".Activity.Utility.ImagePickerActivity"
             android:exported="true"
@@ -295,6 +298,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".MainActivity"

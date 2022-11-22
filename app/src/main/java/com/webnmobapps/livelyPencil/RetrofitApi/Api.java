@@ -111,7 +111,7 @@ public interface Api {
     @POST("register/")
     Call<LoginModelPython> register2(@Part("interesting") List<Integer> interesting,
                                      @Part("first_name") RequestBody first_name,
-                                     @Part("last_name") RequestBody last_name,
+                                         @Part("last_name") RequestBody last_name,
                                      @Part("email") RequestBody email,
                                      @Part("stream_title") RequestBody stream_title,
                                      @Part("role") RequestBody role,

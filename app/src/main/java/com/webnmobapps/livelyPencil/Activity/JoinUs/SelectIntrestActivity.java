@@ -155,8 +155,8 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             public void onClick(View view) {
               //  userEmail = getUserIdData.getString("userEmail", "");
 
-                Log.e("sdfsdf","button clicked");
-              /*  String comma = selectedIntrestId.substring(0,1);
+                Log.e("fdsfdsfsdfsdf",selectedIntrestId);
+                String comma = selectedIntrestId.substring(0,1);
                 if(comma.equals(","))
                 {
                     selectedIntrestId = selectedIntrestId.substring(1, selectedIntrestId.length());
@@ -165,7 +165,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                 {
 
                     Log.e("fdsfdsfsdfsdf",  selectedIntrestId);
-                }*/
+                }
                 getProfileImage();
                 getStreamCoverImage();
 
@@ -184,7 +184,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
                 try {
 
-                    Log.e("sdfsdf","String length is: "+selectedIntrestId.length());
+                    /*Log.e("sdfsdf","String length is: "+selectedIntrestId.length());
                     Log.e("sdfsdf","String is: "+selectedIntrestId);
 
                      list12345 = Arrays.stream(selectedIntrestId.split("\\s"))
@@ -200,7 +200,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
                     for(int i=0; i < list.size();i++){
                         Log.e("ScannerTest","list is: "+String.valueOf(list.get(i)));
-                    }
+                    }*/
 
 
            /*         Log.e("fdsjlkfjdslk","Inside try block");
@@ -245,7 +245,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                    new_registration_api();
                 }
 
-                Log.e("finalSelectedInrestedId",finalSelectedInrestedId);
+
             }
         });
 
@@ -299,21 +299,41 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             Log.e("DATA","usreStreamPageCoverImage: "+usreStreamPageCoverImage);
             Log.e("DATA","streamPagePrivacy: "+streamPagePrivacy);
             Log.e("DATA","userStreamNameData: "+userStreamNameData);
-            Log.e("DATA","selectedIntrestId: "+finalSelectedInrestedId);
+            Log.e("DATA","selectedIntrestId: "+selectedIntrestId);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
 
-        List<Integer> intrestingList = new ArrayList<>();
-        intrestingList.add(1);
-        intrestingList.add(3);
-        intrestingList.add(2);
 
-    /*    for(int i=0; i<list12345.size();i++){
-            intrestingList.add(list12345.get(i));
-            Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.get(i)));
-            Log.e("sdfsdf", "Final is is: "+String.valueOf(intrestingList.size()));
-        }*/
+        Log.e("fdsfsdf", "selectedIntrestId is: "+String.valueOf(selectedIntrestId));
+
+
+        List<Integer> test12345 = new ArrayList<>();
+        test12345.add(1);
+        test12345.add(2);
+        test12345.add(3);
+        test12345.add(4);
+
+        List<Integer> list = null;
+        try {
+            list = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                list = Arrays.asList(selectedIntrestId.split(",")).stream().map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
+            }
+
+            Log.e("fdsfsdf", "size is: "+String.valueOf(list.size()));
+
+            for(int i=0; i<list.size();i++){
+
+                Log.e("fdsfsdf", "value is: "+String.valueOf(list.get(i)));
+
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
 
         //   RequestBody tokenRB = RequestBody.create(MediaType.parse("text/plain"), device_token);
             RequestBody userNameRB = RequestBody.create(MediaType.parse("text/plain"), userName);
@@ -328,7 +348,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
            // RequestBody countryCodeRB = RequestBody.create(MediaType.parse("text/plain"), countryCode);
 
 
-            Call<LoginModelPython> call = API_Client.getClient().register2(intrestingList,
+            Call<LoginModelPython> call = API_Client.getClient().register2(list,
                     userNameRB,
                     usersurNameRB,
                     userEmailRB,
@@ -713,7 +733,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         }*/
         addIntrestIdArrayList.add(id);
         // selectedIntrestId = selectedIntrestId +","+id;
-        selectedIntrestId = selectedIntrestId +id;
+        selectedIntrestId = selectedIntrestId +","+id;
         Log.e("fdfdfde"," Add : " + selectedIntrestId);
 
 
@@ -730,9 +750,10 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
         for(int i = 0; i < addIntrestIdArrayList.size(); i++)
         {
-
             selectedIntrestId = selectedIntrestId + addIntrestIdArrayList.get(i);
         }
+
+
 
 
 
