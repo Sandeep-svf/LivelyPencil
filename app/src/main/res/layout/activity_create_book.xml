@@ -166,6 +166,21 @@ android:fontFamily="@font/raleway_bold"
         </androidx.appcompat.widget.AppCompatTextView>
 
         <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/book_status_flag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintBottom_toTopOf="@+id/passcode_cardview"
+
+            ></com.google.android.material.switchmaterial.SwitchMaterial>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/private_public"
             android:text="@string/Private"
 

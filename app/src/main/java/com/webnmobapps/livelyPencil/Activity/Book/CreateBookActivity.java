@@ -85,8 +85,9 @@ public class CreateBookActivity extends AppCompatActivity {
     private Bitmap thumbnail6;
     private String imageBase64 , key;
     private Uri selectedImageUri;
-    private String bookNameData,bookDescriptionData;
+    private String bookNameData,bookDescriptionData,bookStatusData="0";
     private String finalAccessToken,accessToken,user_id;
+    private SwitchMaterial book_status_flag;
 
 
     @Override
@@ -171,9 +172,21 @@ public class CreateBookActivity extends AppCompatActivity {
 
                 if(validation()) {
 
+
+
                     getUserFormData();
                     // calling APIs here.....
                    // create_book_api();
+
+
+                    // Saving data in shared preferance...
+                    SharedPreferences getUserIdData = getApplicationContext().getSharedPreferences("CREATE_BOOK", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = getUserIdData.edit();
+                    editor.putString("bookNameData", String.valueOf(bookNameData));
+                    editor.putString("bookDescriptionData", String.valueOf(bookDescriptionData));
+                    editor.putString("bookStatusData", String.valueOf(bookStatusData));
+                    editor.putString("book_cover_image", String.valueOf(uri));
+                    editor.apply();
 
                     Intent intent =new Intent(CreateBookActivity.this, SelectIntrestActivity.class);
                     intent.putExtra("key","1");
@@ -458,11 +471,18 @@ public class CreateBookActivity extends AppCompatActivity {
     }
 
     private void getUserFormData() {
+
+        if(book_status_flag.isChecked()){
+            bookStatusData = "1";
+        }else{
+            bookStatusData = "0";
+        }
         bookNameData = Stream_name_title.getText().toString();
         bookDescriptionData = bookDescription.getText().toString();
     }
 
     private void inits() {
+        book_status_flag = findViewById(R.id.book_status_flag);
         stream_page_Image = findViewById(R.id.stream_page_Image_cb);
         confirm_button2 = findViewById(R.id.confirm_button2_cb);
         confirm_button = findViewById(R.id.confirm_button_cb);

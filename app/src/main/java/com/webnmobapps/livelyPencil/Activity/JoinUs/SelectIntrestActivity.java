@@ -47,6 +47,7 @@ import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.TokenPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -89,8 +90,10 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
     private String userName, usersurName, userEmail,userPhone,key,
             userPasswordData, cameraGalleryimageURI,
             usreStreamPageCoverImage, streamPagePrivacy, userStreamNameData,countryCode;
-    private File usrProfieImageFile, userStreamCoverImageFile ;
+    private File usrProfieImageFile, userStreamCoverImageFile , bookCoverImageFile ;
     private String keyStatus="";
+    private String bookNameData, bookDescriptionData,bookStatusData,book_cover_image;
+    private String user_id,accessToken,finalAccessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +126,30 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         keyStatus = getIntent().getStringExtra("key");
 
         selectIntrestListApi();
+
+        SharedPreferences sharedPreferencesBook = null;
+        try {
+
+            SharedPreferences sharedPreferences= SelectIntrestActivity.this.getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+            user_id=sharedPreferences.getString("UserID","");
+            accessToken=sharedPreferences.getString("accessToken","");
+            finalAccessToken = StaticKey.prefixTokem+accessToken;
+
+
+            sharedPreferencesBook = getSharedPreferences("CREATE_BOOK", MODE_PRIVATE);
+            bookNameData = sharedPreferencesBook.getString("bookNameData", "");
+            bookDescriptionData = sharedPreferencesBook.getString("bookDescriptionData", "");
+            bookStatusData = sharedPreferencesBook.getString("bookStatusData", "");
+            book_cover_image = sharedPreferencesBook.getString("book_cover_image", "");
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+        Log.e("DATA","BOOK: "+bookNameData);
+        Log.e("DATA","BOOK: "+bookDescriptionData);
+        Log.e("DATA","BOOK: "+bookStatusData);
+        Log.e("DATA","BOOK: "+book_cover_image);
+        Log.e("DATA","BOOK: KEY: STSTUS:"+keyStatus);
 
 
         //geting userID data
@@ -175,7 +202,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                 }
                 getProfileImage();
                 getStreamCoverImage();
-
+                get_book_cover_image();
 
 
 
@@ -269,21 +296,39 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
     private void create_book_api() {
 
 
+        List<Integer> list = null;
+        try {
+            list = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                list = Arrays.asList(selectedIntrestId.split(",")).stream().map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
+            }
+
+            Log.e("fdsfsdf", "size is: "+String.valueOf(list.size()));
+
+            for(int i=0; i<list.size();i++){
+
+                Log.e("fdsfsdf", "value is: "+String.valueOf(list.get(i)));
+
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
             final ProgressDialog pd = new ProgressDialog(SelectIntrestActivity.this);
             pd.setCancelable(false);
             pd.setMessage("loading...");
             pd.show();
 
             MultipartBody.Part bookCoverImage;
-            bookCoverImage = MultipartBody.Part.createFormData("book_image", profileImage.getName(), RequestBody.create(MediaType.parse("image/*"), profileImage));
+            bookCoverImage = MultipartBody.Part.createFormData("book_image", bookCoverImageFile.getName(), RequestBody.create(MediaType.parse("image/*"), bookCoverImageFile));
 
             RequestBody bookNameDataRB = RequestBody.create(MediaType.parse("text/plain"), bookNameData);
             RequestBody bookDescriptionDataRB = RequestBody.create(MediaType.parse("text/plain"), bookDescriptionData);
+            RequestBody bookStatusDataRB = RequestBody.create(MediaType.parse("text/plain"), bookStatusData);
 
 
-
-
-            Call<CommonStatusMessageModelPython> call = API_Client.getClient().ADD_BOOK_MODEL_CALL(finalAccessToken,bookNameDataRB,bookDescriptionDataRB,bookCoverImage);
+            Call<CommonStatusMessageModelPython> call = API_Client.getClient().ADD_BOOK_MODEL_CALL(finalAccessToken,bookNameDataRB,bookDescriptionDataRB,bookStatusDataRB,list,bookCoverImage);
 
             call.enqueue(new Callback<CommonStatusMessageModelPython>() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -300,7 +345,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                             if (success.equals("true") || success.equals("True")) {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 pd.dismiss();
-                                Intent intent = new Intent(CreateBookActivity.this, BookListActivity.class);
+                                Intent intent = new Intent(SelectIntrestActivity.this, BookListActivity.class);
                                 startActivity(intent);
                             } else {
                                 //  alert_dialog_message("7");
@@ -619,6 +664,27 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             Log.e("file ", "path " + userStreamCoverImageFile.getAbsolutePath());
 
             Uri uu = Uri.fromFile(userStreamCoverImageFile);
+         /*   Glide.with(this).load(uu)
+                    .into(stream_user_image);*/
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void get_book_cover_image ()
+    {
+        try {
+            // You can update this bitmap to your server
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(book_cover_image));
+
+            // loading profile image from local cache
+            //loadProfile(uri.toString());
+            bookCoverImageFile = new File(Uri.parse(book_cover_image).getPath());
+            Log.e("file ", "path " + bookCoverImageFile.getAbsolutePath());
+
+            Uri uu = Uri.fromFile(bookCoverImageFile);
          /*   Glide.with(this).load(uu)
                     .into(stream_user_image);*/
 
