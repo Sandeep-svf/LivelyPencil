@@ -94,6 +94,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
     private String keyStatus="";
     private String bookNameData, bookDescriptionData,bookStatusData,book_cover_image;
     private String user_id,accessToken,finalAccessToken;
+    private AppCompatButton create_book;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,11 +146,11 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
             exception.printStackTrace();
         }
 
-        Log.e("DATA","BOOK: "+bookNameData);
-        Log.e("DATA","BOOK: "+bookDescriptionData);
-        Log.e("DATA","BOOK: "+bookStatusData);
-        Log.e("DATA","BOOK: "+book_cover_image);
-        Log.e("DATA","BOOK: KEY: STSTUS:"+keyStatus);
+        Log.e("DATA2","BOOK: "+bookNameData);
+        Log.e("DATA2","BOOK: "+bookDescriptionData);
+        Log.e("DATA2","BOOK: "+bookStatusData);
+        Log.e("DATA2","BOOK: "+book_cover_image);
+        Log.e("DATA2","BOOK: KEY: STSTUS:"+keyStatus);
 
 
         //geting userID data
@@ -182,6 +183,27 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
         Log.e("DATA","streamPagePrivacy: "+streamPagePrivacy);
         Log.e("DATA","userStreamNameData: "+userStreamNameData);
 
+        if(keyStatus.equals("0")){
+
+            confirm_button.setVisibility(View.VISIBLE);
+            create_book.setVisibility(View.GONE);
+        }else if(keyStatus.equals("1")){
+
+            confirm_button.setVisibility(View.GONE);
+            create_book.setVisibility(View.VISIBLE);
+        }else{
+
+        }
+
+        create_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                get_book_cover_image();
+                create_book_api();
+
+            }
+        });
 
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -202,7 +224,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                 }
                 getProfileImage();
                 getStreamCoverImage();
-                get_book_cover_image();
+
 
 
 
@@ -277,13 +299,11 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
                 if(validation()){
 
-                    if(keyStatus.equals("0")){
-                        new_registration_api();
-                    }else if(keyStatus.equals("1")){
-                        create_book_api();
-                    }else{
 
-                    }
+                        new_registration_api();
+
+
+
 
                 }
 
@@ -697,6 +717,7 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
 
     private void inits() {
 
+        create_book = findViewById(R.id.create_book);
         confirm_button = findViewById(R.id.confirm_button);
         rcv_intrest = findViewById(R.id.rcv_intrest);
     }
