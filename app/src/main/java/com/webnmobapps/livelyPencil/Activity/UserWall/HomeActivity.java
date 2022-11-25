@@ -900,7 +900,7 @@ public class HomeActivity extends AppCompatActivity {
         // Default fragment
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contaner, new UserWallFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contaner, new PageFragment()).commit();
 
     }
 }

@@ -48,6 +48,7 @@ import com.webnmobapps.livelyPencil.ModelPython.RoleSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.SettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModel;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModelPython;
+import com.webnmobapps.livelyPencil.newmodel.StreamModel;
 
 import java.util.List;
 
@@ -459,6 +460,9 @@ public interface Api {
     Call<CommonStatusMessageModelPython> DELETE_BOOK_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Url String url,
             @Header("Authorization") String Authorization);
 
+
+    @GET("my-stream/")
+    Call<StreamModel> STREAM_MODEL_CALL(@Header("Authorization") String Authorization);
 
 }
 

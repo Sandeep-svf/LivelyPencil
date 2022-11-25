@@ -29,6 +29,7 @@ import com.webnmobapps.livelyPencil.ModelPython.BookListData;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.newmodel.CustomBookListModel;
 
 import org.json.JSONObject;
 
@@ -44,11 +45,11 @@ import retrofit2.Response;
 public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
 
     private Context context;
-    private List<BookListData> bookListDataList =  new ArrayList<>();
+    private List<CustomBookListModel> bookListDataList =  new ArrayList<>();
     private String finalAccessToken;
 
 
-    public BookListAdapter(Context context, List<BookListData> bookListDataList, String finalAccessToken) {
+    public BookListAdapter(Context context, List<CustomBookListModel> bookListDataList, String finalAccessToken) {
         this.context = context;
         this.bookListDataList = bookListDataList;
         this.finalAccessToken = finalAccessToken;
@@ -64,6 +65,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BookListViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+
+        if(position==0) holder.delete_book_text.setVisibility(View.GONE);
 
         holder.book_name.setText(bookListDataList.get(position).getBookName());
         holder.book_description.setText(bookListDataList.get(position).getBookDescriptions());

@@ -29,6 +29,9 @@ import com.webnmobapps.livelyPencil.ModelPython.BookListModel;
 import com.webnmobapps.livelyPencil.ModelPython.BookListModel;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.newmodel.CustomBookListModel;
+import com.webnmobapps.livelyPencil.newmodel.StreamModel;
+import com.webnmobapps.livelyPencil.newmodel.StreamModelData;
 import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
@@ -49,9 +52,12 @@ public class BookListActivity extends AppCompatActivity {
 
     RecyclerView rcv_book_list;
     List<BookListData> bookListDataList = new ArrayList<>();
+    List<CustomBookListModel> customBookListModelList = new ArrayList<>();
+
     AlertDialog dialogs;
     private String finalAccessToken,accessToken,user_id;
     ConstraintLayout create_book_icon;
+    private CustomBookListModel customBookListModel;
 
 
     @Override
@@ -74,14 +80,126 @@ public class BookListActivity extends AppCompatActivity {
         finalAccessToken = StaticKey.prefixTokem+accessToken;
 
 
-
-
-        book_list_api();
-
+        stream_data_api();
 
 
 
     }
+
+    private void stream_data_api() {
+
+            final ProgressDialog pd = new ProgressDialog(BookListActivity.this);
+            pd.setCancelable(false);
+            pd.setMessage("loading...");
+            pd.show();
+
+
+
+            Call<StreamModel> call = API_Client.getClient().STREAM_MODEL_CALL(finalAccessToken);
+
+            call.enqueue(new Callback<StreamModel>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(Call<StreamModel> call, Response<StreamModel> response) {
+                    pd.dismiss();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = response.body().getStatus();
+
+                            if (success.equals("true") || success.equals("True")) {
+
+                                StreamModel streamModel = response.body();
+                                StreamModelData streamModelData = streamModel.getData();
+
+                                customBookListModel = new CustomBookListModel();
+                                customBookListModel.setBookName(streamModelData.getStreamTitle());
+                                customBookListModel.setBookDescriptions("null");
+                                customBookListModel.setBookImage( streamModelData.getStreamCoverImage());
+                                customBookListModel.setId( "null");
+                                customBookListModelList.add(customBookListModel);
+
+                                Log.e("addbooklisttest","stream data is :");
+                                Log.e("addbooklisttest","stream data is :"+streamModelData.getStreamTitle());
+                                Log.e("addbooklisttest","stream data is :"+streamModelData.getStreamCoverImage());
+
+
+
+                                book_list_api();
+                            } else {
+                                //  alert_dialog_message("7");
+                                pd.dismiss();
+                            }
+
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+
+                                switch (response.code()) {
+                                    case 400:
+                                        alert_dialog_message("400");
+                                        //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        alert_dialog_message("401");
+                                        // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        alert_dialog_message("404");
+                                        //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        alert_dialog_message("500");
+                                        //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        alert_dialog_message("503");
+                                        // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        alert_dialog_message("504");
+                                        //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        alert_dialog_message("511");
+                                        // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        alert_dialog_message("default");
+                                        //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<StreamModel> call, Throwable t) {
+                    Log.e("bhgyrrrthbh", String.valueOf(t));
+                    if (t instanceof IOException) {
+                        Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            });
+
+
+        }
 
     private void book_list_api() {
       
@@ -110,9 +228,22 @@ public class BookListActivity extends AppCompatActivity {
                             if (success.equals("true") || success.equals("True")) {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 bookListDataList = response.body().getData();
+
+                                Log.e("addbooklisttest","bookListDataListsize Size is :"+bookListDataList.size());
+
+                                for(int i=0; i<bookListDataList.size();i++){
+                                    customBookListModel = new CustomBookListModel();
+                                    customBookListModel.setBookName(bookListDataList.get(i).getBookName());
+                                    customBookListModel.setBookDescriptions(bookListDataList.get(i).getBookDescriptions());
+                                    customBookListModel.setBookImage( bookListDataList.get(i).getBookImage());
+                                    customBookListModel.setId(String.valueOf(bookListDataList.get(i).getId()));
+                                    customBookListModelList.add(customBookListModel);
+                                }
+
+
                                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookListActivity.this,RecyclerView.VERTICAL,false);
                                 rcv_book_list.setLayoutManager(linearLayoutManager);
-                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,bookListDataList,finalAccessToken);
+                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,customBookListModelList,finalAccessToken);
                                 rcv_book_list.setAdapter(bookListAdapter);
 
                             } else {
@@ -248,6 +379,6 @@ public class BookListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        book_list_api();
+       // book_list_api();
     }
 }
