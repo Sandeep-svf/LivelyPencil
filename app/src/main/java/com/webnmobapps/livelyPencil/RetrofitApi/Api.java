@@ -35,6 +35,7 @@ import com.webnmobapps.livelyPencil.Model.TvSettingsModel;
 import com.webnmobapps.livelyPencil.Model.UserWallListModel;
 import com.webnmobapps.livelyPencil.ModelPython.BookListModel;
 import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.FFModel;
 import com.webnmobapps.livelyPencil.ModelPython.FollowersListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.InterestingModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
@@ -464,6 +465,8 @@ public interface Api {
     @GET("my-stream/")
     Call<StreamModel> STREAM_MODEL_CALL(@Header("Authorization") String Authorization);
 
+    @GET
+    Call<FFModel> FF_MODEL_CALL(@Url String url, @Header("Authorization") String Authorization);
 }
 
 

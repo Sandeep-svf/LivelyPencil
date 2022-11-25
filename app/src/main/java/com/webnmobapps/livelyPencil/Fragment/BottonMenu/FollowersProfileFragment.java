@@ -64,7 +64,7 @@ public class FollowersProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_followers_profile, container, false);
+        View view = inflater.inflate(R.layout.followers_profile, container, false);
 
         intis(view);
 
@@ -79,6 +79,12 @@ public class FollowersProfileFragment extends Fragment {
         }
 
         Log.e("followerUserId",followerUserId+"ok");
+
+        SharedPreferences fsdfsd = getActivity().getSharedPreferences("followerUserId", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = fsdfsd.edit();
+        editor.putString("followerUserId", String.valueOf(followerUserId));
+        editor.apply();
+
 
         ProfileFragment.ViewPagerAdapter adapter = new ProfileFragment.ViewPagerAdapter(getChildFragmentManager());
         setupViewPager(viewPager,adapter);
@@ -337,7 +343,7 @@ public class FollowersProfileFragment extends Fragment {
     {
         {
             adapter.addFragment(new PageFragment());
-            adapter.addFragment(new FollowersFragment());
+            adapter.addFragment(new FollowerFollowersFragment());
 
         }
 

@@ -90,7 +90,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        View view =  inflater.inflate(R.layout.activity_owner_profile2, container, false);
+      //  View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
         viewPager = (ViewPager)view.findViewById(R.id.view_pager);
         tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);

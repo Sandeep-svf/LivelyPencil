@@ -29,8 +29,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
+                        android:layout_height="300dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -57,6 +56,7 @@
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/report_profile_layout"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
 
@@ -87,7 +87,7 @@
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:src="@drawable/edit_image"
+                                android:src="@drawable/report_profile"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -106,6 +106,7 @@
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/back_layout"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             app:layout_constraintWidth_percent="0.09"
@@ -129,7 +130,7 @@
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:src="@drawable/back_arrow"
+                                android:src="@drawable/back"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,13 +164,61 @@
 
                         </de.hdodenhof.circleimageview.CircleImageView>
 
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintHeight_percent="0.1"
+                            app:layout_constraintWidth_percent="0.35"
+                            app:layout_constraintVertical_bias="0.667"
+                            app:layout_constraintHorizontal_bias="0.8"
+                            android:background="@drawable/custom_bg125"
+                            android:text="Followed"
+                            android:gravity="center"
+                            android:fontFamily="@font/raleway_bold"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp"
+
+                            ></androidx.appcompat.widget.AppCompatTextView>
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+
+                            app:layout_constraintHeight_percent="0.1"
+                            app:layout_constraintWidth_percent="0.35"
+
+                            app:layout_constraintVertical_bias="0.75"
+                            app:layout_constraintHorizontal_bias="0.75"
+
+                            android:text="user following you"
+                            android:gravity="center"
+                            android:fontFamily="@font/raleway_medium"
+
+                            android:textSize="@dimen/_10sdp"
+
+                            ></androidx.appcompat.widget.AppCompatTextView>
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             app:layout_constraintBottom_toBottomOf="parent"
+
+
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHeight_percent="0.22"
+
                             app:layout_constraintHorizontal_bias="0.03"
+
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintWidth_percent="0.65">
 
@@ -178,9 +227,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/raleway_bold"
-
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:text="Ayhan Ergezen"
+
+                                android:text="Lena Wilson"
 
 
                                 android:textColor="@color/settingEditBackgroundColor"
@@ -197,13 +246,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/raleway_bold"
-                                android:text="Livelypencil Features"
+                                android:text="Travel News Guide"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 android:textSize="@dimen/_14sdp"
                                 app:layout_constraintBottom_toTopOf="@+id/appCompatTextView6"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/userName">
-
                             </androidx.appcompat.widget.AppCompatTextView>
 
 
@@ -211,12 +259,9 @@
                                 android:id="@+id/appCompatTextView6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
                                 android:fontFamily="@font/raleway_bold"
-                                app:layout_constraintEnd_toEndOf="parent"
-
                                 android:text="Joined on 23.08.2022"
-
+                                app:layout_constraintEnd_toEndOf="parent"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -224,7 +269,6 @@
 
                             </androidx.appcompat.widget.AppCompatTextView>
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
@@ -252,10 +296,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHeight_percent="0.48"
-
+                    app:layout_constraintHeight_percent="1"
                     >
-
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tab_layout"
@@ -276,15 +318,14 @@
                         android:id="@+id/view_pager"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:background="@color/white"
                         app:layout_constraintHeight_percent="1"
+                        android:background="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+
                         app:layout_constraintTop_toBottomOf="@+id/tab_layout">
 
                     </androidx.viewpager.widget.ViewPager>
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
