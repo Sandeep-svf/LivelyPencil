@@ -22,22 +22,22 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".aaa.TestActivity"
-            android:exported="true" >
+            android:exported="true"   android:screenOrientation="locked" >
 
 
         </activity>
         <activity
             android:name=".Activity.Book.BookListActivity"
-            android:exported="true" />
+            android:exported="true"   android:screenOrientation="locked"/>
         <activity
             android:name=".Activity.Book.WebviewEditorActivity"
-            android:exported="true" />
+            android:exported="true"   android:screenOrientation="locked"/>
         <activity
             android:name=".Activity.Book.CreateBookActivity"
-            android:exported="true" />
+            android:exported="true"   android:screenOrientation="locked"/>
         <activity
             android:name=".Activity.JoinUs.NameEmailActivity2"
-            android:exported="true" />
+            android:exported="true"   android:screenOrientation="locked"/>
         <activity
             android:name=".Tempcode.TempActivity.TempActivity"
             android:exported="true"

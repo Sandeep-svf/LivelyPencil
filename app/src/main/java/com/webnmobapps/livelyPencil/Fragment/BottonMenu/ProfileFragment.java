@@ -37,6 +37,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.webnmobapps.livelyPencil.Activity.Utility.ImagePickerActivity;
 import com.webnmobapps.livelyPencil.Activity.Utility.Permission;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileData;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileModel;
 import com.webnmobapps.livelyPencil.ModelPython.UserProfileDataPython;
@@ -53,6 +54,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -375,7 +379,7 @@ public class ProfileFragment extends Fragment {
             Bitmap bitmap = null;
 
             selectedImageUri = data.getData();
-            //Toast.makeText(getApplicationContext(), String.valueOf(selectedImageUri), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), String.valueOf(selectedImageUri), Toast.LENGTH_SHORT).show();
 
 
 
@@ -438,6 +442,8 @@ public class ProfileFragment extends Fragment {
                 Glide.with(this).load(uu)
                         .into(streamCoverImage);
 
+                update_stream_api(streamImage);
+
 
             }
 
@@ -445,6 +451,111 @@ public class ProfileFragment extends Fragment {
 
 
     }
+
+    private void update_stream_api(File profileImage) {
+      
+
+            // show till load api data
+
+            final ProgressDialog pd = new ProgressDialog(getActivity());
+            pd.setCancelable(false);
+            pd.setMessage("loading...");
+            pd.show();
+
+        RequestBody userNameRB = RequestBody.create(MediaType.parse("text/plain"), "");
+
+
+        MultipartBody.Part filePart;
+            
+            if (profileImage == null) {
+                filePart = MultipartBody.Part.createFormData("stream_cover_image", "", RequestBody.create(MediaType.parse("image/*"), ""));
+                Log.e("Photo", String.valueOf(profileImage)+"null");
+
+            } else {
+                filePart = MultipartBody.Part.createFormData("stream_cover_image", profileImage.getName(), RequestBody.create(MediaType.parse("image/*"), profileImage));
+                Log.e("Photo", String.valueOf(profileImage)+"value");
+            }
+
+
+            Call<CommonStatusMessageModelPython> call = API_Client.getClient().STREAM_CHNAGE_SETTING_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(finalAccessToken, filePart);
+
+            call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+                @Override
+                public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                    pd.dismiss();
+                    try {
+                        //if api response is successful ,taking message and success
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = String.valueOf(response.body().getStatus());
+
+                            if (success.equals("true") || success.equals("True")) {
+                                Toast.makeText(getActivity(), message , Toast.LENGTH_LONG).show();
+                              //  user_profle_api();
+                            } else {
+                                Toast.makeText(getActivity(), message , Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                            }
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getActivity(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                                switch (response.code()) {
+                                    case 400:
+                                        Toast.makeText(getActivity(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        Toast.makeText(getActivity(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        Toast.makeText(getActivity(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        Toast.makeText(getActivity(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        Toast.makeText(getActivity(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        Toast.makeText(getActivity(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        Toast.makeText(getActivity(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        Toast.makeText(getActivity(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                    Log.e("conversion issue", t.getMessage());
+
+                    if (t instanceof IOException) {
+                        Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)", Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(getActivity(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            });
+
+        }
+
+
     public String getRealPathFromURIs(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getActivity().managedQuery(contentUri, proj, null, null, null);

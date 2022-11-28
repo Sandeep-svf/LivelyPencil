@@ -39,6 +39,11 @@ public Integer followersCount;
 @Expose
 public Integer likesCount;
 
+    @SerializedName("followed")
+    @Expose
+    public Boolean followed;
+
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +86,9 @@ public Integer likesCount;
 
     public Integer getLikesCount() {
         return likesCount;
+    }
+
+    public Boolean getFollowed() {
+        return followed;
     }
 }

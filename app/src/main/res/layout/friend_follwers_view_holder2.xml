@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
 
                 android:id="@+id/liveUserName"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
 
@@ -115,6 +116,7 @@
                 android:layout_height="wrap_content"
 
                 android:id="@+id/liveUserStreamName"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
 

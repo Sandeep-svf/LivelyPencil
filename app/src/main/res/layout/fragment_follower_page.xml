@@ -9,7 +9,7 @@
         android:id="@+id/rcv_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_marginBottom="40dp"
         >
 
     </androidx.recyclerview.widget.RecyclerView>

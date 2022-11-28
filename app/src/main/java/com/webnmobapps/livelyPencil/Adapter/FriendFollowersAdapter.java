@@ -63,6 +63,12 @@ public class FriendFollowersAdapter extends RecyclerView.Adapter<FriendFollowers
             Glide.with(context).load(API_Client.BASE_IMAGE+liveUserListDataPythonArrayList.get(position).getImage()).
                     placeholder(R.drawable.ic_launcher_background).
                     into(holder.live_user_profile);
+
+            if(liveUserListDataPythonArrayList.get(position).getFollowed()){
+                holder.live_add_follow_button.setText("Follow");
+            }else{
+                holder.live_add_follow_button.setText("Followed");
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
         }

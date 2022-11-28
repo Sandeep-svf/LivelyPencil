@@ -1,6 +1,7 @@
 package com.webnmobapps.livelyPencil.Activity.Book;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,7 @@ public class WebviewEditorActivity extends AppCompatActivity {
     private final String  url = "http://69.49.235.253:8001/";
     private String bookId,finalUrl;
     private String key="";
+    AppCompatImageView back_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,18 @@ public class WebviewEditorActivity extends AppCompatActivity {
         }
 
         web = findViewById(R.id.editor_webview);
+        back_arrow = findViewById(R.id.back_arrow);
 
 
         // linl ->  http://69.49.235.253:8001/
         //http://69.49.235.253:8001/
 
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
        // web.getSettings().setLoadsImagesAutomatically(true);

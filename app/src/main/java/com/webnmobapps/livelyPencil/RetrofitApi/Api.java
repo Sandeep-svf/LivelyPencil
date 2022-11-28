@@ -278,7 +278,7 @@ public interface Api {
                                                                    @Header("Authorization") String Authorization);
 
 
-    @GET
+    @POST
     Call<LiveUserListModelPython> LIVE_USER_LIST_MODEL_PYTHON_CALL (@Url String url,
                                                                     @Header("Authorization") String Authorization);
 
@@ -465,8 +465,17 @@ public interface Api {
     @GET("my-stream/")
     Call<StreamModel> STREAM_MODEL_CALL(@Header("Authorization") String Authorization);
 
+    @Multipart
+    @PUT("my-stream/")
+    Call<CommonStatusMessageModelPython> STREAM_CHNAGE_SETTING_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(
+            @Header("Authorization") String Authorization,
+            @Part MultipartBody.Part stream_cover_image);
+
+
     @GET
     Call<FFModel> FF_MODEL_CALL(@Url String url, @Header("Authorization") String Authorization);
+
+
 }
 
 
