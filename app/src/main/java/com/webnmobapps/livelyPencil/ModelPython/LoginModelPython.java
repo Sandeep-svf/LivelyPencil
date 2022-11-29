@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginModelPython {
 
+    @SerializedName("image")
+    @Expose
+    public String image;
 @SerializedName("status")
 @Expose
 public String status;
@@ -14,6 +17,10 @@ public String message;
 @SerializedName("token")
 @Expose
 public TokenPython tokenPython;
+
+    public String getImage() {
+        return image;
+    }
 
     public String getStatus() {
         return status;

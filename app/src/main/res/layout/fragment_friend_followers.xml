@@ -30,10 +30,14 @@
                 android:id="@+id/searchText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="35dp"
-                android:background="@null">
+                android:background="@null"
+                android:maxLines="1"
+
+                android:fontFamily="@font/raleway_medium"
+                android:gravity="center"
+                android:hint="Enter First name / Stream name">
 
             </EditText>
 

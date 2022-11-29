@@ -366,6 +366,8 @@ public class SelectIntrestActivity extends AppCompatActivity implements  SelectI
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 pd.dismiss();
                                 Intent intent = new Intent(SelectIntrestActivity.this, BookListActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             } else {
                                 //  alert_dialog_message("7");

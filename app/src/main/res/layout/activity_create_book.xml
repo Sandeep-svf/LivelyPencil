@@ -170,6 +170,13 @@ android:fontFamily="@font/raleway_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
+            android:text="public"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/white"
+
+            app:thumbTint="@color/dark_white"
+            app:trackTint="@color/rippleBlue"
+            android:fontFamily="@font/raleway_bold"
 
             app:layout_constraintWidth_percent="0.4"
             app:layout_constraintHorizontal_bias="0.9"

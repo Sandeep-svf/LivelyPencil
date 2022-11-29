@@ -166,6 +166,17 @@ public class CreateBookActivity extends AppCompatActivity {
             }
         });
 
+        book_status_flag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(book_status_flag.isChecked()){
+                    book_status_flag.setText("private");
+                }else{
+                    book_status_flag.setText("public");
+                }
+            }
+        });
+
         confirm_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

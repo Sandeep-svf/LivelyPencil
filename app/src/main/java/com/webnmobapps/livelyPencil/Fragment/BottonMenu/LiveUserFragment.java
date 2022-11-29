@@ -7,18 +7,25 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -49,6 +56,9 @@ public class LiveUserFragment extends Fragment {
     RecyclerView rcv_friend_followers;
     List<LiveUserListDataPython>  liveUserListDataPythonArrayList = new ArrayList<>();
     private String finalAccessToken,accessToken;
+    private EditText searchText;
+    FriendFollowersAdapter friendFollowersAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +67,7 @@ public class LiveUserFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_friend_followers, container, false);
 
         rcv_friend_followers = view.findViewById(R.id.rcv_friend_followers);
+        searchText = view.findViewById(R.id.searchText);
 
         SharedPreferences sharedPreferences= getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         // user_id=sharedPreferences.getString("UserID","");
@@ -65,8 +76,35 @@ public class LiveUserFragment extends Fragment {
 
         live_user_api();
 
+
+        try {
+            searchText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    friendFollowersAdapter.getFilter().filter(s);
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
+
         return view;
     }
+
+
 
     private void live_user_api() {
 
@@ -101,7 +139,7 @@ public class LiveUserFragment extends Fragment {
                                 rcv_friend_followers.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
                                 rcv_friend_followers.setItemAnimator(new DefaultItemAnimator());
 
-                                FriendFollowersAdapter friendFollowersAdapter = new FriendFollowersAdapter(getActivity(),liveUserListDataPythonArrayList);
+                                 friendFollowersAdapter = new FriendFollowersAdapter(getActivity(),liveUserListDataPythonArrayList);
                                 rcv_friend_followers.setAdapter(friendFollowersAdapter);
 
 

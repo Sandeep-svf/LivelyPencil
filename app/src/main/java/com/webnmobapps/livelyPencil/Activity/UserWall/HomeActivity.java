@@ -65,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
     AppCompatImageView home_icon, search_icon, friends_followers_icon, messages_mailbox_icon, notification_icon;
     ConstraintLayout fragment_contaner, n_count_layout;
     CircleImageView profile_icon;
-    private String user_id,accessToken;
+    private String user_id,accessToken,userImage;
     private int notificationCount;
     AppCompatTextView notification_count;
     AppCompatImageView contant_icon,settings_image_layout;
@@ -80,6 +80,14 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
         accessToken=sharedPreferences.getString("accessToken","");
+        userImage=sharedPreferences.getString("userImage","");
+
+
+        Glide.with(HomeActivity.this).load(API_Client.BASE_IMAGE+userImage)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(profile_icon);
+
+
 
 
         settings_image_layout.setOnClickListener(new View.OnClickListener() {

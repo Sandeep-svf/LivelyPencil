@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
 import com.webnmobapps.livelyPencil.Adapter.BookListAdapter;
 import com.webnmobapps.livelyPencil.ModelPython.BookListData;
 import com.webnmobapps.livelyPencil.ModelPython.BookListModel;
@@ -58,6 +59,7 @@ public class BookListActivity extends AppCompatActivity {
     private String finalAccessToken,accessToken,user_id;
     ConstraintLayout create_book_icon;
     private CustomBookListModel customBookListModel;
+    private AppCompatImageView back_button;
 
 
     @Override
@@ -65,6 +67,15 @@ public class BookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         inits();
+
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookListActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
         create_book_icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -372,6 +383,7 @@ public class BookListActivity extends AppCompatActivity {
     private void inits() {
         rcv_book_list = findViewById(R.id.rcv_book_list);
         create_book_icon = findViewById(R.id.create_book_icon);
+        back_button = findViewById(R.id.back_button);
     }
 
 

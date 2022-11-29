@@ -390,6 +390,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             LoginModelPython loginModel = response.body();
                             TokenPython tokenPython = loginModel.getToken();
+                            String userImage = loginModel.getImage();
 
                             String accessToken = tokenPython.getAccess();
                             String refreshToken = tokenPython.getRefresh();
@@ -401,6 +402,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = getUserIdData.edit();
                             editor.putString("UserID", String.valueOf(UserID));
                             editor.putString("accessToken", String.valueOf(accessToken));
+                            editor.putString("userImage", String.valueOf(userImage));
                             editor.apply();
 
                            // alert_dialog_message("7");
