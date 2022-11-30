@@ -237,7 +237,7 @@ public class BookListActivity extends AppCompatActivity {
                             String success = response.body().getStatus();
 
                             if (success.equals("true") || success.equals("True")) {
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 bookListDataList = response.body().getData();
 
                                 Log.e("addbooklisttest","bookListDataListsize Size is :"+bookListDataList.size());
@@ -248,6 +248,7 @@ public class BookListActivity extends AppCompatActivity {
                                     customBookListModel.setBookDescriptions(bookListDataList.get(i).getBookDescriptions());
                                     customBookListModel.setBookImage( bookListDataList.get(i).getBookImage());
                                     customBookListModel.setId(String.valueOf(bookListDataList.get(i).getId()));
+                                    customBookListModel.setTotalPage(String.valueOf(bookListDataList.get(i).getTotal_page()));
                                     customBookListModelList.add(customBookListModel);
                                 }
 
@@ -256,7 +257,7 @@ public class BookListActivity extends AppCompatActivity {
                                 rcv_book_list.setLayoutManager(linearLayoutManager);
                                 BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,customBookListModelList,finalAccessToken);
                                 rcv_book_list.setAdapter(bookListAdapter);
-
+                                pd.dismiss();
                             } else {
                                 //  alert_dialog_message("7");
                                 pd.dismiss();

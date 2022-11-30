@@ -793,7 +793,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                             String success = response.body().getStatus();
 
                             if (success.equals("true") || success.equals("True")) {
-                                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
 
                                 SettingModel settingModel = response.body();

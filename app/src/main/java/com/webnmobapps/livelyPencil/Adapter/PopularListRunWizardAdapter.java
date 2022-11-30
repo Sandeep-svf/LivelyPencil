@@ -115,10 +115,7 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
     private void follow_unfollow_api(String listUserId, PopularListViewHolder holder, String followerStatus, int position) {
         // folloe unfollow api code..........
 
-            final ProgressDialog pd = new ProgressDialog(context);
-            pd.setCancelable(false);
-            pd.setMessage("loading...");
-            pd.show();
+
 
             String status;
             if(followerStatus.equals("1"))
@@ -136,7 +133,7 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
                 @Override
                 public void onResponse(Call<SmFlaxibleModel> call, Response<SmFlaxibleModel> response) {
 
-                    pd.dismiss();
+
                     try {
                         if (response.isSuccessful()) {
                             String message = response.body().getMessage();
@@ -160,7 +157,7 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
                             } else {
                                 alert_dialog_message(message);
                                // Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-                                pd.dismiss();
+
                             }
 
                         } else {
@@ -217,11 +214,11 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
                     Log.e("bhgyrrrthbh", String.valueOf(t));
                     if (t instanceof IOException) {
                         Toast.makeText(context, "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        pd.dismiss();
+
                     } else {
                         Log.e("conversion issue", t.getMessage());
                         Toast.makeText(context, "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        pd.dismiss();
+
                     }
                 }
             });

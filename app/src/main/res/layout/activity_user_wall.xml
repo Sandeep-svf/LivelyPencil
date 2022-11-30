@@ -199,7 +199,7 @@
 
             app:layout_constraintHorizontal_bias="0.03"
 
-            android:src="@drawable/test_profile"
+            android:src="@drawable/ic_launcher_background"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -278,7 +278,7 @@
             app:layout_constraintWidth_percent="0.1"
             app:layout_constraintHorizontal_bias="0.9"
 
-            android:src="@drawable/bell"
+            android:src="@drawable/notification"
 
 
             app:layout_constraintTop_toTopOf="parent"
@@ -344,6 +344,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
 
+            android:id="@+id/notificaiton_indicator"
 
             android:src="@color/red"
             app:layout_constraintTop_toTopOf="parent"
@@ -442,29 +443,60 @@
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
-    <androidx.appcompat.widget.AppCompatImageView
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/contant_icon"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:orientation="horizontal"
 
-        app:layout_constraintWidth_percent="0.12"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHeight_percent="0.04"
-        app:layout_constraintVertical_bias="0.99"
-
-        android:src="@drawable/content_color"
-
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintHorizontal_bias="0.5"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99"
+        app:layout_constraintWidth_percent="0.25"
 
         >
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/contant_icon2"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
 
-    </androidx.appcompat.widget.AppCompatImageView>
 
+            android:src="@drawable/go_live_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toStartOf="@+id/kfjkdjf"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintWidth_percent="0.3">
+
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/kfjkdjf"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/go_live"
+            android:textColor="@color/settingEditBackgroundColor"
+            android:textSize="@dimen/_14sdp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contant_icon2"
+
+            app:layout_constraintTop_toTopOf="parent"></androidx.appcompat.widget.AppCompatTextView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

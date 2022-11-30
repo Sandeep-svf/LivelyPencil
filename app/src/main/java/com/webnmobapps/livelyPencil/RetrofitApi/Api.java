@@ -42,6 +42,7 @@ import com.webnmobapps.livelyPencil.ModelPython.LiveUserListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.LoginModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.MyFollowersData;
 import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationCountPythonModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
@@ -475,6 +476,10 @@ public interface Api {
     @GET
     Call<FFModel> FF_MODEL_CALL(@Url String url, @Header("Authorization") String Authorization);
 
+
+
+    @GET("notificationscount/")
+    Call<NotificationCountPythonModel> NOTIFICATION_COUNT_PYTHON_MODEL_CALL (@Header("Authorization") String Authorization);
 
 }
 

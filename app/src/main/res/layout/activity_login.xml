@@ -687,7 +687,7 @@
             android:text="@string/join_us"
             app:layout_constraintVertical_bias="0.85"
 
-            android:fontFamily="@font/raleway_bold"
+            android:fontFamily="@font/raleway_medium"
             android:textColor="@color/settingEditBackgroundColor"
             android:textSize="@dimen/_16sdp">
 
@@ -705,7 +705,7 @@
 
             android:text="Terms / Privacy / Help"
             app:layout_constraintVertical_bias="0.925"
-            android:fontFamily="@font/raleway_bold"
+            android:fontFamily="@font/raleway_medium"
             android:textColor="@color/settingEditBackgroundColor"
             android:textSize="@dimen/_16sdp"
 

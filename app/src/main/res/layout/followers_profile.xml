@@ -130,7 +130,8 @@
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:src="@drawable/back"
+                                android:src="@drawable/back_arrow"
+                                android:id="@+id/back_arrow"
 
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"

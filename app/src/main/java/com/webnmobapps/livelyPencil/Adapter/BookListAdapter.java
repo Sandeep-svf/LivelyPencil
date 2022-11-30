@@ -70,6 +70,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
         if(position==0) holder.delete_book_text.setVisibility(View.GONE);
 
         holder.book_name.setText(bookListDataList.get(position).getBookName());
+        holder.bhu3.setText("P#"+bookListDataList.get(position).getTotalPage());
         holder.book_description.setText(bookListDataList.get(position).getBookDescriptions());
         Glide.with(context).load(API_Client.BASE_IMAGE+bookListDataList.get(position).getBookImage())
                 .placeholder(R.drawable.ic_launcher_background)
@@ -235,12 +236,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
 }
 
 class BookListViewHolder extends RecyclerView.ViewHolder {
-    AppCompatTextView book_description,book_name,delete_book_text;
+    AppCompatTextView book_description,book_name,delete_book_text,bhu3;
     CircleImageView book_cover_image;
     AppCompatImageView book_layout;
 
     public BookListViewHolder(@NonNull View itemView) {
         super(itemView);
+        bhu3 = itemView.findViewById(R.id.bhu3);
         delete_book_text = itemView.findViewById(R.id.delete_book_text);
         book_name = itemView.findViewById(R.id.book_name);
         book_description = itemView.findViewById(R.id.book_description);

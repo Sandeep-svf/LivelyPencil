@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -57,6 +58,7 @@ public class FollowersProfileFragment extends Fragment {
 
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
+    private AppCompatImageView back_arrow;
 
 
 
@@ -94,6 +96,19 @@ public class FollowersProfileFragment extends Fragment {
 
         follower_profile_api();
 
+
+
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ProfileFragment fragment2 = new ProfileFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_contaner, fragment2);
+                fragmentTransaction.commit();
+            }
+        });
 
         report_profile_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,6 +219,7 @@ public class FollowersProfileFragment extends Fragment {
         }
 
     private void intis(View view) {
+        back_arrow = view.findViewById(R.id.back_arrow);
         back_layout = view.findViewById(R.id.back_layout);
         streamCoverImage = view.findViewById(R.id.streamCoverImage);
         userProfile = view.findViewById(R.id.userProfile);

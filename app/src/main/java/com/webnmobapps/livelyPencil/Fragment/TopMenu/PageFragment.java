@@ -132,7 +132,7 @@ public class PageFragment extends Fragment {
                             rcv_page.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
                             pageAdapter = new PageAdapter(getActivity(),postListDataPythonArrayList);
                             rcv_page.setAdapter(pageAdapter);
-
+                            pd.dismiss();
 
                         } else {
                             Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();

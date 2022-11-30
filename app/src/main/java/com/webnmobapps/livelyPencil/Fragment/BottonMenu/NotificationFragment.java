@@ -1,5 +1,6 @@
 package com.webnmobapps.livelyPencil.Fragment.BottonMenu;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,12 +21,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.webnmobapps.livelyPencil.Activity.Setting.PersonalInformationActivity;
 import com.webnmobapps.livelyPencil.Activity.Setting.ShareSettingsActivity;
+import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
 import com.webnmobapps.livelyPencil.Adapter.NotificationListAdapter;
 import com.webnmobapps.livelyPencil.Adapter.RadioAdapter;
 import com.webnmobapps.livelyPencil.Model.EditShareSettingsModel;
@@ -55,7 +60,7 @@ public class NotificationFragment extends Fragment {
     private String user_id,accessToken,finalAccessToken;
     List<NotificationListPython> notificationListPythonArrayList = new ArrayList<>();
     RecyclerView rcv_notification_list;
-    AppCompatButton n_clear_all_button;
+    LinearLayoutCompat n_clear_all_button;
 
 
     //#########################################################################
@@ -79,102 +84,135 @@ public class NotificationFragment extends Fragment {
         notification_list_api();
 
 
+
         n_clear_all_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                final ProgressDialog pd = new ProgressDialog(getActivity());
-                pd.setCancelable(false);
-                pd.setMessage("loading...");
-                pd.show();
+
+                // add pop up...
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.logout_dialog2);
+                LinearLayout noDialogLogout = dialog.findViewById(R.id.noDialogLogout);
+                LinearLayout yesDialogLogout = dialog.findViewById(R.id.yesDialogLogout);
 
 
-                Call<CommonStatusMessageModelPython> call = API_Client.getClient().CLEAR_ALL_NOTIFICATION_PYTHON_CALL(finalAccessToken);
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                call.enqueue(new Callback<CommonStatusMessageModelPython>() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
+
+                yesDialogLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
-                        pd.dismiss();
-
-
-                        try {
-                            if (response.isSuccessful()) {
-                                String message = response.body().getMessage();
-                                String success = response.body().getStatus();
-
-                                if (success.equals("true") || success.equals("True")) {
-
-                                    notification_list_api();
-                                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-
-                                } else {
-                                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-                                    pd.dismiss();
-                                }
-
-
-                            } else {
-                                try {
-                                    JSONObject jObjError = new JSONObject(response.errorBody().string());
-                                    Toast.makeText(getActivity(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
-                                    switch (response.code()) {
-                                        case 400:
-                                            Toast.makeText(getActivity(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case 401:
-                                            Toast.makeText(getActivity(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case 404:
-                                            Toast.makeText(getActivity(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case 500:
-                                            Toast.makeText(getActivity(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case 503:
-                                            Toast.makeText(getActivity(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case 504:
-                                            Toast.makeText(getActivity(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        case 511:
-                                            Toast.makeText(getActivity(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
-                                            break;
-                                        default:
-                                            Toast.makeText(getActivity(), "unknown error", Toast.LENGTH_SHORT).show();
-                                            break;
-                                    }
-
-                                } catch (Exception e) {
-                                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        } catch (
-                                Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
-                        Log.e("bhgyrrrthbh", String.valueOf(t));
-                        if (t instanceof IOException) {
-                            Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            pd.dismiss();
-                        } else {
-                            Log.e("conversion issue", t.getMessage());
-                            Toast.makeText(getActivity(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            pd.dismiss();
-                        }
+                    public void onClick(View v) {
+                        all_clear_api();
+                        dialog.dismiss();
                     }
                 });
+
+
+                noDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+
 
             }
         });
 
-
-
         return view;
+    }
+
+    private void all_clear_api() {
+        final ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setCancelable(false);
+        pd.setMessage("loading...");
+        pd.show();
+
+
+        Call<CommonStatusMessageModelPython> call = API_Client.getClient().CLEAR_ALL_NOTIFICATION_PYTHON_CALL(finalAccessToken);
+
+        call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                pd.dismiss();
+
+
+                try {
+                    if (response.isSuccessful()) {
+                        String message = response.body().getMessage();
+                        String success = response.body().getStatus();
+
+                        if (success.equals("true") || success.equals("True")) {
+
+                            notification_list_api();
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                            pd.dismiss();
+                        }
+
+
+                    } else {
+                        try {
+                            JSONObject jObjError = new JSONObject(response.errorBody().string());
+                            Toast.makeText(getActivity(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                            switch (response.code()) {
+                                case 400:
+                                    Toast.makeText(getActivity(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 401:
+                                    Toast.makeText(getActivity(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 404:
+                                    Toast.makeText(getActivity(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 500:
+                                    Toast.makeText(getActivity(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 503:
+                                    Toast.makeText(getActivity(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 504:
+                                    Toast.makeText(getActivity(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case 511:
+                                    Toast.makeText(getActivity(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    Toast.makeText(getActivity(), "unknown error", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+
+                        } catch (Exception e) {
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                } catch (
+                        Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                Log.e("bhgyrrrthbh", String.valueOf(t));
+                if (t instanceof IOException) {
+                    Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                } else {
+                    Log.e("conversion issue", t.getMessage());
+                    Toast.makeText(getActivity(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
+                }
+            }
+        });
     }
 
     private void inits(View view) {
@@ -213,9 +251,11 @@ public class NotificationFragment extends Fragment {
                                 if(notificationListPythonArrayList.size() == 0)
                                 {
                                     n_clear_all_button.setVisibility(View.GONE);
+                                    Toast.makeText(getActivity(), "There aren't any notification yet.", Toast.LENGTH_LONG).show();
                                 }else
                                 {
                                     n_clear_all_button.setVisibility(View.VISIBLE);
+
                                 }
                             } catch (Exception exception) {
                                 exception.printStackTrace();
@@ -227,7 +267,9 @@ public class NotificationFragment extends Fragment {
                             NotificationListAdapter notificationListAdapter = new NotificationListAdapter(finalAccessToken,notificationListPythonArrayList, getActivity());
                             rcv_notification_list.setAdapter(notificationListAdapter);
                             //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-                            Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                            pd.dismiss();
+                            ((HomeActivity)getActivity()).notification_count_python_api();
                         } else {
                           //  Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
                             pd.dismiss();

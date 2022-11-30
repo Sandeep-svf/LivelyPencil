@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.provider.MediaStore;
@@ -86,6 +88,7 @@ public class ProfileFragment extends Fragment {
     private File profileImage, streamImage;
     private static final int CAMERA_PIC_REQUEST_R = 25418;
     private Uri selectedImageUri;
+    private AppCompatImageView back_arrow;
   
    
     
@@ -99,6 +102,7 @@ public class ProfileFragment extends Fragment {
 
         viewPager = (ViewPager)view.findViewById(R.id.view_pager);
         tabLayout = (TabLayout)view.findViewById(R.id.tab_layout);
+        back_arrow = (AppCompatImageView) view.findViewById(R.id.back_arrow);
         title= view.findViewById(R.id.title);
         streamName= view.findViewById(R.id.appCompatTextView5);
         userName= view.findViewById(R.id.userName);
@@ -121,6 +125,19 @@ public class ProfileFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
         setupTabtitle();
 
+
+
+        back_arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PageFragment fragment2 = new PageFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_contaner, fragment2);
+                fragmentTransaction.commit();
+            }
+        });
 
         add_stream_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +193,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-        user_profile_details_api();
+       // user_profile_details_api();
 
 
         return  view;
@@ -211,7 +228,7 @@ public class ProfileFragment extends Fragment {
                         String success = response.body().getStatus();
 
                         if (success.equals("true") || success.equals("True")) {
-                            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
 
 

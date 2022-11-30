@@ -5,6 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class BookListData {
 
+
+
+    @SerializedName("total_page")
+    @Expose
+    public Integer total_page;
+
 @SerializedName("id")
 @Expose
 public Integer id;
@@ -18,6 +24,9 @@ public String bookDescriptions;
 @Expose
 public String bookImage;
 
+    public Integer getTotal_page() {
+        return total_page;
+    }
 
     public Integer getId() {
         return id;

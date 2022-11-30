@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
@@ -47,8 +48,12 @@ import com.webnmobapps.livelyPencil.Fragment.TopMenu.PageFragment;
 import com.webnmobapps.livelyPencil.Fragment.TopMenu.RadioFragment;
 import com.webnmobapps.livelyPencil.Model.NotificationCountModel;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.Count;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationCount;
+import com.webnmobapps.livelyPencil.ModelPython.NotificationCountPythonModel;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -64,11 +69,13 @@ public class HomeActivity extends AppCompatActivity {
     AppCompatImageView page_top_icon, tv_top_icon, radio_top_icon, market_top_icon, game_top_icon, three_dot_top_icon;
     AppCompatImageView home_icon, search_icon, friends_followers_icon, messages_mailbox_icon, notification_icon;
     ConstraintLayout fragment_contaner, n_count_layout;
+    LinearLayoutCompat contant_icon;
     CircleImageView profile_icon;
-    private String user_id,accessToken,userImage;
+    private String user_id,accessToken,userImage,finalAccessToken;
     private int notificationCount;
     AppCompatTextView notification_count;
-    AppCompatImageView contant_icon,settings_image_layout;
+    AppCompatImageView settings_image_layout;
+    CircleImageView notificaiton_indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
         accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
         userImage=sharedPreferences.getString("userImage","");
 
 
@@ -115,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         // API
-        notificaiton_count_api();
+      //  notificaiton_count_api();
 
 
         // Default fragment
@@ -123,6 +131,8 @@ public class HomeActivity extends AppCompatActivity {
         StrictMode.setVmPolicy(builder.build());
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_contaner, new PageFragment()).commit();
         home_icon.setImageResource(R.drawable.home_color);
+
+        notification_count_python_api();
 
 
         contant_icon.setOnClickListener(new View.OnClickListener() {
@@ -542,8 +552,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
 
-                relaseMediaPlayer();
-                notification_read_api();
+               // relaseMediaPlayer();
+              //  notification_read_api();
 
 
 
@@ -565,6 +575,110 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
+    public void notification_count_python_api() {
+
+
+            // show till load api data
+
+            Call<NotificationCountPythonModel> call = API_Client.getClient().NOTIFICATION_COUNT_PYTHON_MODEL_CALL(finalAccessToken);
+
+            call.enqueue(new Callback<NotificationCountPythonModel>() {
+                @Override
+                public void onResponse(Call<NotificationCountPythonModel> call, Response<NotificationCountPythonModel> response) {
+
+                    try {
+                        //if api response is successful ,taking message and success
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = String.valueOf(response.body().getStatus());
+
+
+                            if (success.equals("true") || success.equals("True")) {
+
+                                NotificationCountPythonModel obj = response.body();
+                                Count count = obj.getCount();
+
+                                String countData = String.valueOf(count.getMessageCount());
+
+                                if(countData.equals("0")){
+                                    notificaiton_indicator.setVisibility(View.GONE);
+                                }else{
+                                    notificaiton_indicator.setVisibility(View.VISIBLE);
+                                }
+
+
+
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                            }
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                                switch (response.code()) {
+                                    case 400:
+                                        alert_dialog_message("400");
+                                        //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        alert_dialog_message("401");
+                                        // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        alert_dialog_message("404");
+                                        //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        alert_dialog_message("500");
+                                        //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        alert_dialog_message("503");
+                                        // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        alert_dialog_message("504");
+                                        //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        alert_dialog_message("511");
+                                        // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        alert_dialog_message("default");
+                                        //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<NotificationCountPythonModel> call, Throwable t) {
+                    Log.e("conversion issue", t.getMessage());
+
+                    if (t instanceof IOException) {
+                        Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            });
+        }
 
 
     private void alert_dialog_create_book(String value) {
@@ -867,6 +981,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void inits() {
+        notificaiton_indicator = findViewById(R.id.notificaiton_indicator);
         contant_icon = findViewById(R.id.contant_icon);
         settings_image_layout = findViewById(R.id.settings_image_layout);
         n_count_layout = findViewById(R.id.n_count_layout);
@@ -901,6 +1016,11 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notification_count_python_api();
+    }
 
     @Override
     public void onBackPressed() {

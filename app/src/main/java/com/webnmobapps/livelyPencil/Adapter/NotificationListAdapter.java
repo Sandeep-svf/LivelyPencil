@@ -1,6 +1,7 @@
 package com.webnmobapps.livelyPencil.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Build;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -80,7 +83,37 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
             @Override
             public void onClick(View view) {
 
-                notification_single_delete_api(notificationId ,position);
+                // add pop up...
+                final Dialog dialog = new Dialog(context);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.logout_dialog3);
+                LinearLayout noDialogLogout = dialog.findViewById(R.id.noDialogLogout);
+                LinearLayout yesDialogLogout = dialog.findViewById(R.id.yesDialogLogout);
+
+
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+
+                yesDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notification_single_delete_api(notificationId ,position);
+                        dialog.dismiss();
+                    }
+                });
+
+
+                noDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+
 
             }
         });
