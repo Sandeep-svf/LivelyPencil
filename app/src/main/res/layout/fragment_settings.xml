@@ -58,7 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
 
-                app:layout_constraintVertical_bias="0.25"
+                app:layout_constraintVertical_bias="0.2"
 
                 android:background="@drawable/custom_bg_border_line"
                 app:layout_constraintWidth_percent="0.95"
@@ -601,7 +601,7 @@
 
 
 
-            app:layout_constraintVertical_bias="0.06"
+            app:layout_constraintVertical_bias="0.03"
             app:layout_constraintHorizontal_bias="0.1"
             >
             <de.hdodenhof.circleimageview.CircleImageView
@@ -677,7 +677,7 @@
 
             android:text="Privacy"
             android:textColor="@color/black"
-            app:layout_constraintVertical_bias="0.675"
+            app:layout_constraintVertical_bias="0.625"
             app:layout_constraintHorizontal_bias="0.1"
             android:fontFamily="@font/raleway_medium"
             android:textSize="@dimen/_12sdp"
@@ -719,7 +719,7 @@
 
             android:text="Notification"
             android:textColor="@color/black"
-            app:layout_constraintVertical_bias="0.775"
+            app:layout_constraintVertical_bias="0.725"
             app:layout_constraintHorizontal_bias="0.1"
             android:fontFamily="@font/raleway_medium"
             android:textSize="@dimen/_12sdp"
@@ -771,7 +771,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintVertical_bias="0.925"
+            app:layout_constraintVertical_bias="0.875"
             app:layout_constraintWidth_percent="0.4">
 
         </androidx.appcompat.widget.AppCompatButton>
@@ -785,8 +785,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
-            android:text="Terms / Privacy / Help"
+            android:text="Delete your account"
             app:layout_constraintVertical_bias="0.975"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/red"
+            android:textSize="@dimen/_12sdp"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/delete_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:text="Terms / Privacy / Help"
+            app:layout_constraintVertical_bias="0.925"
             android:fontFamily="@font/raleway_medium"
             android:textColor="@color/settingEditBackgroundColor"
             android:textSize="@dimen/_16sdp"

@@ -122,6 +122,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
 
                 Intent intent = new Intent(context, WebviewEditorActivity.class);
                 intent.putExtra("bookid",bookId);
+                intent.putExtra("key","2");
                 context.startActivity(intent);
             }
         });

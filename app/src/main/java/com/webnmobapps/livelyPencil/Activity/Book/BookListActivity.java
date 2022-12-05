@@ -60,6 +60,7 @@ public class BookListActivity extends AppCompatActivity {
     ConstraintLayout create_book_icon;
     private CustomBookListModel customBookListModel;
     private AppCompatImageView back_button;
+    StreamModelData streamModelData;
 
 
     @Override
@@ -123,13 +124,23 @@ public class BookListActivity extends AppCompatActivity {
                             if (success.equals("true") || success.equals("True")) {
 
                                 StreamModel streamModel = response.body();
-                                StreamModelData streamModelData = streamModel.getData();
+                                 streamModelData = streamModel.getData();
 
                                 customBookListModel = new CustomBookListModel();
                                 customBookListModel.setBookName(streamModelData.getStreamTitle());
                                 customBookListModel.setBookDescriptions("null");
                                 customBookListModel.setBookImage( streamModelData.getStreamCoverImage());
-                                customBookListModel.setCreated( "01/03/2022");
+
+                                String rawData = streamModelData.getCreated_at();
+                                try {
+                                    String[] parts = rawData.split(",");
+                                    String part1 = parts[0]; // 004
+                                    String part2 = parts[1]; // 034556
+                                    customBookListModel.setCreated(part1);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    customBookListModel.setCreated("null");
+                                }
                                 customBookListModel.setId( "null");
                                 customBookListModelList.add(customBookListModel);
 
@@ -262,6 +273,11 @@ public class BookListActivity extends AppCompatActivity {
                                 pd.dismiss();
                             } else {
                                 //  alert_dialog_message("7");
+
+                                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookListActivity.this,RecyclerView.VERTICAL,false);
+                                rcv_book_list.setLayoutManager(linearLayoutManager);
+                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,customBookListModelList,finalAccessToken);
+                                rcv_book_list.setAdapter(bookListAdapter);
                                 pd.dismiss();
                             }
 

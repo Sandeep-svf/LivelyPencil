@@ -5,6 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class StreamModelData {
 
+
+
+    @SerializedName("created_at")
+    @Expose
+    public String created_at;
+
+
 @SerializedName("id")
 @Expose
 public Integer id;
@@ -14,6 +21,10 @@ public String streamTitle;
 @SerializedName("stream_cover_image")
 @Expose
 public String streamCoverImage;
+
+    public String getCreated_at() {
+        return created_at;
+    }
 
     public Integer getId() {
         return id;

@@ -481,6 +481,10 @@ public interface Api {
     @GET("notificationscount/")
     Call<NotificationCountPythonModel> NOTIFICATION_COUNT_PYTHON_MODEL_CALL (@Header("Authorization") String Authorization);
 
+    @DELETE("profile/")
+    Call<CommonStatusMessageModelPython> DELETE_USER_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization);
+
+
 }
 
 

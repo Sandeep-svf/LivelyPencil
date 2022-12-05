@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -28,6 +29,12 @@ public class WebviewEditorActivity extends AppCompatActivity {
         key = getIntent().getStringExtra("key");
         //get id
         bookId = getIntent().getStringExtra("bookid");
+
+        try {
+            Log.e("nnnnn",bookId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if(key.equals("1")){
             finalUrl = "https://help.livelypencil.com";

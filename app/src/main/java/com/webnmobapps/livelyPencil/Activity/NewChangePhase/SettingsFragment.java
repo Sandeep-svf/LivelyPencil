@@ -116,6 +116,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     private Uri selectedImageUri;
     private String temp;
     private AppCompatButton logout_setting_button;
+    private AppCompatTextView delete_user;
 
 
     @Override
@@ -136,6 +137,58 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
         notification_settring_api();
         role_setting_api();
         user_profle_api();
+
+
+        delete_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.delete_acccount_dialog);
+                LinearLayout noDialogLogout = dialog.findViewById(R.id.noDialogLogout);
+                LinearLayout yesDialogLogout = dialog.findViewById(R.id.yesDialogLogout);
+
+
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                yesDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //relaseMediaPlayer();
+                        //geting userID data
+/*
+                        SharedPreferences getUserIdData = getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = getUserIdData.edit();
+                        editor.putString("UserID", "");
+
+                        editor.apply();
+                        Intent intent = new Intent(getActivity(), LoginJoinusActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.putExtra("finish", true);
+                        startActivity(intent);*/
+
+
+//                        logout_api();
+                    }
+
+                });
+
+                noDialogLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        dialog.dismiss();
+                    }
+                });
+
+
+            }
+        });
 
         terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1354,6 +1407,7 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     }
 
     private void intis(View view) {
+        delete_user = view.findViewById(R.id.delete_user);
         logout_setting_button = view.findViewById(R.id.logout_setting_button);
         terms_privacy_help_layout = view.findViewById(R.id.terms_privacy_help_layout);
         save_change_button = view.findViewById(R.id.save_change_button);
