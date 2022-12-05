@@ -6,6 +6,9 @@ import com.google.gson.annotations.SerializedName;
 public class BookListData {
 
 
+    @SerializedName("created_at")
+    @Expose
+    public String created_at;
 
     @SerializedName("total_page")
     @Expose
@@ -23,6 +26,10 @@ public String bookDescriptions;
 @SerializedName("book_image")
 @Expose
 public String bookImage;
+
+    public String getCreated_at() {
+        return created_at;
+    }
 
     public Integer getTotal_page() {
         return total_page;

@@ -129,6 +129,7 @@ public class BookListActivity extends AppCompatActivity {
                                 customBookListModel.setBookName(streamModelData.getStreamTitle());
                                 customBookListModel.setBookDescriptions("null");
                                 customBookListModel.setBookImage( streamModelData.getStreamCoverImage());
+                                customBookListModel.setCreated( "01/03/2022");
                                 customBookListModel.setId( "null");
                                 customBookListModelList.add(customBookListModel);
 
@@ -249,6 +250,7 @@ public class BookListActivity extends AppCompatActivity {
                                     customBookListModel.setBookImage( bookListDataList.get(i).getBookImage());
                                     customBookListModel.setId(String.valueOf(bookListDataList.get(i).getId()));
                                     customBookListModel.setTotalPage(String.valueOf(bookListDataList.get(i).getTotal_page()));
+                                    customBookListModel.setCreated(String.valueOf(bookListDataList.get(i).getCreated_at()));
                                     customBookListModelList.add(customBookListModel);
                                 }
 

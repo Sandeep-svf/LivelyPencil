@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 public class CustomBookListModel {
     public String id;
 
+    public String created;
+
     public String totalPage;
 
     public String bookName;
@@ -36,6 +38,14 @@ public class CustomBookListModel {
 
     public void setBookDescriptions(String bookDescriptions) {
         this.bookDescriptions = bookDescriptions;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
     }
 
     public String getTotalPage() {
