@@ -45,6 +45,7 @@ import com.webnmobapps.livelyPencil.ModelPython.MyFollowersModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationCountPythonModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.NotificationModelPython;
+import com.webnmobapps.livelyPencil.ModelPython.PopularListModelNew;
 import com.webnmobapps.livelyPencil.ModelPython.PostListModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.RoleSettingModel;
 import com.webnmobapps.livelyPencil.ModelPython.SettingModel;
@@ -114,7 +115,7 @@ public interface Api {
     @POST("register/")
     Call<LoginModelPython> register2(@Part("interesting") List<Integer> interesting,
                                      @Part("first_name") RequestBody first_name,
-                                         @Part("last_name") RequestBody last_name,
+                                     @Part("last_name") RequestBody last_name,
                                      @Part("email") RequestBody email,
                                      @Part("stream_title") RequestBody stream_title,
                                      @Part("role") RequestBody role,
@@ -335,9 +336,7 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("papulardataList")
-    Call<PopularListModel> POPULAR_LIST_MODEL_CALL(@Field("loginId") String loginId
-
-    );
+    Call<PopularListModel> POPULAR_LIST_MODEL_CALL(@Field("loginId") String loginId);
 
     @FormUrlEncoded
     @POST("FollowUNfollow")
@@ -472,17 +471,20 @@ public interface Api {
             @Header("Authorization") String Authorization,
             @Part MultipartBody.Part stream_cover_image);
 
-
     @GET
     Call<FFModel> FF_MODEL_CALL(@Url String url, @Header("Authorization") String Authorization);
-
-
 
     @GET("notificationscount/")
     Call<NotificationCountPythonModel> NOTIFICATION_COUNT_PYTHON_MODEL_CALL (@Header("Authorization") String Authorization);
 
     @DELETE("profile/")
     Call<CommonStatusMessageModelPython> DELETE_USER_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization);
+
+
+
+    @GET("popularlists/")
+    Call<PopularListModelNew> POPULAR_LIST_MODEL_NEW_CALL(@Header("Authorization") String Authorization);
+
 
 
 }

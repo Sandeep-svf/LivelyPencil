@@ -776,7 +776,8 @@
 
         </androidx.appcompat.widget.AppCompatButton>
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/terms_privacy_help_layout"
+
+            android:id="@+id/delete_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -796,7 +797,8 @@
         </androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/delete_user"
+
+            android:id="@+id/terms_privacy_help_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

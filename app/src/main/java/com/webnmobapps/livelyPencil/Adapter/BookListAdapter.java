@@ -45,11 +45,11 @@ import retrofit2.Response;
 public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
 
     private Context context;
-    private List<CustomBookListModel> bookListDataList =  new ArrayList<>();
+    private List<BookListData> bookListDataList =  new ArrayList<>();
     private String finalAccessToken;
 
 
-    public BookListAdapter(Context context, List<CustomBookListModel> bookListDataList, String finalAccessToken) {
+    public BookListAdapter(Context context, List<BookListData> bookListDataList, String finalAccessToken) {
         this.context = context;
         this.bookListDataList = bookListDataList;
         this.finalAccessToken = finalAccessToken;
@@ -70,9 +70,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
         if(position==0) holder.delete_book_text.setVisibility(View.GONE);
 
         holder.book_name.setText(bookListDataList.get(position).getBookName());
-        holder.bhu3.setText("P#"+bookListDataList.get(position).getTotalPage());
+        holder.bhu3.setText("P#"+bookListDataList.get(position).getTotal_page());
         holder.book_description.setText(bookListDataList.get(position).getBookDescriptions());
-        holder.created_at.setText("created at "+bookListDataList.get(position).getCreated()+" / "+"total page "+bookListDataList.get(position).getTotalPage());
+        holder.created_at.setText("created at "+bookListDataList.get(position).getCreated_at()+" / "+"total page "+bookListDataList.get(position).getTotal_page());
         Glide.with(context).load(API_Client.BASE_IMAGE+bookListDataList.get(position).getBookImage())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.book_cover_image);

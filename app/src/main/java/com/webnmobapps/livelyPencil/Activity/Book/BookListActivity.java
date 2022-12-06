@@ -92,7 +92,9 @@ public class BookListActivity extends AppCompatActivity {
         finalAccessToken = StaticKey.prefixTokem+accessToken;
 
 
-        stream_data_api();
+        // stream_data_api();
+
+        book_list_api();
 
 
 
@@ -252,7 +254,7 @@ public class BookListActivity extends AppCompatActivity {
                                // Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 bookListDataList = response.body().getData();
 
-                                Log.e("addbooklisttest","bookListDataListsize Size is :"+bookListDataList.size());
+                            /*    Log.e("addbooklisttest","bookListDataListsize Size is :"+bookListDataList.size());
 
                                 for(int i=0; i<bookListDataList.size();i++){
                                     customBookListModel = new CustomBookListModel();
@@ -263,21 +265,21 @@ public class BookListActivity extends AppCompatActivity {
                                     customBookListModel.setTotalPage(String.valueOf(bookListDataList.get(i).getTotal_page()));
                                     customBookListModel.setCreated(String.valueOf(bookListDataList.get(i).getCreated_at()));
                                     customBookListModelList.add(customBookListModel);
-                                }
+                                }*/
 
 
                                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookListActivity.this,RecyclerView.VERTICAL,false);
                                 rcv_book_list.setLayoutManager(linearLayoutManager);
-                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,customBookListModelList,finalAccessToken);
+                                BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,bookListDataList,finalAccessToken);
                                 rcv_book_list.setAdapter(bookListAdapter);
                                 pd.dismiss();
                             } else {
                                 //  alert_dialog_message("7");
 
-                                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookListActivity.this,RecyclerView.VERTICAL,false);
+                             /*   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(BookListActivity.this,RecyclerView.VERTICAL,false);
                                 rcv_book_list.setLayoutManager(linearLayoutManager);
                                 BookListAdapter bookListAdapter = new BookListAdapter(BookListActivity.this,customBookListModelList,finalAccessToken);
-                                rcv_book_list.setAdapter(bookListAdapter);
+                                rcv_book_list.setAdapter(bookListAdapter);*/
                                 pd.dismiss();
                             }
 

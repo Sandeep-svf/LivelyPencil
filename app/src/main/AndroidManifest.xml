@@ -109,7 +109,15 @@
         <activity
             android:name=".Activity.RunWizard.PopularListActivity"
             android:exported="true"
-            android:screenOrientation="locked" />
+            android:screenOrientation="locked" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".Activity.Login.ResetPasswordActivity"
             android:exported="true"
@@ -296,11 +304,7 @@
             android:name=".Activity.SplashActivity"
             android:exported="true"
             android:screenOrientation="locked">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

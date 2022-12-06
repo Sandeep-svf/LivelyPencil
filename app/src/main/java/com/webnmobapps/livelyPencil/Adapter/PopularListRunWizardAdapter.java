@@ -33,6 +33,7 @@ import com.webnmobapps.livelyPencil.Activity.StaticList.FollowersModel;
 import com.webnmobapps.livelyPencil.Model.PopularListModel;
 import com.webnmobapps.livelyPencil.Model.Record.PopularListResult;
 import com.webnmobapps.livelyPencil.Model.SmFlaxibleModel;
+import com.webnmobapps.livelyPencil.ModelPython.PopularListModelDataNew;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 
@@ -49,18 +50,30 @@ import retrofit2.Response;
 
 public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularListViewHolder> {
 
-    List<FollowersModel> followersModelList = new ArrayList<>();
-    List<PopularListResult> liveUserModelList;
-    Context context;
+
+    List<FollowersModel2> followersModelList = new ArrayList<>();
+     List<PopularListModelDataNew> liveUserModelList = new ArrayList<>();
+     Context context;
     private String user_id;
     private String status="0";
     RefreshInterface refreshInterface;
 
-    public PopularListRunWizardAdapter(List<PopularListResult> liveUserModelList, Context context, String user_id, RefreshInterface refreshInterface) {
+
+    public interface  Get_Position_Eye_Function
+    {
+        void page_details(String id, Integer userId);
+    }
+    public  Get_Position_Eye_Function get_position_eye_function;
+
+    public void setGet_position_itemDrawings(PopularListRunWizardAdapter.Get_Position_Eye_Function get_position_eye_function) {
+        this.get_position_eye_function = get_position_eye_function;
+    }
+
+
+    public PopularListRunWizardAdapter(List<PopularListModelDataNew> liveUserModelList, Context context) {
         this.liveUserModelList = liveUserModelList;
         this.context = context;
-        this.user_id = user_id;
-        this.refreshInterface = refreshInterface;
+
     }
 
     @NonNull
@@ -77,7 +90,9 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
         holder.user_profile.setImageResource(liveUserModelList.get(position).getImage());*/
 
 
-        followersModelList.add(new FollowersModel(1,position));
+
+
+        followersModelList.add(new FollowersModel2(1,position));
 
         String followerStatus2 = String.valueOf(followersModelList.get(position).getFollowersStatus());
         if(followerStatus2.equals("1"))
@@ -92,22 +107,37 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
 
 
         Glide.with(context).load(API_Client.BASE_IMAGE+liveUserModelList.get(position).getImage()).placeholder(R.drawable.ic_launcher_background).into(holder.user_profile);
-        Glide.with(context).load(API_Client.BASE_COVER_IMAGE+liveUserModelList.get(position).getStreamcoverimage()).placeholder(R.drawable.ic_launcher_background).into(holder.bg_image);
-        holder.name.setText(liveUserModelList.get(position).getFirstname());
-        holder.surname.setText(liveUserModelList.get(position).getLastname());
-        holder.t1.setText(liveUserModelList.get(position).getStreamtitle());
-        holder.t2.setText("Total page # "+liveUserModelList.get(position).getTotalPpage());
-        holder.t3.setText("Last Stream: "+liveUserModelList.get(position).getLastStream());
+        Glide.with(context).load(API_Client.BASE_IMAGE+liveUserModelList.get(position).getStreamCoverImage()).placeholder(R.drawable.ic_launcher_background).into(holder.bg_image);
+        holder.name.setText(liveUserModelList.get(position).getFirstName());
+        holder.surname.setText(liveUserModelList.get(position).getLastName());
+        holder.t1.setText(liveUserModelList.get(position).getStreamTitle());
+        holder.t2.setText("Total page # "+liveUserModelList.get(position).getTotal_book());
+       // holder.t2.setText("Total page # "+"19");
+        holder.t3.setText("Last Stream: "+liveUserModelList.get(position).getLast_stream());
+       // holder.t3.setText("Last Stream: "+"22:02:2022");
 
 
         holder.follow_unfollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                Integer id = liveUserModelList.get(position).getId();
+
+                get_position_eye_function.page_details(String.valueOf(position),id);
+
                 Log.e("test_model_value","Value before : "+followersModelList.get(position).getFollowersStatus());
-                String listUserId = String.valueOf(liveUserModelList.get(position).getId());
-                String followerStatus = String.valueOf(liveUserModelList.get(position).getFollowerStatus());
-                follow_unfollow_api(listUserId, holder,followerStatus2,position);
+               // String listUserId = String.valueOf(liveUserModelList.get(position).getId());
+              //  String followerStatus = String.valueOf(liveUserModelList.get(position).getFollowerStatus());
+               // follow_unfollow_api(listUserId, holder,followerStatus2,position);
+                if(followerStatus.equals("1"))
+                {
+                    holder.fu_icon.setImageResource(R.drawable.check_mark);
+                }else
+                {
+                    holder.fu_icon.setImageResource(R.drawable.unfollow_icon);
+                }
+
+
             }
         });
     }
@@ -141,15 +171,9 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
 
                             if (success.equals("true") || success.equals("True")) {
 
-                                if(followerStatus.equals("1"))
-                                {
-                                    holder.fu_icon.setImageResource(R.drawable.check_mark);
-                                }else
-                                {
-                                    holder.fu_icon.setImageResource(R.drawable.unfollow_icon);
-                                }
 
-                                update_list(position, status);
+
+                               // update_list(position, status);
                                 //   refreshInterface.refresh();
                                // alert_dialog_message(message);
                                // Toast.makeText(context, message, Toast.LENGTH_LONG).show();
@@ -226,7 +250,7 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
  /////////////////////////////////////
 
 
-    private void update_list(int position, String status2) {
+ /*   private void update_list(int position, String status2) {
 
             try {
                // liveUserModelList.get(position).setTotalFollowers(Integer.valueOf(5));
@@ -241,7 +265,7 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
             } catch (Exception e) {
                 e.printStackTrace();
             }
-    }
+    }*/
 
 
     private void alert_dialog_message(String value) {

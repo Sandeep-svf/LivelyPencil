@@ -157,22 +157,10 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                 yesDialogLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //relaseMediaPlayer();
-                        //geting userID data
-/*
-                        SharedPreferences getUserIdData = getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = getUserIdData.edit();
-                        editor.putString("UserID", "");
 
-                        editor.apply();
-                        Intent intent = new Intent(getActivity(), LoginJoinusActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra("finish", true);
-                        startActivity(intent);*/
+                        delete_user_account_api();
+                        dialog.dismiss();
 
-
-//                        logout_api();
                     }
 
                 });
@@ -180,7 +168,6 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                 noDialogLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
 
                         dialog.dismiss();
                     }
@@ -250,7 +237,6 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
                         fragmentTransaction.replace(R.id.fragment_contaner, radioFragment);
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();*/
-
 
 
                         dialog.dismiss();
@@ -411,6 +397,107 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
 
         return view;
     }
+
+    private void delete_user_account_api() {
+
+            final ProgressDialog pd = new ProgressDialog(getActivity());
+            pd.setCancelable(false);
+            pd.setMessage("loading...");
+            pd.show();
+
+
+            Call<CommonStatusMessageModelPython> call = API_Client.getClient().DELETE_USER_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(finalAccessToken);
+
+            call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                    pd.dismiss();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = response.body().getStatus();
+
+                            if (success.equals("true") || success.equals("True")) {
+                                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+                                SharedPreferences getUserIdData = getActivity().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = getUserIdData.edit();
+                                editor.putString("UserID", "");
+
+
+                                editor.apply();
+                                Intent intent = new Intent(getActivity(), LoginJoinusActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.putExtra("finish", true);
+                                startActivity(intent);
+
+                                pd.dismiss();
+                            } else {
+                                Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                            }
+
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getActivity(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                                switch (response.code()) {
+                                    case 400:
+                                        Toast.makeText(getActivity(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        Toast.makeText(getActivity(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        Toast.makeText(getActivity(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        Toast.makeText(getActivity(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        Toast.makeText(getActivity(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        Toast.makeText(getActivity(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        Toast.makeText(getActivity(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        Toast.makeText(getActivity(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                    Log.e("bhgyrrrthbh", String.valueOf(t));
+                    if (t instanceof IOException) {
+                        Toast.makeText(getActivity(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(getActivity(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            });
+
+        }
 
     private boolean validation() {
         if(userName.equals("")){

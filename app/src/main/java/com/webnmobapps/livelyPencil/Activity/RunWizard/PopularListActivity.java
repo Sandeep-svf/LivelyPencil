@@ -23,17 +23,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.webnmobapps.livelyPencil.Activity.Book.BookListActivity;
 import com.webnmobapps.livelyPencil.Activity.Interface.RefreshInterface;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
+import com.webnmobapps.livelyPencil.Activity.StaticList.FollowersModel;
 import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
 import com.webnmobapps.livelyPencil.Adapter.LiveUserAdapter;
 import com.webnmobapps.livelyPencil.Adapter.PopularListRunWizardAdapter;
 import com.webnmobapps.livelyPencil.Model.PopularListModel;
 import com.webnmobapps.livelyPencil.Model.Record.PopularListResult;
 import com.webnmobapps.livelyPencil.Model.RegisterModel;
+import com.webnmobapps.livelyPencil.ModelPython.PopularListModelDataNew;
+import com.webnmobapps.livelyPencil.ModelPython.PopularListModelNew;
 import com.webnmobapps.livelyPencil.R;
 import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 import com.webnmobapps.livelyPencil.StaticModel.LiveUserModel;
+import com.webnmobapps.livelyPencil.utility.StaticKey;
 
 import org.json.JSONObject;
 
@@ -48,16 +53,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PopularListActivity extends AppCompatActivity {
+public class PopularListActivity extends AppCompatActivity implements PopularListRunWizardAdapter.Get_Position_Eye_Function {
 
+    List<FollowersModel> followersModelList2 = new ArrayList<>();
 
     AppCompatButton popular_list_start_button;
     RecyclerView rcv_popular_list;
     PopularListRunWizardAdapter popularListRunWizardAdapter;
     List<PopularListRunWizardModel> liveUserModelList = new ArrayList<>();
     ConstraintLayout cp;
-    List<PopularListResult> popularListResultList = new ArrayList<>();
-    private String user_id;
+    List<PopularListModelDataNew> popularListModelDataNewList = new ArrayList<>();
+    private String user_id,accessToken,finalAccessToken;
     RefreshInterface refreshInterface;
 
     @Override
@@ -69,8 +75,17 @@ public class PopularListActivity extends AppCompatActivity {
         inits();
 
 
-        SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+        try {
+            SharedPreferences sharedPreferences= getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
+            user_id=sharedPreferences.getString("UserID","");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        SharedPreferences sharedPreferences= PopularListActivity.this.getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");
+        accessToken=sharedPreferences.getString("accessToken","");
+        finalAccessToken = StaticKey.prefixTokem+accessToken;
 
         Log.e("dsafsad","user_id: "+user_id);
        // add_data_in_model();
@@ -96,37 +111,45 @@ public class PopularListActivity extends AppCompatActivity {
 
     }
 
-    private void popular_list_api() {
+    public void popular_list_api() {
         Log.e("dsafsad","API Calling ...........");
             final ProgressDialog pd = new ProgressDialog(PopularListActivity.this);
             pd.setCancelable(false);
             pd.setMessage("loading...");
             pd.show();
 
-            Call<PopularListModel> call = API_Client.getClient2().POPULAR_LIST_MODEL_CALL("47");
+            Call<PopularListModelNew> call = API_Client.getClient().POPULAR_LIST_MODEL_NEW_CALL(finalAccessToken);
 
-            call.enqueue(new Callback<PopularListModel>() {
+            call.enqueue(new Callback<PopularListModelNew>() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
-                public void onResponse(Call<PopularListModel> call, Response<PopularListModel> response) {
+                public void onResponse(Call<PopularListModelNew> call, Response<PopularListModelNew> response) {
                     pd.dismiss();
 
 
                     try {
                         if (response.isSuccessful()) {
                             String message = response.body().getMessage();
-                            String success = response.body().getSuccess();
+                            String success = response.body().getStatus();
 
                             if (success.equals("true") || success.equals("True")) {
 
-                                popularListResultList = response.body().getPopularListResult();
-                                Log.e("dsafsad", String.valueOf(popularListResultList.size()+"ok"));
+                                popularListModelDataNewList = response.body().getData();
+                                Log.e("dsafsad", String.valueOf(popularListModelDataNewList.size()+"ok"));
+
+                                for(int i=0; i<popularListModelDataNewList.size();i++){
+                                    followersModelList2.add(new FollowersModel(0,i,0));
+                                }
+
 
                                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PopularListActivity.this);
                                 linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                                 rcv_popular_list.setLayoutManager(linearLayoutManager);
-                                popularListRunWizardAdapter = new PopularListRunWizardAdapter(popularListResultList,PopularListActivity.this, user_id, refreshInterface);
+
+
+                                popularListRunWizardAdapter = new PopularListRunWizardAdapter(popularListModelDataNewList,PopularListActivity.this);
                                 rcv_popular_list.setAdapter(popularListRunWizardAdapter);
+                                popularListRunWizardAdapter.setGet_position_itemDrawings(PopularListActivity.this);
 
 
 
@@ -188,7 +211,7 @@ public class PopularListActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<PopularListModel> call, Throwable t) {
+                public void onFailure(Call<PopularListModelNew> call, Throwable t) {
                     Log.e("bhgyrrrthbh", String.valueOf(t));
                     if (t instanceof IOException) {
                         Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -350,5 +373,21 @@ public class PopularListActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void page_details(String id, Integer userId) {
+        Integer position = Integer.valueOf(id);
 
+        String status = String.valueOf(followersModelList2.get(position).getFollowersStatus());
+
+
+        if(status.equals("0")){
+            followersModelList2.get(position).setFollowersStatus(1);
+            followersModelList2.get(position).setUserId(userId);
+
+        }else{
+            followersModelList2.get(position).setFollowersStatus(0);
+            followersModelList2.get(position).setUserId(0);
+        }
+
+    }
 }
