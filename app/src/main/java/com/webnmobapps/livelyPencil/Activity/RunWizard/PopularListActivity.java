@@ -28,11 +28,13 @@ import com.webnmobapps.livelyPencil.Activity.Interface.RefreshInterface;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
 import com.webnmobapps.livelyPencil.Activity.StaticList.FollowersModel;
 import com.webnmobapps.livelyPencil.Activity.UserWall.HomeActivity;
+import com.webnmobapps.livelyPencil.Adapter.FollowersModel2;
 import com.webnmobapps.livelyPencil.Adapter.LiveUserAdapter;
 import com.webnmobapps.livelyPencil.Adapter.PopularListRunWizardAdapter;
 import com.webnmobapps.livelyPencil.Model.PopularListModel;
 import com.webnmobapps.livelyPencil.Model.Record.PopularListResult;
 import com.webnmobapps.livelyPencil.Model.RegisterModel;
+import com.webnmobapps.livelyPencil.ModelPython.CommonStatusMessageModelPython;
 import com.webnmobapps.livelyPencil.ModelPython.PopularListModelDataNew;
 import com.webnmobapps.livelyPencil.ModelPython.PopularListModelNew;
 import com.webnmobapps.livelyPencil.R;
@@ -65,6 +67,7 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
     List<PopularListModelDataNew> popularListModelDataNewList = new ArrayList<>();
     private String user_id,accessToken,finalAccessToken;
     RefreshInterface refreshInterface;
+    List<Integer> userIdList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
 
         //refreshInterface = this;
         inits();
+
+        followersModelList2.clear();
 
 
         try {
@@ -95,8 +100,28 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
         popular_list_start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PopularListActivity.this, HomeActivity.class);
-                startActivity(intent);
+
+               // Log.e("test2","list size is: "+followersModelList2.size());
+
+                for(int i=0; i < followersModelList2.size() ; i++ ){
+                    String status = String.valueOf(followersModelList2.get(i).getFollowersStatus());
+
+                   // Log.e("test2","status is : "+status);
+                    if(status.equals("0")){
+                        userIdList.add(followersModelList2.get(i).getUserId());
+                      //  Log.e("test2","user id id: "+followersModelList2.get(i).getUserId());
+                    }
+                }
+
+
+                Log.e("test2","userIdList size is: "+userIdList.size());
+                for(int i=0; i< userIdList.size();i++){
+                    Log.e("test2","userIdList item is: "+userIdList.get(i).toString());
+                }
+
+                follow_unfollow_api();
+
+
             }
         });
 
@@ -110,6 +135,104 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
         });
 
     }
+
+    public void follow_unfollow_api(){
+
+            Log.e("dsafsad","API Calling ...........");
+            final ProgressDialog pd = new ProgressDialog(PopularListActivity.this);
+            pd.setCancelable(false);
+            pd.setMessage("loading...");
+            pd.show();
+
+            Call<CommonStatusMessageModelPython> call = API_Client.getClient().ADD_FOLLOWERS_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(finalAccessToken,userIdList);
+
+            call.enqueue(new Callback<CommonStatusMessageModelPython>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
+                @Override
+                public void onResponse(Call<CommonStatusMessageModelPython> call, Response<CommonStatusMessageModelPython> response) {
+                    pd.dismiss();
+
+
+                    try {
+                        if (response.isSuccessful()) {
+                            String message = response.body().getMessage();
+                            String success = response.body().getStatus();
+
+                            if (success.equals("true") || success.equals("True")) {
+
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                                Intent intent = new Intent(PopularListActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                            }
+
+
+                        } else {
+                            try {
+                                JSONObject jObjError = new JSONObject(response.errorBody().string());
+                                Toast.makeText(getApplicationContext(), jObjError.getString("message"), Toast.LENGTH_LONG).show();
+                                switch (response.code()) {
+                                    case 400:
+                                        alert_dialog_message("400");
+                                        //  Toast.makeText(getApplicationContext(), "The server did not understand the request.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 401:
+                                        alert_dialog_message("401");
+                                        // Toast.makeText(getApplicationContext(), "Unauthorized The requested page needs a username and a password.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 404:
+                                        alert_dialog_message("404");
+                                        //Toast.makeText(getApplicationContext(), "The server can not find the requested page.", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 500:
+                                        alert_dialog_message("500");
+                                        //Toast.makeText(getApplicationContext(), "Internal Server Error..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 503:
+                                        alert_dialog_message("503");
+                                        // Toast.makeText(getApplicationContext(), "Service Unavailable..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 504:
+                                        alert_dialog_message("504");
+                                        //  Toast.makeText(getApplicationContext(), "Gateway Timeout..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    case 511:
+                                        alert_dialog_message("511");
+                                        // Toast.makeText(getApplicationContext(), "Network Authentication Required ..", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    default:
+                                        alert_dialog_message("default");
+                                        //Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (
+                            Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonStatusMessageModelPython> call, Throwable t) {
+                    Log.e("bhgyrrrthbh", String.valueOf(t));
+                    if (t instanceof IOException) {
+                        Toast.makeText(getApplicationContext(), "This is an actual network failure :( inform the user and possibly retry)" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    } else {
+                        Log.e("conversion issue", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Please Check your Internet Connection...." + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                    }
+                }
+            });
+        }
 
     public void popular_list_api() {
         Log.e("dsafsad","API Calling ...........");
@@ -138,7 +261,7 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
                                 Log.e("dsafsad", String.valueOf(popularListModelDataNewList.size()+"ok"));
 
                                 for(int i=0; i<popularListModelDataNewList.size();i++){
-                                    followersModelList2.add(new FollowersModel(0,i,0));
+                                    followersModelList2.add(new FollowersModel(1,i,0));
                                 }
 
 
@@ -312,7 +435,7 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
         });
     }
 
-    private void add_data_in_model() {
+   /* private void add_data_in_model() {
         PopularListRunWizardModel popularListRunWizardModel = new PopularListRunWizardModel();
         popularListRunWizardModel.setUserName("Maria");
         popularListRunWizardModel.setUserSurname("Yerasimos");
@@ -363,7 +486,7 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
         popularListRunWizardModel.setTitle("Breaking News");
         liveUserModelList.add(popularListRunWizardModel);
 
-    }
+    }*/
 
 
     private void inits() {
@@ -374,20 +497,23 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
 
 
     @Override
-    public void page_details(String id, Integer userId) {
+    public void page_details(String id, Integer userId, String status) {
         Integer position = Integer.valueOf(id);
 
-        String status = String.valueOf(followersModelList2.get(position).getFollowersStatus());
 
 
-        if(status.equals("0")){
-            followersModelList2.get(position).setFollowersStatus(1);
-            followersModelList2.get(position).setUserId(userId);
+        Log.e("test","CASE 1 : position"+ (position));
+        Log.e("test","CASE 2 : userId"+userId);
+        Log.e("test","CASE 3 : status"+status);
 
-        }else{
-            followersModelList2.get(position).setFollowersStatus(0);
-            followersModelList2.get(position).setUserId(0);
-        }
+        //followersModelList2.add(new FollowersModel(0,i,0));
+
+        followersModelList2.get(position).setFollowersStatus(Integer.parseInt(status));
+        followersModelList2.get(position).setUserId(userId);
+
+
+       // followersModelList2.add(new FollowersModel(Integer.parseInt(status),position,userId));
+
 
     }
 }

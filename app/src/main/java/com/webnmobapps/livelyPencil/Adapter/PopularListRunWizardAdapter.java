@@ -61,7 +61,7 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
 
     public interface  Get_Position_Eye_Function
     {
-        void page_details(String id, Integer userId);
+        void page_details(String id, Integer userId, String status);
     }
     public  Get_Position_Eye_Function get_position_eye_function;
 
@@ -123,20 +123,29 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
 
                 Integer id = liveUserModelList.get(position).getId();
 
-                get_position_eye_function.page_details(String.valueOf(position),id);
+                String status , newStatus;
 
-                Log.e("test_model_value","Value before : "+followersModelList.get(position).getFollowersStatus());
+                status = String.valueOf(followersModelList.get(position).getFollowersStatus());
+
+               // Log.e("test_model_value","Value before : "+followersModelList.get(position).getFollowersStatus());
                // String listUserId = String.valueOf(liveUserModelList.get(position).getId());
-              //  String followerStatus = String.valueOf(liveUserModelList.get(position).getFollowerStatus());
+               // String followerStatus = String.valueOf(liveUserModelList.get(position).getFollowerStatus());
                // follow_unfollow_api(listUserId, holder,followerStatus2,position);
-                if(followerStatus.equals("1"))
-                {
-                    holder.fu_icon.setImageResource(R.drawable.check_mark);
-                }else
+                if(status.equals("1"))
                 {
                     holder.fu_icon.setImageResource(R.drawable.unfollow_icon);
+                    followersModelList.get(position).setFollowersStatus(0);
+                    holder.f_unf_text.setText("UNF");
+                    newStatus ="0";
+                }else
+                {
+                    holder.fu_icon.setImageResource(R.drawable.check_mark);
+                    followersModelList.get(position).setFollowersStatus(1);
+                    holder.f_unf_text.setText("Follow");
+                    newStatus = "1";
                 }
 
+                get_position_eye_function.page_details(String.valueOf(position),id,newStatus);
 
             }
         });
@@ -144,8 +153,6 @@ public class PopularListRunWizardAdapter extends RecyclerView.Adapter<PopularLis
 
     private void follow_unfollow_api(String listUserId, PopularListViewHolder holder, String followerStatus, int position) {
         // folloe unfollow api code..........
-
-
 
             String status;
             if(followerStatus.equals("1"))

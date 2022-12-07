@@ -176,8 +176,6 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/fu_icon"
-
-
                 app:layout_constraintWidth_percent="0.9"
                 android:tint="@color/white"
                 android:src="@drawable/check_mark"

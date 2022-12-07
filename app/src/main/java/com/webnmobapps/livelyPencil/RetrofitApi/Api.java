@@ -486,6 +486,9 @@ public interface Api {
     Call<PopularListModelNew> POPULAR_LIST_MODEL_NEW_CALL(@Header("Authorization") String Authorization);
 
 
+    @GET("addfollowers/")
+    Call<CommonStatusMessageModelPython> ADD_FOLLOWERS_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization,
+                                                                                               @Field("id") List<Integer> id);
 
 }
 
