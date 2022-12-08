@@ -212,7 +212,7 @@
 
         </de.hdodenhof.circleimageview.CircleImageView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/page_top_icon"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -232,7 +232,7 @@
 
 
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+        </androidx.appcompat.widget.AppCompatImageView>
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -284,10 +284,6 @@
 
 
         </androidx.appcompat.widget.AppCompatImageView>
-
-
-
-
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -443,7 +439,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.15"
@@ -463,7 +459,7 @@
 
         >
 
-    </de.hdodenhof.circleimageview.CircleImageView>
+    </androidx.appcompat.widget.AppCompatImageView>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

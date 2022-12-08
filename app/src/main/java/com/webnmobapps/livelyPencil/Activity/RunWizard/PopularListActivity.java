@@ -88,7 +88,6 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
         }
 
         SharedPreferences sharedPreferences= PopularListActivity.this.getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
-        user_id=sharedPreferences.getString("UserID","");
         accessToken=sharedPreferences.getString("accessToken","");
         finalAccessToken = StaticKey.prefixTokem+accessToken;
 
