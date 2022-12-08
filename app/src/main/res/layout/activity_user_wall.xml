@@ -44,13 +44,13 @@
             >
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/page_top_icon"
+                android:id="@+id/page_top_icon2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/lastpages_nonactive"
+             
                 app:layout_constraintHeight_percent="0.7"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/friends_followers_icon"
+                app:layout_constraintEnd_toStartOf="@+id/notification_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25">
@@ -60,15 +60,16 @@
 
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/friends_followers_icon"
+            
+                android:id="@+id/notification_icon"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/liveusers_nonactive"
+                android:src="@drawable/notification"
 
                 app:layout_constraintHeight_percent="0.7"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/settings_image_layout"
-                app:layout_constraintStart_toEndOf="@+id/page_top_icon"
+                app:layout_constraintStart_toEndOf="@+id/page_top_icon2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25">
 
@@ -109,7 +110,7 @@
                 app:layout_constraintHeight_percent="0.7"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/friends_followers_icon"
+                app:layout_constraintStart_toEndOf="@+id/notification_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
                 >
@@ -126,7 +127,7 @@
                 app:layout_constraintHeight_percent="0.7"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/friends_followers_icon"
+                app:layout_constraintStart_toEndOf="@+id/notification_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
                 >
@@ -144,7 +145,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
 
 
-            android:background="@color/text_color"
+            android:background="@color/border_line_color"
             ></View>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -200,6 +201,28 @@
             app:layout_constraintHorizontal_bias="0.03"
 
             android:src="@drawable/ic_launcher_background"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/page_top_icon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintWidth_percent="0.1"
+
+            app:layout_constraintHorizontal_bias="0.25"
+
+            android:src="@drawable/n_shelf"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -268,17 +291,16 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-
-            android:id="@+id/notification_icon"
+            android:id="@+id/friends_followers_icon"
+            
             android:layout_width="0dp"
             android:layout_height="0dp"
 
             app:layout_constraintHeight_percent="0.55"
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintWidth_percent="0.1"
-            app:layout_constraintHorizontal_bias="0.9"
 
-            android:src="@drawable/notification"
+            android:src="@drawable/search"
 
 
             app:layout_constraintTop_toTopOf="parent"
@@ -453,7 +475,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.04"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.85"
+
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
