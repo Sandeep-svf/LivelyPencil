@@ -586,7 +586,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/password_edit_text"
                 android:layout_width="0dp"
-                android:layout_weight="8.5"
+                android:layout_weight="8"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:hint="@string/enter_password"
@@ -597,6 +597,49 @@
                 android:singleLine="true">
 
             </androidx.appcompat.widget.AppCompatEditText>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hiden_password_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".5"
+                    app:layout_constraintHeight_percent="0.7"
+                    app:layout_constraintWidth_percent="0.1"
+                    app:layout_constraintHorizontal_bias="0.95"
+
+                    android:src="@drawable/hidden"
+                    android:tint="@color/settingEditBackgroundColor"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+
+                </androidx.appcompat.widget.AppCompatImageView>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/visibale_password_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight=".5"
+
+                    app:layout_constraintHeight_percent="0.7"
+                    app:layout_constraintWidth_percent="0.1"
+                    app:layout_constraintHorizontal_bias="0.95"
+
+                    android:src="@drawable/eye"
+                    android:visibility="gone"
+                    android:tint="@color/settingEditBackgroundColor"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+
+                </androidx.appcompat.widget.AppCompatImageView>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
 

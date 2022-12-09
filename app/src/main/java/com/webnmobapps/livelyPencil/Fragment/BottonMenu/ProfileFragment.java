@@ -231,6 +231,7 @@ public class ProfileFragment extends Fragment {
                            // Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
 
 
+                            Log.e("dfsdfsdfwerwe",success);
 
                                 UserProfileModel userProfileModel = response.body();
                                 UserProfileData userProfileData = userProfileModel.getUserProfileData();

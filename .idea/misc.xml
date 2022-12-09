@@ -235,14 +235,16 @@
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_book_list.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_create_book.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_edit_book.xml" value="0.17" />
+        <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_login.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_name_email.xml" value="0.1425925925925926" />
-        <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_owner_profile2.xml" value="0.209375" />
+        <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_owner_profile2.xml" value="0.2512873326467559" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_popular_list.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_stream_page.xml" value="0.209375" />
-        <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_user_wall.xml" value="0.18" />
+        <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/activity_user_wall.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/book_list2.xml" value="0.22" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/delete_acccount_dialog.xml" value="0.209375" />
+        <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/fragment_friend_followers.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/fragment_settings.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/logout_dialog.xml" value="0.209375" />
         <entry key="..\:/Users/dmin/StudioProjects/LivelyPencil/app/src/main/res/layout/popular_list_run_wizard_layout.xml" value="0.209375" />
@@ -258,7 +260,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.22" />
+        <option name="scale" value="0.2512873326467559" />
       </ProjectState>
     </option>
   </component>

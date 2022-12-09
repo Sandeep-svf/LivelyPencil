@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,8 @@ public class StreamPageActivity extends AppCompatActivity {
     private Uri selectedImageUri;
 
     AppCompatEditText passwordEditText, confirm_password_EditText;
+    private AppCompatImageView hiden_password_image, c_hiden_password_image, visibale_password_image, c_visibale_password_image;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,52 @@ public class StreamPageActivity extends AppCompatActivity {
                 if(! private_public.isChecked()) private_public.setText("Private");
             }
         });
+
+        hiden_password_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visibale_password_image.setVisibility(View.VISIBLE);
+                hiden_password_image.setVisibility(View.GONE);
+                passwordEditText.setTransformationMethod(null);
+                passwordEditText.setSelection(passwordEditText.getText().length());
+
+            }
+        });
+
+        visibale_password_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hiden_password_image.setVisibility(View.VISIBLE);
+                visibale_password_image.setVisibility(View.GONE);
+
+                passwordEditText.setTransformationMethod(new PasswordTransformationMethod());
+                passwordEditText.setSelection(passwordEditText.getText().length());
+            }
+        });
+
+
+        c_hiden_password_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c_visibale_password_image.setVisibility(View.VISIBLE);
+                c_hiden_password_image.setVisibility(View.GONE);
+                confirm_password_EditText.setTransformationMethod(null);
+                confirm_password_EditText.setSelection(confirm_password_EditText.getText().length());
+
+            }
+        });
+
+        c_visibale_password_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c_hiden_password_image.setVisibility(View.VISIBLE);
+                c_visibale_password_image.setVisibility(View.GONE);
+
+                confirm_password_EditText.setTransformationMethod(new PasswordTransformationMethod());
+                confirm_password_EditText.setSelection(confirm_password_EditText.getText().length());
+            }
+        });
+
 
         stream_page_Image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -451,6 +500,12 @@ public class StreamPageActivity extends AppCompatActivity {
     }
 
     private void inits() {
+
+        hiden_password_image = findViewById(R.id.hiden_password_image);
+        c_hiden_password_image = findViewById(R.id.c_hiden_password_image);
+        visibale_password_image = findViewById(R.id.visibale_password_image);
+        c_visibale_password_image = findViewById(R.id.c_visibale_password_image);
+
         stream_page_Image = findViewById(R.id.stream_page_Image);
         confirm_button2 = findViewById(R.id.confirm_button2);
         confirm_button = findViewById(R.id.confirm_button);

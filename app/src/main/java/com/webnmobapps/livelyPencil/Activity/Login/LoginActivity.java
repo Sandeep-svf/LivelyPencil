@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -18,6 +19,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     private String loginMessage;
     private String UserID = "";
     AppCompatTextView terms_privacy_help_layout;
+    private AppCompatImageView hiden_password_image, visibale_password_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,29 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         inits();
+
+        hiden_password_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                visibale_password_image.setVisibility(View.VISIBLE);
+                hiden_password_image.setVisibility(View.GONE);
+                password_edit_text.setTransformationMethod(null);
+                password_edit_text.setSelection(password_edit_text.getText().length());
+
+            }
+        });
+
+        visibale_password_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hiden_password_image.setVisibility(View.VISIBLE);
+                visibale_password_image.setVisibility(View.GONE);
+
+                password_edit_text.setTransformationMethod(new PasswordTransformationMethod());
+                password_edit_text.setSelection(password_edit_text.getText().length());
+            }
+        });
+
 
         terms_privacy_help_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +180,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
+
+
 
 
 
@@ -370,7 +398,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Call<LoginModelPython> call = API_Client.getClient().login(email_edittext.getText().toString()
                 ,password_edit_text.getText().toString()
-            ,"sadsadsadasda" );
+            ,"dfadsfsadfdsfs" );
 
         call.enqueue(new Callback<LoginModelPython>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -498,6 +526,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void inits() {
+        hiden_password_image = findViewById(R.id.hiden_password_image);
+        visibale_password_image = findViewById(R.id.visibale_password_image);
+
         terms_privacy_help_layout = findViewById(R.id.terms_privacy_help_layout);
         forgot_password = findViewById(R.id.forgot_password);
         email_edittext123 = findViewById(R.id.email_edittext123);

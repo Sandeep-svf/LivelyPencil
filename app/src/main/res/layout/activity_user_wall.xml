@@ -59,6 +59,8 @@
             </androidx.appcompat.widget.AppCompatImageView>
 
 
+
+
             <androidx.appcompat.widget.AppCompatImageView
             
                 android:id="@+id/notification_icon"
@@ -135,6 +137,32 @@
 
             </androidx.appcompat.widget.AppCompatImageView>
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+
+
+                android:id="@+id/notificaiton_indicator"
+
+                android:visibility="gone"
+                android:src="@color/red"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintWidth_percent="0.15"
+                app:layout_constraintHeight_percent="0.2"
+
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintHorizontal_bias="0.58"
+
+                >
+
+
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
@@ -172,7 +200,7 @@
 
 <View
     android:layout_width="match_parent"
-    android:layout_height="2dp"
+    android:layout_height="1dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"
@@ -379,29 +407,7 @@
 
         </androidx.appcompat.widget.AppCompatImageView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
 
-            android:id="@+id/notificaiton_indicator"
-
-            android:src="@color/red"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintWidth_percent="0.015"
-            app:layout_constraintHeight_percent="0.2"
-
-            app:layout_constraintVertical_bias="0.4"
-            app:layout_constraintHorizontal_bias="0.88"
-
-            >
-
-
-
-        </de.hdodenhof.circleimageview.CircleImageView>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/notification_icon_2"

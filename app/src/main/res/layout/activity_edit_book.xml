@@ -131,8 +131,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back_arrow"
-                android:layout_width="11dp"
-                android:layout_height="11dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/back_arrow"
 
                 android:tint="@color/white"
