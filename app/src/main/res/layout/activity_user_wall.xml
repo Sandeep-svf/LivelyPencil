@@ -234,7 +234,28 @@
 
         </androidx.appcompat.widget.AppCompatImageView>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.65"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintHorizontal_bias="0.5"
 
+
+
+
+            app:civ_border_color="@color/border_line_color"
+
+
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            >
+
+        </androidx.appcompat.widget.AppCompatImageView>
         <androidx.appcompat.widget.AppCompatImageView
             android:visibility="gone"
             android:id="@+id/home_icon"
@@ -296,7 +317,7 @@
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintWidth_percent="0.1"
 
-            android:src="@drawable/search"
+            android:src="@drawable/new_search"
 
 
             app:layout_constraintTop_toTopOf="parent"
@@ -439,27 +460,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintVertical_bias="1"
 
-        app:civ_border_width="10dp"
-        app:civ_border_color="@color/border_line_color"
-
-
-
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        >
-
-    </androidx.appcompat.widget.AppCompatImageView>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

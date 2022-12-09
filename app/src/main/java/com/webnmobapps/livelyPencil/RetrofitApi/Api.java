@@ -58,11 +58,13 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -486,10 +488,11 @@ public interface Api {
     Call<PopularListModelNew> POPULAR_LIST_MODEL_NEW_CALL(@Header("Authorization") String Authorization);
 
 
-    @FormUrlEncoded
+
+    @Headers({"Content-Type:application/json"})
     @POST("addfollowers/")
     Call<CommonStatusMessageModelPython> ADD_FOLLOWERS_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization,
-                                                                                               @Field("id") List<Integer> id);
+                                                                                               @Body String body);
 
 
 

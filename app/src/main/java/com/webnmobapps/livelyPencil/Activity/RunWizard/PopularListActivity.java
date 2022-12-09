@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.webnmobapps.livelyPencil.Activity.Book.BookListActivity;
 import com.webnmobapps.livelyPencil.Activity.Interface.RefreshInterface;
 import com.webnmobapps.livelyPencil.Activity.JoinUs.SelectIntrestActivity;
@@ -42,6 +43,8 @@ import com.webnmobapps.livelyPencil.RetrofitApi.API_Client;
 import com.webnmobapps.livelyPencil.StaticModel.LiveUserModel;
 import com.webnmobapps.livelyPencil.utility.StaticKey;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -137,13 +140,41 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
 
     public void follow_unfollow_api(){
 
+        try {
             Log.e("dsafsad","API Calling ...........");
             final ProgressDialog pd = new ProgressDialog(PopularListActivity.this);
             pd.setCancelable(false);
             pd.setMessage("loading...");
             pd.show();
 
-            Call<CommonStatusMessageModelPython> call = API_Client.getClient().ADD_FOLLOWERS_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(finalAccessToken,userIdList);
+            JSONObject paramObject = new JSONObject();
+            JSONArray jsonArray = new JSONArray();
+            for(int i=0; i < userIdList.size() ; i++){
+                jsonArray.put(userIdList.get(i));
+            }
+            paramObject.put("id",jsonArray);
+
+/*
+            JSONArray myArray = new JSONArray();
+            myArray.put(userIdList);
+
+            JSONObject j = new JSONObject();
+            j.put("id",userIdList);
+
+
+            Gson gson=new Gson();
+            String json=gson.toJson(userIdList);*/
+
+
+
+            Log.e("myArray",paramObject.toString());
+
+
+
+
+
+
+            Call<CommonStatusMessageModelPython> call = API_Client.getClient().ADD_FOLLOWERS_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(finalAccessToken,paramObject.toString());
 
             call.enqueue(new Callback<CommonStatusMessageModelPython>() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -159,6 +190,7 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
 
                             if (success.equals("true") || success.equals("True")) {
 
+                                userIdList.clear();
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                 pd.dismiss();
                                 Intent intent = new Intent(PopularListActivity.this, HomeActivity.class);
@@ -231,7 +263,10 @@ public class PopularListActivity extends AppCompatActivity implements PopularLis
                     }
                 }
             });
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
     public void popular_list_api() {
         Log.e("dsafsad","API Calling ...........");

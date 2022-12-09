@@ -113,7 +113,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
                 page_top_icon.setImageResource(R.drawable.lastpages_nonactive);
-                friends_followers_icon.setImageResource(R.drawable.liveusers_nonactive);
+                friends_followers_icon.setImageResource(R.drawable.new_search);
                 settings_image_layout.setImageResource(R.drawable.settings_active);
                 notification_icon.setImageResource(R.drawable.notification);
 
@@ -183,7 +183,7 @@ public class HomeActivity extends AppCompatActivity {
                 relaseMediaPlayer();
 
                 page_top_icon.setImageResource(R.drawable.lastpages_active);
-                friends_followers_icon.setImageResource(R.drawable.liveusers_nonactive);
+                friends_followers_icon.setImageResource(R.drawable.new_search);
                 settings_image_layout.setImageResource(R.drawable.setting_nonactive);
                 notification_icon.setImageResource(R.drawable.notification);
 
@@ -438,7 +438,7 @@ public class HomeActivity extends AppCompatActivity {
 
              //   home_icon.setImageResource(R.drawable.home);
               //  search_icon.setImageResource(R.drawable.search);
-                friends_followers_icon.setImageResource(R.drawable.liveusers_nonactive);
+                friends_followers_icon.setImageResource(R.drawable.new_search);
               //  messages_mailbox_icon.setImageResource(R.drawable.messages_mailbox);
                 notification_icon.setImageResource(R.drawable.notification);
             }
@@ -494,7 +494,7 @@ public class HomeActivity extends AppCompatActivity {
                // page_top_icon.setImageResource(R.drawable.n_shelf);
 
                 page_top_icon.setImageResource(R.drawable.lastpages_nonactive);
-                friends_followers_icon.setImageResource(R.drawable.liveusers_active);
+                friends_followers_icon.setImageResource(R.drawable.new_search_active);
                 settings_image_layout.setImageResource(R.drawable.setting_nonactive);
                 notification_icon.setImageResource(R.drawable.notification);
 
@@ -558,7 +558,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
                 page_top_icon.setImageResource(R.drawable.lastpages_nonactive);
-                friends_followers_icon.setImageResource(R.drawable.liveusers_nonactive);
+                friends_followers_icon.setImageResource(R.drawable.new_search);
                 settings_image_layout.setImageResource(R.drawable.setting_nonactive);
                 notification_icon.setImageResource(R.drawable.noti_color);
 
