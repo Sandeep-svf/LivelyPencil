@@ -86,7 +86,7 @@ public class CreateBookActivity extends AppCompatActivity {
     private String imageBase64 , key;
     private Uri selectedImageUri;
     private String bookNameData,bookDescriptionData,bookStatusData="0";
-    private String finalAccessToken,accessToken,user_id;
+    private String finalAccessToken,accessToken,user_id,editBookKey="";
     private SwitchMaterial book_status_flag;
 
 
@@ -96,6 +96,18 @@ public class CreateBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_book);
         inits();
 
+
+        try {
+            editBookKey = getIntent().getStringExtra("editbook");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(editBookKey.equals("101")){
+
+        }else{
+
+        }
 
         SharedPreferences sharedPreferences= CreateBookActivity.this.getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");

@@ -102,20 +102,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.01"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.91"
-            android:text="@string/edit"
-            android:textSize="@dimen/_12sdp"
-            android:fontFamily="@font/raleway_medium"
-            android:textColor="@color/settingEditBackgroundColor"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -172,7 +159,21 @@
                 ></androidx.appcompat.widget.AppCompatTextView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/edit_book_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.01"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
+            android:text="@string/edit"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/settingEditBackgroundColor"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatTextView

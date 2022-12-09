@@ -285,4 +285,8 @@
     <string name="delete_book">Delete Book</string>
     <string name="address">sdfsd</string>
     <string name="go_live">Go Live</string>
+    <string name="update">Update</string>
+    <string name="edit_book">Edit Book</string>
+    <string name="please_enter_book_cover">Please enter book name.</string>
+    <string name="please_enter_book_desc">Please enter book description.</string>
 </resources>

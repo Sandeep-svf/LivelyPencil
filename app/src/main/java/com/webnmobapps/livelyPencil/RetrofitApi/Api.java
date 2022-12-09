@@ -493,8 +493,14 @@ public interface Api {
 
 
 
+    @Multipart
     @PUT
-    Call<CommonStatusMessageModelPython> EDIT_BBOK_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Url String url,@Header("Authorization") String Authorization);
+    Call<CommonStatusMessageModelPython> EDIT_BBOK_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Url String url,
+                                                                                           @Header("Authorization") String Authorization,
+                                                                                           @Part ("book_name") RequestBody book_name,
+                                                                                           @Part ("book_descriptions") RequestBody book_descriptions,
+                                                                                           @Part ("book_status") RequestBody book_status,
+                                                                                           @Part MultipartBody.Part book_image);
 
 
 }

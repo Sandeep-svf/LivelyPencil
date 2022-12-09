@@ -23,6 +23,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.Book.CreateBookActivity;
+import com.webnmobapps.livelyPencil.Activity.Book.EditBookActivity;
 import com.webnmobapps.livelyPencil.Activity.Book.WebviewEditorActivity;
 import com.webnmobapps.livelyPencil.Activity.Login.LoginJoinusActivity;
 import com.webnmobapps.livelyPencil.ModelPython.BookListData;
@@ -76,6 +78,25 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListViewHolder> {
         Glide.with(context).load(API_Client.BASE_IMAGE+bookListDataList.get(position).getBookImage())
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.book_cover_image);
+
+
+
+        holder.edit_book_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String bookName = bookListDataList.get(position).getBookName();
+                String bookDescription = bookListDataList.get(position).getBookDescriptions();
+                String image = bookListDataList.get(position).getBookImage();
+                String bookId = String.valueOf(bookListDataList.get(position).getId());
+
+                Intent intent = new Intent(context, EditBookActivity.class);
+                intent.putExtra("bookName",bookName);
+                intent.putExtra("bookDescription",bookDescription);
+                intent.putExtra("bookCoverImage",image);
+                intent.putExtra("bookId",bookId);
+                context.startActivity(intent);
+            }
+        });
 
         holder.delete_book_text.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,10 +262,11 @@ class BookListViewHolder extends RecyclerView.ViewHolder {
     AppCompatTextView book_description,book_name,delete_book_text,bhu3;
     CircleImageView book_cover_image;
     AppCompatImageView book_layout;
-    AppCompatTextView created_at;
+    AppCompatTextView created_at,edit_book_layout;
 
     public BookListViewHolder(@NonNull View itemView) {
         super(itemView);
+        edit_book_layout = itemView.findViewById(R.id.edit_book_layout);
         created_at = itemView.findViewById(R.id.created_at);
         bhu3 = itemView.findViewById(R.id.bhu3);
         delete_book_text = itemView.findViewById(R.id.delete_book_text);

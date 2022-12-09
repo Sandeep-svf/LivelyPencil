@@ -85,18 +85,18 @@
                                 ></de.hdodenhof.circleimageview.CircleImageView>
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
+                                android:layout_width="18dp"
+                                android:layout_height="10dp"
                                 android:src="@drawable/edit_image"
 
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 android:tint="@color/white"
-
-                                app:layout_constraintWidth_percent="0.65"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHeight_percent="0.65"
+                                app:layout_constraintStart_toStartOf="parent"
+
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintWidth_percent="0.65"
 
 
                                 ></androidx.appcompat.widget.AppCompatImageView>
@@ -127,19 +127,19 @@
                                 ></de.hdodenhof.circleimageview.CircleImageView>
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
                                 android:id="@+id/back_arrow"
+                                android:layout_width="11dp"
+                                android:layout_height="11dp"
                                 android:src="@drawable/back_arrow"
 
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 android:tint="@color/white"
-
-                                app:layout_constraintWidth_percent="0.65"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHeight_percent="0.65"
+                                app:layout_constraintStart_toStartOf="parent"
+
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintWidth_percent="0.65"
 
 
                                 ></androidx.appcompat.widget.AppCompatImageView>
