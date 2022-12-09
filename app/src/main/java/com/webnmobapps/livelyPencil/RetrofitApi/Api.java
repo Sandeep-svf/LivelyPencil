@@ -491,6 +491,12 @@ public interface Api {
     Call<CommonStatusMessageModelPython> ADD_FOLLOWERS_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Header("Authorization") String Authorization,
                                                                                                @Field("id") List<Integer> id);
 
+
+
+    @PUT
+    Call<CommonStatusMessageModelPython> EDIT_BBOK_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Url String url,@Header("Authorization") String Authorization);
+
+
 }
 
 
