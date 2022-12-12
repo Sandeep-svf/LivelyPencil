@@ -506,6 +506,10 @@ public interface Api {
                                                                                            @Part MultipartBody.Part book_image);
 
 
+
+    @POST
+    Call<CommonStatusMessageModelPython> FOLLOW_UFOLLOW_COMMON_STATUS_MESSAGE_MODEL_PYTHON_CALL(@Url String url,
+                                                                                             @Header("Authorization") String Authorization);
 }
 
 

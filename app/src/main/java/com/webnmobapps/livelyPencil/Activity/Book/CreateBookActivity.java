@@ -97,7 +97,7 @@ public class CreateBookActivity extends AppCompatActivity {
         inits();
 
 
-        try {
+      /*  try {
             editBookKey = getIntent().getStringExtra("editbook");
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class CreateBookActivity extends AppCompatActivity {
 
         }else{
 
-        }
+        }*/
 
         SharedPreferences sharedPreferences= CreateBookActivity.this.getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE);
         user_id=sharedPreferences.getString("UserID","");

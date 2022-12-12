@@ -43,6 +43,9 @@ public Integer likesCount;
     @Expose
     public Boolean followed;
 
+    public void setFollowed(Boolean followed) {
+        this.followed = followed;
+    }
 
     public Integer getId() {
         return id;

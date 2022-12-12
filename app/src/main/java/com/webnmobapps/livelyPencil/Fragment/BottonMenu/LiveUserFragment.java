@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.StaticList.FollowersModel;
 import com.webnmobapps.livelyPencil.Adapter.FriendFollowersAdapter;
 import com.webnmobapps.livelyPencil.Model.friend_followers_model;
 import com.webnmobapps.livelyPencil.ModelPython.LiveUserListDataPython;
@@ -53,6 +54,8 @@ import retrofit2.Response;
 public class LiveUserFragment extends Fragment {
 
 
+
+    private List<FollowersModel> followersModelList2 = new ArrayList<>();
     RecyclerView rcv_friend_followers;
     List<LiveUserListDataPython>  liveUserListDataPythonArrayList = new ArrayList<>();
     private String finalAccessToken,accessToken;
@@ -133,13 +136,20 @@ public class LiveUserFragment extends Fragment {
 
                                 liveUserListDataPythonArrayList = response.body().getData();
 
+                                for(int i=0; i<liveUserListDataPythonArrayList.size();i++){
+                                    followersModelList2.add(new FollowersModel(1,i,0));
+                                }
+
+
+
+
 
                                 RecyclerView.LayoutManager topLayoutManager = new GridLayoutManager(getActivity(), 2);
                                 rcv_friend_followers.setLayoutManager(topLayoutManager);
                                 rcv_friend_followers.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(8), true));
                                 rcv_friend_followers.setItemAnimator(new DefaultItemAnimator());
 
-                                 friendFollowersAdapter = new FriendFollowersAdapter(getActivity(),liveUserListDataPythonArrayList);
+                                 friendFollowersAdapter = new FriendFollowersAdapter(getActivity(),liveUserListDataPythonArrayList,finalAccessToken);
                                 rcv_friend_followers.setAdapter(friendFollowersAdapter);
 
 

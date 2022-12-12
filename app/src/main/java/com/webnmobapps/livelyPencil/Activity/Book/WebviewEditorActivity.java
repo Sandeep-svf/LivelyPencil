@@ -2,6 +2,7 @@ package com.webnmobapps.livelyPencil.Activity.Book;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,11 +21,14 @@ public class WebviewEditorActivity extends AppCompatActivity {
     private String bookId,finalUrl;
     private String key="";
     AppCompatImageView back_arrow;
+    private AppCompatTextView tital;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview_editor);
+
+        tital = findViewById(R.id.tital);
 
         key = getIntent().getStringExtra("key");
         //get id
@@ -38,7 +42,9 @@ public class WebviewEditorActivity extends AppCompatActivity {
 
         if(key.equals("1")){
             finalUrl = "https://help.livelypencil.com";
+            tital.setText("Help");
         }else{
+            tital.setText("Content Editor");
             finalUrl = url+bookId;
         }
 

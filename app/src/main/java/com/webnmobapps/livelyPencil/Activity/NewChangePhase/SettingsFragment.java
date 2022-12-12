@@ -1518,74 +1518,74 @@ public class SettingsFragment extends Fragment implements  com.tsongkha.spinnerd
     @Override
     public void onDateSet(com.tsongkha.spinnerdatepicker.DatePicker  view, int year, int monthOfYear, int dayOfMonth) {
         monthOfYear = ++monthOfYear;
-        Log.e("check","working.*&###########"+year+monthOfYear+dayOfMonth);
-        if(monthOfYear == 0)
+        Log.e("check","year :"+year+"monthOfYear :"+monthOfYear+"dayOfMonth :"+dayOfMonth);
+        if(monthOfYear == 1)
         {
             month_spin.setText("Jan");
             monthData = "Jan";
         }
 
-        if(monthOfYear == 1)
+        if(monthOfYear == 2)
         {
             month_spin.setText("Feb");
             monthData = "Feb";
         }
 
-        if(monthOfYear == 2)
+        if(monthOfYear == 3)
         {
             month_spin.setText("Mar");
             monthData = "Mar";
         }
 
-        if(monthOfYear == 3)
+        if(monthOfYear == 4)
         {
             month_spin.setText("Apr");
             monthData = "Apr";
         }
 
-        if(monthOfYear == 4)
+        if(monthOfYear == 5)
         {
             month_spin.setText("May");
             monthData = "May";
         }
 
-        if(monthOfYear == 5)
+        if(monthOfYear == 6)
         {
             month_spin.setText("Jun");
             monthData = "Jun";
         }
 
-        if(monthOfYear == 6)
+        if(monthOfYear == 7)
         {
             month_spin.setText("Jul");
             monthData = "Jul";
         }
 
-        if(monthOfYear == 7)
+        if(monthOfYear == 8)
         {
             month_spin.setText("Aug");
             monthData = "Aug";
         }
 
-        if(monthOfYear == 8)
+        if(monthOfYear == 9)
         {
             month_spin.setText("Sep");
             monthData = "Sep";
         }
 
-        if(monthOfYear == 9)
+        if(monthOfYear == 10)
         {
             month_spin.setText("Oct");
             monthData = "Oct";
         }
 
-        if(monthOfYear == 10)
+        if(monthOfYear == 11)
         {
             month_spin.setText("Nov");
             monthData = "Nov";
         }
 
-        if(monthOfYear == 11)
+        if(monthOfYear == 12)
         {
             month_spin.setText("Dec");
             monthData = "Dec";
