@@ -5,24 +5,35 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
+import com.webnmobapps.livelyPencil.Activity.ImportDocHelperClass.SelectedImageAdapter;
 import com.webnmobapps.livelyPencil.Adapter.SelectIntrestAdapter;
 import com.webnmobapps.livelyPencil.R;
 
-public class RunWizardAdapter extends PagerAdapter {
+import java.util.ArrayList;
+import java.util.List;
+
+public class RunWizardAdapter extends PagerAdapter  {
 
 
     Context context;
     LayoutInflater inflater;
+    List<RunWizardListModel> wizardListModelList = new ArrayList<>();
 
-    public RunWizardAdapter(Context context) {
+    public RunWizardAdapter(Context context ) {
         this.context = context;
+
     }
 
     public interface  Get_Position_Wizard_Function
@@ -69,6 +80,14 @@ public class RunWizardAdapter extends PagerAdapter {
         Log.e("page","page no is: "+page);
 
 
+       /* TextView tv = (TextView) view.findViewById(R.id.name);
+        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+        tv.setText(wizardListModelList.get(position).getName());
+        Glide.with(context).load(wizardListModelList.get(position).getImage())
+                .into(imageView);*/
+
+
+
         ConstraintLayout linearLayout = (ConstraintLayout)view.findViewById(R.id.slider_constraint_layout2);
         ConstraintLayout RW1 = view.findViewById(R.id.RW1);
         ConstraintLayout RW2 = view.findViewById(R.id.RW2);
@@ -82,6 +101,9 @@ public class RunWizardAdapter extends PagerAdapter {
 
         if(position==0)
         {
+
+
+
             RW1.setVisibility(View.VISIBLE);
             RW2.setVisibility(View.GONE);
             RW3.setVisibility(View.GONE);

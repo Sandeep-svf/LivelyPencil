@@ -19,6 +19,9 @@ import com.webnmobapps.livelyPencil.Activity.Tutorial.SlideAdapter;
 import com.webnmobapps.livelyPencil.Activity.Tutorial.TutorialActivity;
 import com.webnmobapps.livelyPencil.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.relex.circleindicator.CircleIndicator;
 
 public class RunWizardSettingsActivity extends AppCompatActivity implements  RunWizardAdapter.Get_Position_Wizard_Function{
@@ -45,6 +48,24 @@ public class RunWizardSettingsActivity extends AppCompatActivity implements  Run
         setContentView(R.layout.activity_run_wizard_settings);
 
         intis();
+
+        List<RunWizardListModel> runWizardListModelList = new ArrayList<>();
+
+        // add data in model manually
+        RunWizardListModel runWizardListModel = new RunWizardListModel();
+        runWizardListModel.setImage(R.drawable.ic_launcher_background);
+        runWizardListModel.setName("Sam1");
+        runWizardListModelList.add(runWizardListModel);
+
+        runWizardListModel = new RunWizardListModel();
+        runWizardListModel.setImage(R.drawable.ic_launcher_background);
+        runWizardListModel.setName("Sam2");
+        runWizardListModelList.add(runWizardListModel);
+
+        runWizardListModel = new RunWizardListModel();
+        runWizardListModel.setImage(R.drawable.ic_launcher_background);
+        runWizardListModel.setName("Sam3");
+        runWizardListModelList.add(runWizardListModel);
 
         myadapter=new RunWizardAdapter(this);
         viewpager.setAdapter(myadapter);
@@ -235,6 +256,7 @@ public class RunWizardSettingsActivity extends AppCompatActivity implements  Run
         apiStatus = key;
         Log.e("check",position+" : "+key);
         Log.e("check","####################");
+        // hjkjshdkj
     }
 
 }
