@@ -29,7 +29,6 @@ public class SearchFragment extends Fragment {
 
     List<SearchListModel> searchListModelList = new ArrayList<>();
 
-
     AppCompatEditText search_edit_text;
     RecyclerView rcv_search_list;
     SearchListAdapter searchListAdapter;
